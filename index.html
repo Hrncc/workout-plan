@@ -440,177 +440,197 @@ renderWorkout();
 
 /* ══════════ NUTRITION ══════════ */
 const MEAL_DAYS = [
-  { label:"Po", name:"Pondělí — Push", meals:[
-    { name:"Snídaně", time:"7:00", kcal:720, p:42, c:80, f:22, foods:[
-      { name:"Ovesné vločky", amt:"100 g" },
+  { label:"Po", name:"Pondělí — Push A", meals:[
+    { name:"Snídaně", time:"7:00", kcal:820, p:48, c:90, f:24, foods:[
+      { name:"Ovesné vločky", amt:"120 g" },
       { name:"Řecký jogurt (0%)", amt:"200 g" },
       { name:"Tvaroh (měkký)", amt:"100 g" },
       { name:"Banán", amt:"1 ks (~120 g)" },
-      { name:"Mandle", amt:"20 g" },
-    ]},
-    { name:"Oběd", time:"12:30", kcal:890, p:58, c:105, f:24, foods:[
-      { name:"Kuřecí prsa (vařená/grilovaná)", amt:"200 g" },
-      { name:"Rýže basmati (vařená)", amt:"250 g" },
-      { name:"Brokolice", amt:"150 g" },
-      { name:"Olivový olej", amt:"1 lžíce (10 g)" },
-    ]},
-    { name:"Svačina", time:"16:00", kcal:380, p:28, c:42, f:10, foods:[
-      { name:"Tvaroh (tučný 10%)", amt:"200 g" },
-      { name:"Celozrnný chléb", amt:"2 plátky (70 g)" },
-      { name:"Vejce (vařené)", amt:"1 ks" },
-    ]},
-    { name:"Večeře", time:"19:30", kcal:750, p:52, c:70, f:24, foods:[
-      { name:"Losos", amt:"180 g" },
-      { name:"Brambory vařené", amt:"250 g" },
-      { name:"Špenát (čerstvý)", amt:"100 g" },
-      { name:"Olivový olej", amt:"1 lžíce" },
-    ]},
-  ]},
-  { label:"Út", name:"Úterý — Pull", meals:[
-    { name:"Snídaně", time:"7:00", kcal:700, p:40, c:85, f:18, foods:[
-      { name:"Celozrnný toast", amt:"3 plátky (105 g)" },
-      { name:"Vajíčka (míchaná)", amt:"3 ks" },
-      { name:"Šunka krůtí", amt:"60 g" },
-      { name:"Rajče", amt:"1 ks" },
-    ]},
-    { name:"Oběd", time:"12:30", kcal:870, p:55, c:100, f:22, foods:[
-      { name:"Hovězí mleté (90%)", amt:"180 g" },
-      { name:"Těstoviny celozrnné (vařené)", amt:"250 g" },
-      { name:"Rajčatová omáčka", amt:"150 g" },
-      { name:"Parmazán (strouhaný)", amt:"15 g" },
-    ]},
-    { name:"Svačina", time:"16:30", kcal:350, p:30, c:38, f:8, foods:[
-      { name:"Protein shake (syrovátkový)", amt:"1 odměrka (~30 g prášku)" },
-      { name:"Mléko polotučné", amt:"300 ml" },
-      { name:"Ovesné vločky", amt:"50 g" },
-    ]},
-    { name:"Večeře", time:"19:30", kcal:720, p:50, c:72, f:22, foods:[
-      { name:"Kuřecí stehno (bez kůže)", amt:"200 g" },
-      { name:"Pohanka vařená", amt:"200 g" },
-      { name:"Cuketa + paprika (dušená)", amt:"200 g" },
-      { name:"Olivový olej", amt:"1 lžíce" },
-    ]},
-  ]},
-  { label:"St", name:"Středa — Legs", meals:[
-    { name:"Snídaně", time:"7:00", kcal:730, p:38, c:90, f:20, foods:[
-      { name:"Ovesné vločky", amt:"100 g" },
-      { name:"Mléko polotučné", amt:"300 ml" },
-      { name:"Protein prášek", amt:"1 odměrka (30 g)" },
-      { name:"Borůvky", amt:"100 g" },
-      { name:"Chia semínka", amt:"10 g" },
-    ]},
-    { name:"Oběd", time:"12:30", kcal:900, p:60, c:100, f:24, foods:[
-      { name:"Tuňák v nálevu (odcezený)", amt:"2 konzervičky (~300 g)" },
-      { name:"Rýže jasmínová (vařená)", amt:"250 g" },
-      { name:"Hrášek mražený (uvařený)", amt:"100 g" },
-      { name:"Majonéza light", amt:"1 lžíce (15 g)" },
-    ]},
-    { name:"Svačina", time:"15:30", kcal:320, p:26, c:35, f:8, foods:[
-      { name:"Řecký jogurt (0%)", amt:"200 g" },
-      { name:"Müsli (bez přidaného cukru)", amt:"40 g" },
+      { name:"Mandle", amt:"25 g" },
       { name:"Med", amt:"1 lžička (10 g)" },
     ]},
-    { name:"Večeře", time:"19:30", kcal:760, p:52, c:72, f:24, foods:[
-      { name:"Vepřová panenka", amt:"200 g" },
-      { name:"Batáty pečené", amt:"250 g" },
-      { name:"Zelený salát s olivovým olejem", amt:"150 g + 1 lžíce oleje" },
+    { name:"Oběd", time:"12:30", kcal:1010, p:65, c:115, f:26, foods:[
+      { name:"Kuřecí prsa (grilovaná)", amt:"250 g" },
+      { name:"Rýže basmati (vařená)", amt:"300 g" },
+      { name:"Brokolice", amt:"150 g" },
+      { name:"Olivový olej", amt:"1.5 lžíce (15 g)" },
+      { name:"Parmazán (strouhaný)", amt:"15 g" },
+    ]},
+    { name:"Svačina", time:"16:00", kcal:480, p:36, c:50, f:13, foods:[
+      { name:"Tvaroh (tučný 10%)", amt:"200 g" },
+      { name:"Celozrnný chléb", amt:"3 plátky (105 g)" },
+      { name:"Vejce (vařené)", amt:"2 ks" },
+      { name:"Rajče", amt:"1 ks" },
+    ]},
+    { name:"Večeře", time:"19:30", kcal:870, p:58, c:80, f:28, foods:[
+      { name:"Losos", amt:"220 g" },
+      { name:"Brambory vařené", amt:"300 g" },
+      { name:"Špenát (čerstvý)", amt:"150 g" },
+      { name:"Olivový olej", amt:"1.5 lžíce (15 g)" },
+    ]},
+  ]},
+  { label:"Út", name:"Úterý — Pull A", meals:[
+    { name:"Snídaně", time:"7:00", kcal:810, p:48, c:92, f:22, foods:[
+      { name:"Celozrnný toast", amt:"4 plátky (140 g)" },
+      { name:"Vajíčka míchaná", amt:"3 ks" },
+      { name:"Šunka krůtí", amt:"80 g" },
+      { name:"Rajče", amt:"1 ks" },
+      { name:"Avokádo", amt:"¼ ks (~50 g)" },
+    ]},
+    { name:"Oběd", time:"12:30", kcal:980, p:60, c:112, f:26, foods:[
+      { name:"Hovězí mleté (90%)", amt:"220 g" },
+      { name:"Těstoviny celozrnné (vařené)", amt:"280 g" },
+      { name:"Rajčatová omáčka", amt:"150 g" },
+      { name:"Parmazán (strouhaný)", amt:"20 g" },
+      { name:"Olivový olej", amt:"1 lžíce" },
+    ]},
+    { name:"Svačina", time:"16:30", kcal:490, p:38, c:50, f:10, foods:[
+      { name:"Protein shake (syrovátkový)", amt:"1 odměrka (30 g)" },
+      { name:"Mléko polotučné", amt:"400 ml" },
+      { name:"Ovesné vločky", amt:"60 g" },
+      { name:"Banán", amt:"½ ks" },
+    ]},
+    { name:"Večeře", time:"19:30", kcal:850, p:58, c:82, f:26, foods:[
+      { name:"Kuřecí stehno (bez kůže)", amt:"250 g" },
+      { name:"Pohanka vařená", amt:"250 g" },
+      { name:"Cuketa + paprika (dušená)", amt:"200 g" },
+      { name:"Olivový olej", amt:"1.5 lžíce" },
+    ]},
+  ]},
+  { label:"St", name:"Středa — Legs + Core", meals:[
+    { name:"Snídaně", time:"7:00", kcal:830, p:44, c:98, f:24, foods:[
+      { name:"Ovesné vločky", amt:"120 g" },
+      { name:"Mléko polotučné", amt:"350 ml" },
+      { name:"Protein prášek", amt:"1 odměrka (30 g)" },
+      { name:"Borůvky", amt:"100 g" },
+      { name:"Chia semínka", amt:"15 g" },
+      { name:"Mandle", amt:"15 g" },
+    ]},
+    { name:"Oběd", time:"12:30", kcal:1000, p:64, c:110, f:26, foods:[
+      { name:"Tuňák v nálevu (odcezený)", amt:"2 konzervičky (~300 g)" },
+      { name:"Rýže jasmínová (vařená)", amt:"300 g" },
+      { name:"Hrášek (uvařený)", amt:"100 g" },
+      { name:"Majonéza light", amt:"2 lžíce (30 g)" },
+      { name:"Kukuřice z konzervy", amt:"80 g" },
+    ]},
+    { name:"Svačina", time:"15:30", kcal:450, p:30, c:50, f:12, foods:[
+      { name:"Řecký jogurt (0%)", amt:"250 g" },
+      { name:"Müsli (bez přidaného cukru)", amt:"60 g" },
+      { name:"Med", amt:"1.5 lžičky (15 g)" },
+    ]},
+    { name:"Večeře", time:"19:30", kcal:900, p:58, c:85, f:28, foods:[
+      { name:"Vepřová panenka", amt:"250 g" },
+      { name:"Batáty pečené", amt:"300 g" },
+      { name:"Zelený salát", amt:"150 g" },
+      { name:"Olivový olej", amt:"1.5 lžíce" },
     ]},
   ]},
   { label:"Čt", name:"Čtvrtek — Push B", meals:[
-    { name:"Snídaně", time:"7:00", kcal:710, p:42, c:82, f:20, foods:[
-      { name:"Celozrnný toast", amt:"3 plátky" },
-      { name:"Arašídové máslo (natural)", amt:"30 g" },
-      { name:"Tvaroh (měkký)", amt:"150 g" },
+    { name:"Snídaně", time:"7:00", kcal:820, p:46, c:90, f:24, foods:[
+      { name:"Celozrnný toast", amt:"4 plátky (140 g)" },
+      { name:"Arašídové máslo (natural)", amt:"35 g" },
+      { name:"Tvaroh (měkký)", amt:"200 g" },
       { name:"Jablko", amt:"1 ks" },
     ]},
-    { name:"Oběd", time:"12:30", kcal:880, p:56, c:105, f:22, foods:[
-      { name:"Kuřecí prsa", amt:"200 g" },
-      { name:"Kuskus (vařený)", amt:"250 g" },
+    { name:"Oběd", time:"12:30", kcal:990, p:62, c:115, f:26, foods:[
+      { name:"Kuřecí prsa", amt:"250 g" },
+      { name:"Kuskus (vařený)", amt:"300 g" },
       { name:"Paprika + cuketa (grilovaná)", amt:"200 g" },
-      { name:"Olivový olej", amt:"1 lžíce" },
+      { name:"Olivový olej", amt:"1.5 lžíce" },
     ]},
-    { name:"Svačina", time:"16:00", kcal:340, p:28, c:40, f:8, foods:[
+    { name:"Svačina", time:"16:00", kcal:470, p:36, c:50, f:10, foods:[
       { name:"Protein shake", amt:"1 odměrka (30 g)" },
-      { name:"Voda nebo mléko", amt:"300 ml" },
+      { name:"Mléko polotučné", amt:"400 ml" },
       { name:"Banán", amt:"1 ks" },
+      { name:"Ovesné vločky", amt:"30 g" },
     ]},
-    { name:"Večeře", time:"19:30", kcal:740, p:50, c:68, f:24, foods:[
-      { name:"Treska filé", amt:"200 g" },
-      { name:"Brambory vařené", amt:"250 g" },
+    { name:"Večeře", time:"19:30", kcal:880, p:56, c:82, f:28, foods:[
+      { name:"Treska filé", amt:"250 g" },
+      { name:"Brambory vařené", amt:"300 g" },
       { name:"Zelená fazolka (vařená)", amt:"150 g" },
-      { name:"Máslo", amt:"10 g" },
+      { name:"Máslo", amt:"15 g" },
+      { name:"Olivový olej", amt:"1 lžíce" },
     ]},
   ]},
   { label:"Pá", name:"Pátek — Pull B", meals:[
-    { name:"Snídaně", time:"7:00", kcal:720, p:44, c:80, f:20, foods:[
-      { name:"Ovesné vločky", amt:"100 g" },
-      { name:"Vejce (vařené)", amt:"2 ks" },
+    { name:"Snídaně", time:"7:00", kcal:830, p:50, c:88, f:24, foods:[
+      { name:"Ovesné vločky", amt:"120 g" },
+      { name:"Vejce (vařené)", amt:"3 ks" },
       { name:"Tvaroh (tučný)", amt:"150 g" },
-      { name:"Jahody", amt:"100 g" },
+      { name:"Jahody", amt:"150 g" },
+      { name:"Med", amt:"1 lžička" },
     ]},
-    { name:"Oběd", time:"12:30", kcal:870, p:58, c:98, f:22, foods:[
-      { name:"Hovězí steak (libový)", amt:"200 g" },
-      { name:"Rýže basmati (vařená)", amt:"250 g" },
+    { name:"Oběd", time:"12:30", kcal:990, p:64, c:108, f:26, foods:[
+      { name:"Hovězí steak (libový)", amt:"250 g" },
+      { name:"Rýže basmati (vařená)", amt:"300 g" },
       { name:"Brokolice + mrkev (dušená)", amt:"200 g" },
-      { name:"Olivový olej", amt:"1 lžíce" },
+      { name:"Olivový olej", amt:"1.5 lžíce" },
     ]},
-    { name:"Svačina", time:"16:00", kcal:360, p:30, c:40, f:8, foods:[
-      { name:"Tvaroh (měkký)", amt:"200 g" },
-      { name:"Celozrnný chléb", amt:"2 plátky" },
+    { name:"Svačina", time:"16:00", kcal:480, p:34, c:50, f:12, foods:[
+      { name:"Tvaroh (měkký)", amt:"250 g" },
+      { name:"Celozrnný chléb", amt:"2 plátky (70 g)" },
       { name:"Rajče", amt:"1 ks" },
+      { name:"Šunka krůtí", amt:"50 g" },
     ]},
-    { name:"Večeře", time:"19:30", kcal:740, p:50, c:70, f:24, foods:[
-      { name:"Losos", amt:"180 g" },
-      { name:"Quinoa (vařená)", amt:"200 g" },
+    { name:"Večeře", time:"19:30", kcal:860, p:54, c:80, f:28, foods:[
+      { name:"Losos", amt:"220 g" },
+      { name:"Quinoa (vařená)", amt:"250 g" },
       { name:"Špenát s česnekem", amt:"150 g" },
-      { name:"Olivový olej", amt:"1 lžíce" },
+      { name:"Olivový olej", amt:"1.5 lžíce" },
     ]},
   ]},
   { label:"So", name:"Sobota — Cardio", meals:[
-    { name:"Snídaně", time:"8:00", kcal:680, p:38, c:80, f:20, foods:[
-      { name:"Palačinky (celozrnná mouka)", amt:"3 ks" },
-      { name:"Řecký jogurt", amt:"150 g" },
-      { name:"Med + borůvky", amt:"1 lžička + 80 g" },
-      { name:"Protein prášek (přimíchaný)", amt:"20 g" },
+    { name:"Snídaně", time:"8:00", kcal:790, p:44, c:90, f:24, foods:[
+      { name:"Palačinky (celozrnná mouka)", amt:"4 ks" },
+      { name:"Řecký jogurt (0%)", amt:"200 g" },
+      { name:"Med + borůvky", amt:"1.5 lžičky + 100 g" },
+      { name:"Protein prášek (přimíchaný do těsta)", amt:"30 g" },
+      { name:"Mandle (drcené)", amt:"15 g" },
     ]},
-    { name:"Oběd", time:"13:00", kcal:820, p:52, c:92, f:22, foods:[
-      { name:"Kuřecí prsa (grilovaná)", amt:"180 g" },
-      { name:"Těstoviny celozrnné (vařené)", amt:"230 g" },
-      { name:"Pesto (basilikové)", amt:"20 g" },
+    { name:"Oběd", time:"13:00", kcal:960, p:58, c:108, f:26, foods:[
+      { name:"Kuřecí prsa (grilovaná)", amt:"220 g" },
+      { name:"Těstoviny celozrnné (vařené)", amt:"270 g" },
+      { name:"Pesto (basilikové)", amt:"25 g" },
       { name:"Cherry rajčata", amt:"100 g" },
+      { name:"Parmazán", amt:"15 g" },
     ]},
-    { name:"Svačina", time:"16:30", kcal:340, p:22, c:40, f:10, foods:[
+    { name:"Svačina", time:"16:30", kcal:460, p:28, c:54, f:14, foods:[
       { name:"Kefír", amt:"300 ml" },
-      { name:"Ovesná tyčinka (bez přidaného cukru)", amt:"50 g" },
+      { name:"Ovesná tyčinka (bez přidaného cukru)", amt:"60 g" },
+      { name:"Banán", amt:"½ ks" },
     ]},
-    { name:"Večeře", time:"19:30", kcal:700, p:48, c:68, f:22, foods:[
-      { name:"Vejce (celá + bílky)", amt:"2 celá + 4 bílky" },
-      { name:"Brambory vařené", amt:"200 g" },
+    { name:"Večeře", time:"19:30", kcal:850, p:54, c:80, f:28, foods:[
+      { name:"Vejce (celá + bílky)", amt:"3 celá + 4 bílky" },
+      { name:"Brambory vařené", amt:"280 g" },
       { name:"Špenát s česnekem", amt:"150 g" },
-      { name:"Olivový olej", amt:"1 lžíce" },
+      { name:"Olivový olej", amt:"1.5 lžíce" },
     ]},
   ]},
   { label:"Ne", name:"Neděle — Rest", meals:[
-    { name:"Snídaně", time:"9:00", kcal:750, p:40, c:85, f:22, foods:[
-      { name:"Vaječná omeleta", amt:"3 vejce" },
-      { name:"Celozrnný toast", amt:"3 plátky" },
+    { name:"Snídaně", time:"9:00", kcal:860, p:46, c:96, f:28, foods:[
+      { name:"Vaječná omeleta", amt:"4 vejce" },
+      { name:"Celozrnný toast", amt:"3 plátky (105 g)" },
       { name:"Avokádo", amt:"½ ks (~80 g)" },
-      { name:"Šunka krůtí", amt:"60 g" },
+      { name:"Šunka krůtí", amt:"80 g" },
+      { name:"Rajče", amt:"1 ks" },
     ]},
-    { name:"Oběd", time:"13:00", kcal:900, p:55, c:100, f:25, foods:[
-      { name:"Kuřecí stehno pečené", amt:"250 g" },
-      { name:"Rýže vařená", amt:"250 g" },
+    { name:"Oběd", time:"13:00", kcal:1000, p:60, c:112, f:28, foods:[
+      { name:"Kuřecí stehno pečené", amt:"280 g" },
+      { name:"Rýže vařená", amt:"300 g" },
       { name:"Mrkev + brokolice (dušená)", amt:"200 g" },
-      { name:"Olivový olej", amt:"1 lžíce" },
+      { name:"Olivový olej", amt:"1.5 lžíce" },
     ]},
-    { name:"Svačina", time:"16:00", kcal:310, p:22, c:35, f:8, foods:[
+    { name:"Svačina", time:"16:00", kcal:450, p:28, c:50, f:14, foods:[
       { name:"Tvaroh (měkký)", amt:"200 g" },
-      { name:"Ovoce dle výběru", amt:"150 g" },
+      { name:"Ovoce dle výběru", amt:"200 g" },
+      { name:"Chia semínka", amt:"10 g" },
+      { name:"Med", amt:"1 lžička" },
     ]},
-    { name:"Večeře", time:"19:30", kcal:680, p:45, c:68, f:22, foods:[
-      { name:"Losos nebo tuňák", amt:"180 g" },
-      { name:"Batáty pečené", amt:"200 g" },
+    { name:"Večeře", time:"19:30", kcal:820, p:50, c:76, f:26, foods:[
+      { name:"Losos nebo tuňák", amt:"220 g" },
+      { name:"Batáty pečené", amt:"250 g" },
       { name:"Salát (mix listů, olej, citron)", amt:"150 g" },
+      { name:"Olivový olej", amt:"1.5 lžíce" },
     ]},
   ]},
 ];
