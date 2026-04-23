@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan — byHRNC</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #111110; color: #e8e6e0; min-height: 100vh; padding: 0 0 3rem; }
+  .container { max-width: 700px; margin: 0 auto; padding: 0 1rem; }
+
+  /* ── Top nav ── */
+  .top-nav { display: flex; gap: 2px; padding: 1.25rem 1rem 0; max-width: 700px; margin: 0 auto 1.5rem; border-bottom: 0.5px solid #2a2a27; }
+  .nav-btn { padding: 8px 20px; font-size: 14px; font-weight: 600; background: none; border: none; color: #555; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -0.5px; transition: color 0.12s; }
+  .nav-btn:hover { color: #aaa; }
+  .nav-btn.active { color: #f0ede8; border-bottom-color: #c9882a; }
+
+  /* ── Sections ── */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ── Shared ── */
+  .page-title { font-size: 20px; font-weight: 700; color: #f0ede8; margin-bottom: 3px; }
+  .page-sub { font-size: 13px; color: #888; margin-bottom: 16px; }
+  .inbody-note { font-size: 11px; color: #999; background: #1c1c1a; border-radius: 8px; padding: 6px 12px; margin-bottom: 16px; border: 0.5px solid #2a2a27; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 20px; }
+  .stat { background: #1a1a18; border-radius: 10px; padding: 10px 12px; border: 0.5px solid #2a2a27; }
+  .stat-label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
+  .stat-val { font-size: 16px; font-weight: 700; color: #e8e6e0; }
+  .stat-sub { font-size: 11px; color: #777; margin-top: 2px; }
+  .section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: #777; font-weight: 700; margin-bottom: 8px; margin-top: 18px; }
+  .section-label:first-child { margin-top: 0; }
+  .tip-box { background: #1a1a18; border-left: 2px solid #333; border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: 13px; color: #888; line-height: 1.6; margin-top: 16px; }
+  .badge { font-size: 11px; padding: 3px 12px; border-radius: 20px; font-weight: 600; white-space: nowrap; }
+  .block-title { font-size: 15px; font-weight: 700; color: #f0ede8; margin-bottom: 3px; }
+  .block-sub { font-size: 12px; color: #666; margin-bottom: 12px; }
+
+  /* ── Workout ── */
+  .week-bar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 16px; }
+  .week-day { text-align: center; padding: 8px 4px; border-radius: 8px; cursor: pointer; border: 0.5px solid #2a2a27; background: #1a1a18; transition: all 0.12s; user-select: none; }
+  .week-day:hover { background: #222220; }
+  .wd-name { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.04em; }
+  .wd-type { font-size: 11px; color: #777; margin-top: 2px; }
+  .day-panel { display: none; }
+  .day-panel.active { display: block; }
+  .day-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 0.5px solid #2a2a27; }
+  .day-title { font-size: 17px; font-weight: 700; color: #f0ede8; }
+  .day-subtitle { font-size: 13px; color: #888; margin-top: 3px; }
+  .ex-list { display: flex; flex-direction: column; gap: 6px; }
+  .ex-row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; padding: 10px 12px; background: #1a1a18; border-radius: 8px; border: 0.5px solid #2a2a27; }
+  .ex-name { font-size: 14px; font-weight: 600; color: #e8e6e0; margin-bottom: 2px; }
+  .ex-note { font-size: 12px; color: #888; }
+  .ex-sets { font-size: 13px; color: #aaa; font-weight: 700; white-space: nowrap; }
+  .tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 5px; }
+  .tag { font-size: 10px; padding: 2px 7px; border-radius: 20px; font-weight: 500; }
+  .rest-box { text-align: center; padding: 3rem 1rem; color: #444; }
+  .rest-box .dash { font-size: 40px; margin-bottom: 10px; }
+  .rest-box .rest-title { font-size: 15px; font-weight: 700; color: #666; margin-bottom: 4px; }
+  .rest-box .rest-sub { font-size: 13px; }
+
+  /* ── Nutrition ── */
+  .macro-targets { background: #1a1a18; border: 0.5px solid #2a2a27; border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; }
+  .macro-row { display: grid; grid-template-columns: 100px 1fr 70px; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .macro-row:last-child { margin-bottom: 0; }
+  .macro-lbl { font-size: 12px; color: #888; }
+  .macro-track { background: #2a2a27; border-radius: 20px; height: 6px; overflow: hidden; }
+  .macro-fill { height: 100%; border-radius: 20px; }
+  .macro-val { font-size: 12px; font-weight: 700; color: #ccc; text-align: right; }
+
+  .day-tabs { display: flex; gap: 4px; margin-bottom: 14px; flex-wrap: wrap; }
+  .day-tab { padding: 5px 12px; border-radius: 8px; border: 0.5px solid #2a2a27; background: #1a1a18; font-size: 12px; cursor: pointer; color: #777; transition: all 0.12s; user-select: none; }
+  .day-tab:hover { background: #222; }
+  .day-tab.active { border: 1.5px solid #c9882a; background: #2a1f0a; color: #e0a855; font-weight: 600; }
+  .meal-panel { display: none; }
+  .meal-panel.active { display: block; }
+
+  .meal-card { background: #1a1a18; border: 0.5px solid #2a2a27; border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
+  .meal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .meal-name { font-size: 14px; font-weight: 700; color: #f0ede8; }
+  .meal-time { font-size: 11px; color: #555; margin-top: 2px; }
+  .meal-macros { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+  .mm { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+  .mm-k { background: #2a1f0a; color: #c9882a; }
+  .mm-p { background: #0d1e30; color: #5a9fd4; }
+  .mm-c { background: #0f1f15; color: #5aaa7a; }
+  .mm-f { background: #2a1a2a; color: #c47aaa; }
+  .food-list { list-style: none; }
+  .food-list li { font-size: 13px; color: #aaa; padding: 4px 0; border-bottom: 0.5px solid #1e1e1c; display: flex; justify-content: space-between; gap: 8px; }
+  .food-list li:last-child { border-bottom: none; }
+  .food-amt { color: #666; font-size: 12px; white-space: nowrap; }
+  .day-total-bar { display: flex; gap: 8px; margin-top: 14px; padding: 10px 14px; background: #111; border-radius: 8px; flex-wrap: wrap; align-items: center; }
+  .day-total-bar span { font-size: 12px; font-weight: 700; }
+
+  /* Food DB */
+  .search-input { width: 100%; background: #1a1a18; border: 0.5px solid #2a2a27; border-radius: 8px; padding: 9px 12px; color: #e8e6e0; font-size: 14px; outline: none; margin-bottom: 10px; }
+  .search-input:focus { border-color: #555; }
+  .cat-filters { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .cat-btn { padding: 4px 12px; border-radius: 20px; border: 0.5px solid #2a2a27; background: #1a1a18; font-size: 12px; color: #777; cursor: pointer; transition: all 0.12s; user-select: none; }
+  .cat-btn:hover { background: #222; }
+  .cat-btn.active { background: #2a1f0a; border-color: #c9882a; color: #e0a855; font-weight: 600; }
+  .db-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .db-table th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: #555; padding: 6px 8px; border-bottom: 0.5px solid #2a2a27; font-weight: 600; }
+  .db-table td { padding: 8px 8px; border-bottom: 0.5px solid #1e1e1c; color: #bbb; }
+  .db-table tr:last-child td { border-bottom: none; }
+  .db-table tr:hover td { background: #1a1a18; }
+  .db-table td:first-child { color: #e8e6e0; font-weight: 500; }
+  .cat-pill { font-size: 10px; padding: 2px 7px; border-radius: 20px; font-weight: 500; }
+  .cp-protein { background: #0d1e30; color: #5a9fd4; }
+  .cp-carb    { background: #0f1f15; color: #5aaa7a; }
+  .cp-fat     { background: #2a1a2a; color: #c47aaa; }
+  .cp-dairy   { background: #2a2010; color: #d4aa5a; }
+  .cp-veg     { background: #102a15; color: #6acc8a; }
+
+  /* ── Progress ── */
+  .log-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+  .log-field { display: flex; flex-direction: column; gap: 4px; }
+  .log-field label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.05em; }
+  .log-field input { background: #1a1a18; border: 0.5px solid #2a2a27; border-radius: 8px; padding: 8px 10px; color: #e8e6e0; font-size: 14px; width: 100%; outline: none; }
+  .log-field input:focus { border-color: #555; }
+  .log-btn { background: #2a2a27; border: 0.5px solid #3a3a37; border-radius: 8px; color: #ccc; font-size: 13px; font-weight: 600; padding: 9px 18px; cursor: pointer; transition: background 0.12s; white-space: nowrap; }
+  .log-btn:hover { background: #333; }
+  .log-btn.danger { color: #d45a5a; background: #2a1010; border-color: #3a1a1a; }
+  .log-btn.danger:hover { background: #3a1515; }
+  .prog-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+  .prog-table th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: #555; padding: 6px 8px; border-bottom: 0.5px solid #2a2a27; font-weight: 600; }
+  .prog-table td { padding: 8px 8px; border-bottom: 0.5px solid #1e1e1c; color: #ccc; vertical-align: middle; }
+  .prog-table tr:last-child td { border-bottom: none; }
+  .prog-table tr:hover td { background: #1a1a18; }
+  .delta { font-size: 11px; margin-left: 4px; }
+  .delta.pos { color: #5aaa7a; }
+  .delta.neg { color: #d45a5a; }
+  .delta.neu { color: #666; }
+  .del-btn { background: none; border: none; color: #444; font-size: 13px; cursor: pointer; padding: 2px 6px; border-radius: 4px; }
+  .del-btn:hover { color: #d45a5a; background: #2a1010; }
+  .empty-log { font-size: 13px; color: #444; padding: 1.5rem 0; text-align: center; }
+
+  @media (max-width: 500px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .wd-type { display: none; }
+    .log-grid { grid-template-columns: repeat(2, 1fr); }
+    .macro-row { grid-template-columns: 85px 1fr 60px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <button class="nav-btn active" onclick="showSection('workout')">Workout</button>
+  <button class="nav-btn" onclick="showSection('nutrition')">Nutrition</button>
+  <button class="nav-btn" onclick="showSection('progress')">Progress</button>
+</nav>
+
+<!-- ════════════════════════════════ WORKOUT ════════════════════════════════ -->
+<div class="section active" id="sec-workout">
+<div class="container">
+  <p class="page-title">Weekly Workout Plan</p>
+  <p class="page-sub">Home training · Muscle gain · Pull-up bar, resistance band, jump rope, bicycle</p>
+  <div class="inbody-note">InBody 270S · 19.03.2026 · 23y / M / 182 cm · Score 75/100 · Arms slightly under target · Trunk fat elevated (178% norm)</div>
+  <div class="stats">
+    <div class="stat"><div class="stat-label">Weight</div><div class="stat-val">77.5 kg</div><div class="stat-sub">Target: 72.9 kg</div></div>
+    <div class="stat"><div class="stat-label">Muscle mass</div><div class="stat-val">34.8 kg</div><div class="stat-sub">Arms slightly under</div></div>
+    <div class="stat"><div class="stat-label">Body fat</div><div class="stat-val">20.6%</div><div class="stat-sub">Trunk at 178% norm</div></div>
+    <div class="stat"><div class="stat-label">Calorie target</div><div class="stat-val">2902 kcal</div><div class="stat-sub">+300–400 for bulk</div></div>
+  </div>
+  <div class="week-bar" id="weekBar"></div>
+  <div id="dayPanels"></div>
+</div>
+</div>
+
+<!-- ════════════════════════════════ NUTRITION ════════════════════════════════ -->
+<div class="section" id="sec-nutrition">
+<div class="container">
+  <p class="page-title">Nutrition Plan</p>
+  <p class="page-sub">Muscle gain · 3–4 jídla denně · Bez omezení · Cíl: 3100–3300 kcal</p>
+  <div class="inbody-note">Váha 77.5 kg · BMR 1700 kcal · Maintenance ~2900 kcal · Bulk surplus +300–400 kcal</div>
+
+  <!-- Macro targets -->
+  <div class="section-label">Denní cíle maker</div>
+  <div class="macro-targets">
+    <div class="macro-row">
+      <span class="macro-lbl">Kalorie</span>
+      <div class="macro-track"><div class="macro-fill" style="width:100%;background:#c9882a"></div></div>
+      <span class="macro-val" style="color:#c9882a">3200 kcal</span>
+    </div>
+    <div class="macro-row">
+      <span class="macro-lbl">Bílkoviny</span>
+      <div class="macro-track"><div class="macro-fill" style="width:85%;background:#5a9fd4"></div></div>
+      <span class="macro-val" style="color:#5a9fd4">160 g</span>
+    </div>
+    <div class="macro-row">
+      <span class="macro-lbl">Sacharidy</span>
+      <div class="macro-track"><div class="macro-fill" style="width:75%;background:#5aaa7a"></div></div>
+      <span class="macro-val" style="color:#5aaa7a">400 g</span>
+    </div>
+    <div class="macro-row">
+      <span class="macro-lbl">Tuky</span>
+      <div class="macro-track"><div class="macro-fill" style="width:40%;background:#c47aaa"></div></div>
+      <span class="macro-val" style="color:#c47aaa">90 g</span>
+    </div>
+  </div>
+
+  <!-- Weekly meal plan -->
+  <div class="section-label" style="margin-bottom:12px">Týdenní jídelníček</div>
+  <div class="day-tabs" id="mealTabs"></div>
+  <div id="mealPanels"></div>
+
+  <!-- Food DB -->
+  <div class="section-label" style="margin-top:2rem;margin-bottom:12px">Databáze potravin — makra na 100 g</div>
+  <input class="search-input" type="text" placeholder="Hledat potravinu..." oninput="filterDB(this.value)">
+  <div class="cat-filters" id="catFilters"></div>
+  <table class="db-table" id="dbTable">
+    <thead><tr>
+      <th>Potravina</th><th>Kategorie</th><th style="text-align:right">Kcal</th>
+      <th style="text-align:right">Bíl.</th><th style="text-align:right">Sach.</th><th style="text-align:right">Tuky</th>
+    </tr></thead>
+    <tbody id="dbBody"></tbody>
+  </table>
+</div>
+</div>
+
+<!-- ════════════════════════════════ PROGRESS ════════════════════════════════ -->
+<div class="section" id="sec-progress">
+<div class="container">
+  <p class="page-title">Weekly Progress</p>
+  <p class="page-sub">Loguj každý týden — data zůstanou v prohlížeči</p>
+
+  <div class="log-grid">
+    <div class="log-field"><label>Týden</label><input id="inp-week" type="text" placeholder="W1" maxlength="6"></div>
+    <div class="log-field"><label>Váha (kg)</label><input id="inp-weight" type="number" step="0.1" placeholder="77.5"></div>
+    <div class="log-field"><label>Pull-ups (max)</label><input id="inp-pullups" type="number" placeholder="8"></div>
+    <div class="log-field"><label>Push-ups (max)</label><input id="inp-pushups" type="number" placeholder="20"></div>
+  </div>
+  <div style="display:flex;gap:8px;align-items:flex-end;margin-bottom:1.25rem;flex-wrap:wrap;">
+    <div class="log-field" style="flex:1;min-width:120px;">
+      <label>Body fat (%)</label>
+      <input id="inp-bf" type="number" step="0.1" placeholder="20.6">
+    </div>
+    <div class="log-field" style="flex:2;min-width:140px;">
+      <label>Poznámka</label>
+      <input id="inp-note" type="text" placeholder="volitelné">
+    </div>
+    <button class="log-btn" onclick="addEntry()">+ Přidat</button>
+  </div>
+  <div id="progress-table-wrap"></div>
+</div>
+</div>
+
+<script>
+/* ══════════ NAV ══════════ */
+function showSection(id) {
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+  document.getElementById("sec-" + id).classList.add("active");
+  event.target.classList.add("active");
+}
+
+/* ══════════ WORKOUT ══════════ */
+const TAG_COLORS = {
+  "jump rope":   { bg:"#2a1f0a", color:"#c9882a" },
+  "band":        { bg:"#1e1a2e", color:"#9b8fd4" },
+  "pull-up bar": { bg:"#0d1e30", color:"#5a9fd4" },
+  "bodyweight":  { bg:"#1e1e1c", color:"#888" },
+  "bicycle":     { bg:"#2a1010", color:"#d45a5a" },
+};
+
+const DAYS = [
+  { short:"Mon", name:"Monday", type:"Push A", badge:"Push", badgeBg:"#0d1e30", badgeColor:"#5a9fd4",
+    subtitle:"Chest · Shoulders · Triceps",
+    tip:"Rest 60–90s between sets. Aim to add 1 rep per set each week — that is your progressive overload with bodyweight.",
+    sections:[
+      { label:"Warm-up (5 min)", ex:[
+        { name:"Jump rope", note:"Easy pace", sets:"3 min", tags:["jump rope"] },
+        { name:"Arm circles + shoulder rolls", note:"Dynamic mobility", sets:"2 min", tags:[] },
+      ]},
+      { label:"Main work", ex:[
+        { name:"Wide push-ups", note:"Chest emphasis — elbows 45° out", sets:"4 × 12–15", tags:["bodyweight"] },
+        { name:"Pike push-ups", note:"Shoulder emphasis — hips high", sets:"4 × 10–12", tags:["bodyweight"] },
+        { name:"Diamond push-ups", note:"Triceps emphasis — hands form diamond", sets:"3 × 8–10", tags:["bodyweight"] },
+        { name:"Band chest press", note:"Band anchored behind, press forward at chest height", sets:"3 × 15", tags:["band"] },
+        { name:"Band lateral raise", note:"Stand on band, raise arms to shoulder height", sets:"3 × 12", tags:["band"] },
+        { name:"Band overhead press", note:"Stand on band, press overhead", sets:"3 × 12", tags:["band"] },
+      ]},
+      { label:"Finisher", ex:[
+        { name:"Push-up hold (bottom)", note:"Isometric strength builder", sets:"3 × 20–30s", tags:["bodyweight"] },
+      ]},
+    ]
+  },
+  { short:"Tue", name:"Tuesday", type:"Pull A", badge:"Pull", badgeBg:"#0f1f15", badgeColor:"#5aaa7a",
+    subtitle:"Back · Biceps · Rear delts",
+    tip:"Your arms scored 91–95% on InBody — pull work is priority. Use the resistance band looped over the bar for assisted pull-ups if needed.",
+    sections:[
+      { label:"Warm-up (5 min)", ex:[
+        { name:"Jump rope", note:"Moderate pace", sets:"3 min", tags:["jump rope"] },
+        { name:"Band pull-aparts", note:"Activate rear delts", sets:"2 × 15", tags:["band"] },
+      ]},
+      { label:"Main work", ex:[
+        { name:"Pull-ups (wide, overhand)", note:"Full dead hang to chin over bar", sets:"4 × max", tags:["pull-up bar"] },
+        { name:"Chin-ups (underhand)", note:"Biceps + lower lats emphasis", sets:"3 × max", tags:["pull-up bar"] },
+        { name:"Neutral-grip pull-ups", note:"Mid-back focus", sets:"3 × max", tags:["pull-up bar"] },
+        { name:"Band bent-over rows", note:"Stand on band, hinge at hips, row to hip", sets:"4 × 15", tags:["band"] },
+        { name:"Band bicep curls", note:"Stand on band, strict curl — no swinging", sets:"3 × 12–15", tags:["band"] },
+        { name:"Band face pulls", note:"Anchor at face height, pull to forehead", sets:"3 × 15", tags:["band"] },
+      ]},
+      { label:"Core", ex:[
+        { name:"Hollow body hold", note:"Lower back pressed to floor", sets:"3 × 30s", tags:["bodyweight"] },
+      ]},
+    ]
+  },
+  { short:"Wed", name:"Wednesday", type:"Legs + Core", badge:"Legs", badgeBg:"#2a1f0a", badgeColor:"#c9882a",
+    subtitle:"Quads · Glutes · Hamstrings · Core",
+    tip:"Your legs scored 103–104% on InBody — already solid. This session maintains leg mass, burns calories, and attacks trunk fat through core work.",
+    sections:[
+      { label:"Warm-up (5 min)", ex:[
+        { name:"Jump rope", note:"Build to moderate intensity", sets:"3 min", tags:["jump rope"] },
+        { name:"Hip circles + leg swings", note:"Mobility prep", sets:"2 min", tags:[] },
+      ]},
+      { label:"Main work", ex:[
+        { name:"Bulgarian split squats", note:"Rear foot on chair — 10 each side", sets:"4 × 10 / side", tags:["bodyweight"] },
+        { name:"Jump squats", note:"Explosive, land soft — power builder", sets:"3 × 12", tags:["bodyweight"] },
+        { name:"Single-leg RDL", note:"Bodyweight, control the descent", sets:"3 × 10 / side", tags:["bodyweight"] },
+        { name:"Band glute bridge", note:"Band above knees, drive hips high", sets:"4 × 20", tags:["band"] },
+        { name:"Lateral band walks", note:"Band above knees, wide stance squat walk", sets:"3 × 15 / side", tags:["band"] },
+      ]},
+      { label:"Core circuit (3 rounds)", ex:[
+        { name:"Plank", note:"Squeeze glutes + core simultaneously", sets:"3 × 45s", tags:["bodyweight"] },
+        { name:"V-ups", note:"Control — no momentum", sets:"3 × 12", tags:["bodyweight"] },
+        { name:"Side plank", note:"15–20s each side", sets:"3 × 20s / side", tags:["bodyweight"] },
+      ]},
+    ]
+  },
+  { short:"Thu", name:"Thursday", type:"Push B", badge:"Push", badgeBg:"#0d1e30", badgeColor:"#5a9fd4",
+    subtitle:"Chest · Shoulders · Triceps — volume",
+    tip:"Push B is higher volume than A. Working through mild soreness from Monday is fine. Keep all sets even if reps drop slightly.",
+    sections:[
+      { label:"Warm-up (5 min)", ex:[
+        { name:"Jump rope", note:"Moderate pace", sets:"3 min", tags:["jump rope"] },
+        { name:"Shoulder mobility + wrist circles", note:"", sets:"2 min", tags:[] },
+      ]},
+      { label:"Main work", ex:[
+        { name:"Decline push-ups", note:"Feet elevated on chair — upper chest", sets:"4 × 12", tags:["bodyweight"] },
+        { name:"Incline push-ups", note:"Hands on chair — lower chest stretch", sets:"3 × 15", tags:["bodyweight"] },
+        { name:"Archer push-ups", note:"Wide hands, shift weight side to side", sets:"3 × 6 / side", tags:["bodyweight"] },
+        { name:"Band tricep overhead extension", note:"Band overhead, extend to full lockout", sets:"4 × 12", tags:["band"] },
+        { name:"Band front raise", note:"Stand on band, raise both arms forward", sets:"3 × 12", tags:["band"] },
+        { name:"Chair dips", note:"Hands on chair edge, lower until 90°", sets:"4 × 10–12", tags:["bodyweight"] },
+      ]},
+      { label:"Finisher", ex:[
+        { name:"Push-up ladder", note:"10–9–8…1 reps, 10s rest between rounds", sets:"1 × ladder", tags:["bodyweight"] },
+      ]},
+    ]
+  },
+  { short:"Fri", name:"Friday", type:"Pull B", badge:"Pull", badgeBg:"#0f1f15", badgeColor:"#5aaa7a",
+    subtitle:"Back · Biceps — volume + intensity",
+    tip:"Track your unassisted pull-up max every week. That number is the clearest signal of upper body progress.",
+    sections:[
+      { label:"Warm-up (5 min)", ex:[
+        { name:"Jump rope", note:"Moderate pace", sets:"3 min", tags:["jump rope"] },
+        { name:"Dead hangs", note:"Grip + shoulder health", sets:"2 × 25s", tags:["pull-up bar"] },
+      ]},
+      { label:"Main work", ex:[
+        { name:"Explosive pull-ups", note:"Pull fast, lower slow (3s) — time under tension", sets:"4 × max", tags:["pull-up bar"] },
+        { name:"L-sit chin-ups", note:"Legs extended — core + biceps", sets:"3 × 5–8", tags:["pull-up bar"] },
+        { name:"Band single-arm row", note:"Stand on band, row one arm at a time", sets:"4 × 12 / side", tags:["band"] },
+        { name:"Band hammer curl", note:"Neutral grip — forearm + brachialis", sets:"3 × 15", tags:["band"] },
+        { name:"Band reverse fly", note:"Hinge forward, fly arms out — rear delts", sets:"3 × 15", tags:["band"] },
+        { name:"Dead hang hold", note:"Scapular depression + grip strength", sets:"3 × 30s", tags:["pull-up bar"] },
+      ]},
+      { label:"Core", ex:[
+        { name:"Hanging knee raises", note:"From bar — control the swing", sets:"3 × 12", tags:["pull-up bar"] },
+      ]},
+    ]
+  },
+  { short:"Sat", name:"Saturday", type:"Cardio", badge:"Cardio", badgeBg:"#2a1010", badgeColor:"#d45a5a",
+    subtitle:"Fat burn · Active recovery",
+    tip:"Keep HR at 60–70% max (~117–136 BPM). This zone burns fat without breaking down muscle. This is active recovery, not a hard effort day.",
+    sections:[
+      { label:"Option A — bike (recommended)", ex:[
+        { name:"Bicycle ride", note:"Steady pace, flat or light hills", sets:"40–60 min", tags:["bicycle"] },
+      ]},
+      { label:"Option B — jump rope HIIT", ex:[
+        { name:"Jump rope intervals", note:"30s fast / 30s rest — 15 rounds", sets:"15 min", tags:["jump rope"] },
+        { name:"Cool-down walk", note:"", sets:"5–10 min", tags:[] },
+      ]},
+      { label:"Mobility (both options)", ex:[
+        { name:"Hip flexor stretch", note:"60s each side", sets:"2 × 60s", tags:[] },
+        { name:"Thoracic rotation", note:"Seated or lying", sets:"2 × 10 / side", tags:[] },
+        { name:"Doorframe chest stretch", note:"Arms at 90°, lean forward gently", sets:"2 × 30s", tags:[] },
+      ]},
+    ]
+  },
+  { short:"Sun", name:"Sunday", type:"Rest", badge:"Rest", badgeBg:"#1e1e1c", badgeColor:"#666",
+    subtitle:"Full recovery", isRest:true,
+    tip:"Muscle is built during rest. Prioritize 8h sleep, eat 3200–3300 kcal/day, and hit 140–170g of protein (~1.8–2.2g per kg bodyweight).",
+    sections:[]
+  },
+];
+
+let activeDay = 0;
+
+function tag(t) {
+  const c = TAG_COLORS[t] || { bg:"#222", color:"#777" };
+  return `<span class="tag" style="background:${c.bg};color:${c.color}">${t}</span>`;
+}
+function renderExercise(ex) {
+  return `<div class="ex-row"><div>
+    <div class="ex-name">${ex.name}</div>
+    ${ex.note ? `<div class="ex-note">${ex.note}</div>` : ""}
+    ${ex.tags.length ? `<div class="tags">${ex.tags.map(tag).join("")}</div>` : ""}
+  </div><div class="ex-sets">${ex.sets}</div></div>`;
+}
+function renderDay(d) {
+  if (d.isRest) return `
+    <div class="day-header">
+      <div><div class="day-title">${d.name} — ${d.type}</div><div class="day-subtitle">${d.subtitle}</div></div>
+      <span class="badge" style="background:${d.badgeBg};color:${d.badgeColor}">${d.badge}</span>
+    </div>
+    <div class="rest-box"><div class="dash">—</div><div class="rest-title">Rest day</div><div class="rest-sub">No training. Sleep, eat, recover.</div></div>
+    <div class="tip-box">${d.tip}</div>`;
+  const secs = d.sections.map(s => `<div class="section-label">${s.label}</div><div class="ex-list">${s.ex.map(renderExercise).join("")}</div>`).join("");
+  return `
+    <div class="day-header">
+      <div><div class="day-title">${d.name} — ${d.type}</div><div class="day-subtitle">${d.subtitle}</div></div>
+      <span class="badge" style="background:${d.badgeBg};color:${d.badgeColor}">${d.badge}</span>
+    </div>${secs}<div class="tip-box">${d.tip}</div>`;
+}
+function renderWorkout() {
+  document.getElementById("weekBar").innerHTML = DAYS.map((d, i) => {
+    const a = i === activeDay;
+    const as = a ? `border:1.5px solid ${d.badgeColor};background:${d.badgeBg};` : "";
+    const ns = a ? `color:${d.badgeColor};font-weight:600;` : "";
+    return `<div class="week-day" style="${as}" onclick="setDay(${i})">
+      <div class="wd-name" style="${ns}">${d.short}</div>
+      <div class="wd-type" style="${ns}">${d.type}</div></div>`;
+  }).join("");
+  document.getElementById("dayPanels").innerHTML = DAYS.map((d, i) =>
+    `<div class="day-panel ${i===activeDay?"active":""}">${renderDay(d)}</div>`).join("");
+}
+function setDay(i) { activeDay = i; renderWorkout(); }
+renderWorkout();
+
+/* ══════════ NUTRITION ══════════ */
+const MEAL_DAYS = [
+  { label:"Po", name:"Pondělí — Push", meals:[
+    { name:"Snídaně", time:"7:00", kcal:720, p:42, c:80, f:22, foods:[
+      { name:"Ovesné vločky", amt:"100 g" },
+      { name:"Řecký jogurt (0%)", amt:"200 g" },
+      { name:"Tvaroh (měkký)", amt:"100 g" },
+      { name:"Banán", amt:"1 ks (~120 g)" },
+      { name:"Mandle", amt:"20 g" },
+    ]},
+    { name:"Oběd", time:"12:30", kcal:890, p:58, c:105, f:24, foods:[
+      { name:"Kuřecí prsa (vařená/grilovaná)", amt:"200 g" },
+      { name:"Rýže basmati (vařená)", amt:"250 g" },
+      { name:"Brokolice", amt:"150 g" },
+      { name:"Olivový olej", amt:"1 lžíce (10 g)" },
+    ]},
+    { name:"Svačina", time:"16:00", kcal:380, p:28, c:42, f:10, foods:[
+      { name:"Tvaroh (tučný 10%)", amt:"200 g" },
+      { name:"Celozrnný chléb", amt:"2 plátky (70 g)" },
+      { name:"Vejce (vařené)", amt:"1 ks" },
+    ]},
+    { name:"Večeře", time:"19:30", kcal:750, p:52, c:70, f:24, foods:[
+      { name:"Losos", amt:"180 g" },
+      { name:"Brambory vařené", amt:"250 g" },
+      { name:"Špenát (čerstvý)", amt:"100 g" },
+      { name:"Olivový olej", amt:"1 lžíce" },
+    ]},
+  ]},
+  { label:"Út", name:"Úterý — Pull", meals:[
+    { name:"Snídaně", time:"7:00", kcal:700, p:40, c:85, f:18, foods:[
+      { name:"Celozrnný toast", amt:"3 plátky (105 g)" },
+      { name:"Vajíčka (míchaná)", amt:"3 ks" },
+      { name:"Šunka krůtí", amt:"60 g" },
+      { name:"Rajče", amt:"1 ks" },
+    ]},
+    { name:"Oběd", time:"12:30", kcal:870, p:55, c:100, f:22, foods:[
+      { name:"Hovězí mleté (90%)", amt:"180 g" },
+      { name:"Těstoviny celozrnné (vařené)", amt:"250 g" },
+      { name:"Rajčatová omáčka", amt:"150 g" },
+      { name:"Parmazán (strouhaný)", amt:"15 g" },
+    ]},
+    { name:"Svačina", time:"16:30", kcal:350, p:30, c:38, f:8, foods:[
+      { name:"Protein shake (syrovátkový)", amt:"1 odměrka (~30 g prášku)" },
+      { name:"Mléko polotučné", amt:"300 ml" },
+      { name:"Ovesné vločky", amt:"50 g" },
+    ]},
+    { name:"Večeře", time:"19:30", kcal:720, p:50, c:72, f:22, foods:[
+      { name:"Kuřecí stehno (bez kůže)", amt:"200 g" },
+      { name:"Pohanka vařená", amt:"200 g" },
+      { name:"Cuketa + paprika (dušená)", amt:"200 g" },
+      { name:"Olivový olej", amt:"1 lžíce" },
+    ]},
+  ]},
+  { label:"St", name:"Středa — Legs", meals:[
+    { name:"Snídaně", time:"7:00", kcal:730, p:38, c:90, f:20, foods:[
+      { name:"Ovesné vločky", amt:"100 g" },
+      { name:"Mléko polotučné", amt:"300 ml" },
+      { name:"Protein prášek", amt:"1 odměrka (30 g)" },
+      { name:"Borůvky", amt:"100 g" },
+      { name:"Chia semínka", amt:"10 g" },
+    ]},
+    { name:"Oběd", time:"12:30", kcal:900, p:60, c:100, f:24, foods:[
+      { name:"Tuňák v nálevu (odcezený)", amt:"2 konzervičky (~300 g)" },
+      { name:"Rýže jasmínová (vařená)", amt:"250 g" },
+      { name:"Hrášek mražený (uvařený)", amt:"100 g" },
+      { name:"Majonéza light", amt:"1 lžíce (15 g)" },
+    ]},
+    { name:"Svačina", time:"15:30", kcal:320, p:26, c:35, f:8, foods:[
+      { name:"Řecký jogurt (0%)", amt:"200 g" },
+      { name:"Müsli (bez přidaného cukru)", amt:"40 g" },
+      { name:"Med", amt:"1 lžička (10 g)" },
+    ]},
+    { name:"Večeře", time:"19:30", kcal:760, p:52, c:72, f:24, foods:[
+      { name:"Vepřová panenka", amt:"200 g" },
+      { name:"Batáty pečené", amt:"250 g" },
+      { name:"Zelený salát s olivovým olejem", amt:"150 g + 1 lžíce oleje" },
+    ]},
+  ]},
+  { label:"Čt", name:"Čtvrtek — Push B", meals:[
+    { name:"Snídaně", time:"7:00", kcal:710, p:42, c:82, f:20, foods:[
+      { name:"Celozrnný toast", amt:"3 plátky" },
+      { name:"Arašídové máslo (natural)", amt:"30 g" },
+      { name:"Tvaroh (měkký)", amt:"150 g" },
+      { name:"Jablko", amt:"1 ks" },
+    ]},
+    { name:"Oběd", time:"12:30", kcal:880, p:56, c:105, f:22, foods:[
+      { name:"Kuřecí prsa", amt:"200 g" },
+      { name:"Kuskus (vařený)", amt:"250 g" },
+      { name:"Paprika + cuketa (grilovaná)", amt:"200 g" },
+      { name:"Olivový olej", amt:"1 lžíce" },
+    ]},
+    { name:"Svačina", time:"16:00", kcal:340, p:28, c:40, f:8, foods:[
+      { name:"Protein shake", amt:"1 odměrka (30 g)" },
+      { name:"Voda nebo mléko", amt:"300 ml" },
+      { name:"Banán", amt:"1 ks" },
+    ]},
+    { name:"Večeře", time:"19:30", kcal:740, p:50, c:68, f:24, foods:[
+      { name:"Treska filé", amt:"200 g" },
+      { name:"Brambory vařené", amt:"250 g" },
+      { name:"Zelená fazolka (vařená)", amt:"150 g" },
+      { name:"Máslo", amt:"10 g" },
+    ]},
+  ]},
+  { label:"Pá", name:"Pátek — Pull B", meals:[
+    { name:"Snídaně", time:"7:00", kcal:720, p:44, c:80, f:20, foods:[
+      { name:"Ovesné vločky", amt:"100 g" },
+      { name:"Vejce (vařené)", amt:"2 ks" },
+      { name:"Tvaroh (tučný)", amt:"150 g" },
+      { name:"Jahody", amt:"100 g" },
+    ]},
+    { name:"Oběd", time:"12:30", kcal:870, p:58, c:98, f:22, foods:[
+      { name:"Hovězí steak (libový)", amt:"200 g" },
+      { name:"Rýže basmati (vařená)", amt:"250 g" },
+      { name:"Brokolice + mrkev (dušená)", amt:"200 g" },
+      { name:"Olivový olej", amt:"1 lžíce" },
+    ]},
+    { name:"Svačina", time:"16:00", kcal:360, p:30, c:40, f:8, foods:[
+      { name:"Tvaroh (měkký)", amt:"200 g" },
+      { name:"Celozrnný chléb", amt:"2 plátky" },
+      { name:"Rajče", amt:"1 ks" },
+    ]},
+    { name:"Večeře", time:"19:30", kcal:740, p:50, c:70, f:24, foods:[
+      { name:"Losos", amt:"180 g" },
+      { name:"Quinoa (vařená)", amt:"200 g" },
+      { name:"Špenát s česnekem", amt:"150 g" },
+      { name:"Olivový olej", amt:"1 lžíce" },
+    ]},
+  ]},
+  { label:"So", name:"Sobota — Cardio", meals:[
+    { name:"Snídaně", time:"8:00", kcal:680, p:38, c:80, f:20, foods:[
+      { name:"Palačinky (celozrnná mouka)", amt:"3 ks" },
+      { name:"Řecký jogurt", amt:"150 g" },
+      { name:"Med + borůvky", amt:"1 lžička + 80 g" },
+      { name:"Protein prášek (přimíchaný)", amt:"20 g" },
+    ]},
+    { name:"Oběd", time:"13:00", kcal:820, p:52, c:92, f:22, foods:[
+      { name:"Kuřecí prsa (grilovaná)", amt:"180 g" },
+      { name:"Těstoviny celozrnné (vařené)", amt:"230 g" },
+      { name:"Pesto (basilikové)", amt:"20 g" },
+      { name:"Cherry rajčata", amt:"100 g" },
+    ]},
+    { name:"Svačina", time:"16:30", kcal:340, p:22, c:40, f:10, foods:[
+      { name:"Kefír", amt:"300 ml" },
+      { name:"Ovesná tyčinka (bez přidaného cukru)", amt:"50 g" },
+    ]},
+    { name:"Večeře", time:"19:30", kcal:700, p:48, c:68, f:22, foods:[
+      { name:"Vejce (celá + bílky)", amt:"2 celá + 4 bílky" },
+      { name:"Brambory vařené", amt:"200 g" },
+      { name:"Špenát s česnekem", amt:"150 g" },
+      { name:"Olivový olej", amt:"1 lžíce" },
+    ]},
+  ]},
+  { label:"Ne", name:"Neděle — Rest", meals:[
+    { name:"Snídaně", time:"9:00", kcal:750, p:40, c:85, f:22, foods:[
+      { name:"Vaječná omeleta", amt:"3 vejce" },
+      { name:"Celozrnný toast", amt:"3 plátky" },
+      { name:"Avokádo", amt:"½ ks (~80 g)" },
+      { name:"Šunka krůtí", amt:"60 g" },
+    ]},
+    { name:"Oběd", time:"13:00", kcal:900, p:55, c:100, f:25, foods:[
+      { name:"Kuřecí stehno pečené", amt:"250 g" },
+      { name:"Rýže vařená", amt:"250 g" },
+      { name:"Mrkev + brokolice (dušená)", amt:"200 g" },
+      { name:"Olivový olej", amt:"1 lžíce" },
+    ]},
+    { name:"Svačina", time:"16:00", kcal:310, p:22, c:35, f:8, foods:[
+      { name:"Tvaroh (měkký)", amt:"200 g" },
+      { name:"Ovoce dle výběru", amt:"150 g" },
+    ]},
+    { name:"Večeře", time:"19:30", kcal:680, p:45, c:68, f:22, foods:[
+      { name:"Losos nebo tuňák", amt:"180 g" },
+      { name:"Batáty pečené", amt:"200 g" },
+      { name:"Salát (mix listů, olej, citron)", amt:"150 g" },
+    ]},
+  ]},
+];
+
+let activeMealDay = 0;
+
+function macroChip(cls, label, val) {
+  return `<span class="mm ${cls}">${label} ${val}</span>`;
+}
+
+function renderMeals() {
+  document.getElementById("mealTabs").innerHTML = MEAL_DAYS.map((d, i) => {
+    const a = i === activeMealDay;
+    return `<div class="day-tab ${a?"active":""}" onclick="setMealDay(${i})">${d.label}</div>`;
+  }).join("");
+
+  document.getElementById("mealPanels").innerHTML = MEAL_DAYS.map((d, i) => {
+    if (i !== activeMealDay) return `<div class="meal-panel"></div>`;
+    const totalK = d.meals.reduce((s,m)=>s+m.kcal,0);
+    const totalP = d.meals.reduce((s,m)=>s+m.p,0);
+    const totalC = d.meals.reduce((s,m)=>s+m.c,0);
+    const totalF = d.meals.reduce((s,m)=>s+m.f,0);
+    const cards = d.meals.map(m => `
+      <div class="meal-card">
+        <div class="meal-header">
+          <div><div class="meal-name">${m.name}</div><div class="meal-time">${m.time}</div></div>
+        </div>
+        <div class="meal-macros">
+          ${macroChip("mm-k","⚡",m.kcal+" kcal")}
+          ${macroChip("mm-p","Bíl.",m.p+"g")}
+          ${macroChip("mm-c","Sach.",m.c+"g")}
+          ${macroChip("mm-f","Tuky",m.f+"g")}
+        </div>
+        <ul class="food-list">${m.foods.map(f=>`<li><span>${f.name}</span><span class="food-amt">${f.amt}</span></li>`).join("")}</ul>
+      </div>`).join("");
+    return `<div class="meal-panel active">
+      <div style="font-size:13px;color:#888;margin-bottom:12px">${d.name}</div>
+      ${cards}
+      <div class="day-total-bar">
+        <span style="color:#888;font-weight:400;font-size:12px">Denní součet:</span>
+        <span style="color:#c9882a">${totalK} kcal</span>
+        <span style="color:#5a9fd4">B: ${totalP}g</span>
+        <span style="color:#5aaa7a">S: ${totalC}g</span>
+        <span style="color:#c47aaa">T: ${totalF}g</span>
+      </div>
+      <div class="tip-box">Pij 3–3.5l vody denně. Protein soustřeď zejména do jídel po tréninku. Pokud nestíháš vařit, protein shake + ovesné vločky je rychlá náhrada svačiny.</div>
+    </div>`;
+  }).join("");
+}
+
+function setMealDay(i) { activeMealDay = i; renderMeals(); }
+renderMeals();
+
+/* ── Food DB ── */
+const FOODS = [
+  { name:"Kuřecí prsa", cat:"protein",  kcal:165, p:31, c:0,  f:3.6 },
+  { name:"Hovězí mleté (90%)", cat:"protein", kcal:218, p:26, c:0, f:13 },
+  { name:"Losos",        cat:"protein",  kcal:208, p:20, c:0,  f:13 },
+  { name:"Tuňák v nálevu", cat:"protein", kcal:109, p:24, c:0, f:1 },
+  { name:"Treska",       cat:"protein",  kcal:82,  p:18, c:0,  f:0.7 },
+  { name:"Vejce (celé)", cat:"protein",  kcal:155, p:13, c:1.1,f:11 },
+  { name:"Vaječný bílek",cat:"protein",  kcal:52,  p:11, c:0.7,f:0.2 },
+  { name:"Hovězí steak (libový)", cat:"protein", kcal:190, p:28, c:0, f:8 },
+  { name:"Vepřová panenka", cat:"protein", kcal:143, p:22, c:0, f:6 },
+  { name:"Krůtí šunka",  cat:"protein",  kcal:104, p:17, c:2,  f:3 },
+  { name:"Protein syrovátkový", cat:"protein", kcal:380, p:75, c:8, f:5 },
+  { name:"Tvaroh (tučný 10%)", cat:"dairy", kcal:132, p:14, c:3, f:7 },
+  { name:"Tvaroh (měkký, nízkotučný)", cat:"dairy", kcal:73, p:12, c:3.5, f:0.5 },
+  { name:"Řecký jogurt (0%)", cat:"dairy", kcal:59, p:10, c:3.6, f:0.4 },
+  { name:"Mléko polotučné", cat:"dairy", kcal:46,  p:3.4,c:4.8, f:1.5 },
+  { name:"Kefír",         cat:"dairy",   kcal:61,  p:3.3,c:4.5, f:3.2 },
+  { name:"Parmazán",      cat:"dairy",   kcal:431, p:38, c:0,   f:29 },
+  { name:"Rýže basmati (vařená)", cat:"carb", kcal:130, p:2.7, c:28, f:0.3 },
+  { name:"Ovesné vločky", cat:"carb",   kcal:379, p:13, c:67,  f:7 },
+  { name:"Těstoviny celozrnné (vařené)", cat:"carb", kcal:131, p:5, c:26, f:1 },
+  { name:"Brambory vařené", cat:"carb", kcal:87,  p:1.9,c:20,  f:0.1 },
+  { name:"Batáty pečené", cat:"carb",   kcal:90,  p:2,  c:21,  f:0.1 },
+  { name:"Celozrnný chléb", cat:"carb", kcal:247, p:9,  c:46,  f:3.4 },
+  { name:"Pohanka vařená", cat:"carb",  kcal:92,  p:3.4,c:20,  f:0.6 },
+  { name:"Kuskus vařený", cat:"carb",   kcal:112, p:3.8,c:23,  f:0.2 },
+  { name:"Quinoa vařená", cat:"carb",   kcal:120, p:4.4,c:22,  f:1.9 },
+  { name:"Banán",         cat:"carb",   kcal:89,  p:1.1,c:23,  f:0.3 },
+  { name:"Ovesná tyčinka (bez cukru)", cat:"carb", kcal:400, p:10, c:60, f:12 },
+  { name:"Olivový olej",  cat:"fat",    kcal:884, p:0,  c:0,   f:100 },
+  { name:"Arašídové máslo (natural)", cat:"fat", kcal:598, p:25, c:20, f:50 },
+  { name:"Avokádo",       cat:"fat",    kcal:160, p:2,  c:9,   f:15 },
+  { name:"Mandle",        cat:"fat",    kcal:579, p:21, c:22,  f:50 },
+  { name:"Máslo",         cat:"fat",    kcal:717, p:0.9,c:0.1, f:81 },
+  { name:"Chia semínka",  cat:"fat",    kcal:486, p:17, c:42,  f:31 },
+  { name:"Brokolice",     cat:"veg",    kcal:34,  p:2.8,c:7,   f:0.4 },
+  { name:"Špenát",        cat:"veg",    kcal:23,  p:2.9,c:3.6, f:0.4 },
+  { name:"Rajče",         cat:"veg",    kcal:18,  p:0.9,c:3.9, f:0.2 },
+  { name:"Paprika červená",cat:"veg",   kcal:31,  p:1,  c:6,   f:0.3 },
+  { name:"Cuketa",        cat:"veg",    kcal:17,  p:1.2,c:3.1, f:0.3 },
+  { name:"Mrkev",         cat:"veg",    kcal:41,  p:0.9,c:10,  f:0.2 },
+  { name:"Zelená fazolka",cat:"veg",    kcal:31,  p:1.8,c:7,   f:0.1 },
+  { name:"Hrášek",        cat:"veg",    kcal:81,  p:5.4,c:14,  f:0.4 },
+];
+
+const CAT_LABELS = { all:"Vše", protein:"Bílkoviny", dairy:"Mléčné", carb:"Sacharidy", fat:"Tuky", veg:"Zelenina" };
+const CAT_CLS    = { protein:"cp-protein", dairy:"cp-dairy", carb:"cp-carb", fat:"cp-fat", veg:"cp-veg" };
+let activecat = "all";
+let searchQ = "";
+
+function renderDB() {
+  const rows = FOODS.filter(f => {
+    const matchCat = activecat === "all" || f.cat === activecat;
+    const matchQ   = !searchQ || f.name.toLowerCase().includes(searchQ.toLowerCase());
+    return matchCat && matchQ;
+  }).map(f => `<tr>
+    <td>${f.name}</td>
+    <td><span class="cat-pill ${CAT_CLS[f.cat]||""}">${CAT_LABELS[f.cat]||f.cat}</span></td>
+    <td style="text-align:right">${f.kcal}</td>
+    <td style="text-align:right;color:#5a9fd4">${f.p}g</td>
+    <td style="text-align:right;color:#5aaa7a">${f.c}g</td>
+    <td style="text-align:right;color:#c47aaa">${f.f}g</td>
+  </tr>`).join("");
+  document.getElementById("dbBody").innerHTML = rows || `<tr><td colspan="6" style="color:#444;padding:1rem 8px">Nic nenalezeno</td></tr>`;
+}
+
+function initCatFilters() {
+  document.getElementById("catFilters").innerHTML = Object.entries(CAT_LABELS).map(([k,v]) =>
+    `<div class="cat-btn ${k===activecat?"active":""}" onclick="setCat('${k}')">${v}</div>`).join("");
+}
+
+function setCat(c) { activecat = c; initCatFilters(); renderDB(); }
+function filterDB(q) { searchQ = q; renderDB(); }
+
+initCatFilters();
+renderDB();
+
+/* ══════════ PROGRESS ══════════ */
+const STORE_KEY = "workout_progress_v1";
+function loadEntries() { try { return JSON.parse(localStorage.getItem(STORE_KEY))||[]; } catch { return []; } }
+function saveEntries(e) { localStorage.setItem(STORE_KEY, JSON.stringify(e)); }
+
+function delta(entries, i, key) {
+  if (i===0||entries[i-1][key]==null||entries[i][key]==null) return "";
+  const diff = (parseFloat(entries[i][key])-parseFloat(entries[i-1][key])).toFixed(1);
+  if (diff==0) return `<span class="delta neu">±0</span>`;
+  const good = (key==="pullups"||key==="pushups") ? diff>0 : diff<0;
+  return `<span class="delta ${good?"pos":"neg"}">${diff>0?"+":""}${diff}</span>`;
+}
+
+function renderTable() {
+  const entries = loadEntries();
+  const wrap = document.getElementById("progress-table-wrap");
+  if (!entries.length) { wrap.innerHTML=`<div class="empty-log">Žádné záznamy — zaloguj první týden výše.</div>`; return; }
+  const rows = entries.map((e,i)=>`<tr>
+    <td><strong style="color:#e8e6e0">${e.week||"—"}</strong></td>
+    <td>${e.weight!=null?e.weight+" kg":"—"}${delta(entries,i,"weight")}</td>
+    <td>${e.pullups!=null?e.pullups:"—"}${delta(entries,i,"pullups")}</td>
+    <td>${e.pushups!=null?e.pushups:"—"}${delta(entries,i,"pushups")}</td>
+    <td>${e.bf!=null?e.bf+"%":"—"}${delta(entries,i,"bf")}</td>
+    <td style="color:#666;font-size:12px">${e.note||""}</td>
+    <td><button class="del-btn" onclick="deleteEntry(${i})">✕</button></td>
+  </tr>`).join("");
+  wrap.innerHTML=`<table class="prog-table"><thead><tr>
+    <th>Týden</th><th>Váha</th><th>Pull-ups</th><th>Push-ups</th><th>Tuk</th><th>Poznámka</th><th></th>
+  </tr></thead><tbody>${rows}</tbody></table>
+  <div style="text-align:right;margin-top:8px"><button class="log-btn danger" onclick="clearAll()">Smazat vše</button></div>`;
+}
+
+function addEntry() {
+  const week=document.getElementById("inp-week").value.trim();
+  const weight=document.getElementById("inp-weight").value;
+  const pullups=document.getElementById("inp-pullups").value;
+  const pushups=document.getElementById("inp-pushups").value;
+  const bf=document.getElementById("inp-bf").value;
+  const note=document.getElementById("inp-note").value.trim();
+  if (!week&&!weight&&!pullups&&!pushups&&!bf) return;
+  const entries=loadEntries();
+  entries.push({ week, weight:weight?parseFloat(weight):null, pullups:pullups?parseInt(pullups):null, pushups:pushups?parseInt(pushups):null, bf:bf?parseFloat(bf):null, note, date:new Date().toLocaleDateString("cs-CZ") });
+  saveEntries(entries);
+  ["inp-week","inp-weight","inp-pullups","inp-pushups","inp-bf","inp-note"].forEach(id=>document.getElementById(id).value="");
+  renderTable();
+}
+function deleteEntry(i) { const e=loadEntries(); e.splice(i,1); saveEntries(e); renderTable(); }
+function clearAll() { if(confirm("Smazat všechny záznamy?")) { localStorage.removeItem(STORE_KEY); renderTable(); } }
+renderTable();
+</script>
+</body>
+</html>
