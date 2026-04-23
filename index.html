@@ -157,10 +157,10 @@
   <p class="page-sub">Home training · Muscle gain · Pull-up bar, resistance band, jump rope, bicycle</p>
   <div class="inbody-note">InBody 270S · 19.03.2026 · 23y / M / 182 cm · Score 75/100 · Arms slightly under target · Trunk fat elevated (178% norm)</div>
   <div class="stats">
-    <div class="stat"><div class="stat-label">Weight</div><div class="stat-val">77.5 kg</div><div class="stat-sub">Target: 72.9 kg</div></div>
-    <div class="stat"><div class="stat-label">Muscle mass</div><div class="stat-val">34.8 kg</div><div class="stat-sub">Arms slightly under</div></div>
-    <div class="stat"><div class="stat-label">Body fat</div><div class="stat-val">20.6%</div><div class="stat-sub">Trunk at 178% norm</div></div>
-    <div class="stat"><div class="stat-label">Calorie target</div><div class="stat-val">2902 kcal</div><div class="stat-sub">+300–400 for bulk</div></div>
+    <div class="stat"><div class="stat-label">Weight</div><div class="stat-val" id="s-weight">77.5 kg</div><div class="stat-sub" id="s-weight-sub">InBody baseline</div></div>
+    <div class="stat"><div class="stat-label">Body fat</div><div class="stat-val" id="s-bf">20.6%</div><div class="stat-sub" id="s-bf-sub">InBody baseline</div></div>
+    <div class="stat"><div class="stat-label">Pull-ups (max)</div><div class="stat-val" id="s-pullups">—</div><div class="stat-sub" id="s-pullups-sub">Log první týden</div></div>
+    <div class="stat"><div class="stat-label">Push-ups (max)</div><div class="stat-val" id="s-pushups">—</div><div class="stat-sub" id="s-pushups-sub">Log první týden</div></div>
   </div>
   <div class="week-bar" id="weekBar"></div>
   <div id="dayPanels"></div>
@@ -774,6 +774,49 @@ function renderTable() {
   <div style="text-align:right;margin-top:8px"><button class="log-btn danger" onclick="clearAll()">Smazat vše</button></div>`;
 }
 
+function updateStats() {
+  const entries = loadEntries();
+  if (!entries.length) {
+    document.getElementById("s-weight").textContent = "77.5 kg";
+    document.getElementById("s-weight-sub").textContent = "InBody baseline";
+    document.getElementById("s-bf").textContent = "20.6%";
+    document.getElementById("s-bf-sub").textContent = "InBody baseline";
+    document.getElementById("s-pullups").textContent = "—";
+    document.getElementById("s-pullups-sub").textContent = "Log první týden";
+    document.getElementById("s-pushups").textContent = "—";
+    document.getElementById("s-pushups-sub").textContent = "Log první týden";
+    return;
+  }
+  const last = entries[entries.length - 1];
+  const prev = entries.length > 1 ? entries[entries.length - 2] : null;
+
+  function diff(cur, old, unit, invertGood) {
+    if (cur == null || old == null) return "";
+    const d = (parseFloat(cur) - parseFloat(old)).toFixed(1);
+    if (d == 0) return " (beze změny)";
+    const good = invertGood ? d < 0 : d > 0;
+    const sign = d > 0 ? "+" : "";
+    return ` (${sign}${d}${unit})`;
+  }
+
+  if (last.weight != null) {
+    document.getElementById("s-weight").textContent = last.weight + " kg";
+    document.getElementById("s-weight-sub").textContent = (last.week || "") + diff(last.weight, prev?.weight, " kg", true);
+  }
+  if (last.bf != null) {
+    document.getElementById("s-bf").textContent = last.bf + "%";
+    document.getElementById("s-bf-sub").textContent = (last.week || "") + diff(last.bf, prev?.bf, "%", true);
+  }
+  if (last.pullups != null) {
+    document.getElementById("s-pullups").textContent = last.pullups;
+    document.getElementById("s-pullups-sub").textContent = (last.week || "") + diff(last.pullups, prev?.pullups, " rep", false);
+  }
+  if (last.pushups != null) {
+    document.getElementById("s-pushups").textContent = last.pushups;
+    document.getElementById("s-pushups-sub").textContent = (last.week || "") + diff(last.pushups, prev?.pushups, " rep", false);
+  }
+}
+
 function addEntry() {
   const week=document.getElementById("inp-week").value.trim();
   const weight=document.getElementById("inp-weight").value;
@@ -787,10 +830,12 @@ function addEntry() {
   saveEntries(entries);
   ["inp-week","inp-weight","inp-pullups","inp-pushups","inp-bf","inp-note"].forEach(id=>document.getElementById(id).value="");
   renderTable();
+  updateStats();
 }
-function deleteEntry(i) { const e=loadEntries(); e.splice(i,1); saveEntries(e); renderTable(); }
-function clearAll() { if(confirm("Smazat všechny záznamy?")) { localStorage.removeItem(STORE_KEY); renderTable(); } }
+function deleteEntry(i) { const e=loadEntries(); e.splice(i,1); saveEntries(e); renderTable(); updateStats(); }
+function clearAll() { if(confirm("Smazat všechny záznamy?")) { localStorage.removeItem(STORE_KEY); renderTable(); updateStats(); } }
 renderTable();
+updateStats();
 </script>
 </body>
 </html>
