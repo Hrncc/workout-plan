@@ -139,40 +139,55 @@
   .cp-dairy   { background: #1e1808; color: #d4a84a; }
   .cp-veg     { background: #081a0e; color: #72d48a; }
 
-  /* ── Tracker ── */
-  .tr-summary { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 6px; }
-  .tr-bar-row { background: #161614; border: 1px solid #1e1e1b; border-radius: 12px; padding: 14px 16px; }
-  .tr-bar-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
-  .tr-bar-label { font-size: 12px; color: #6a6a64; font-weight: 500; }
-  .tr-bar-vals { font-size: 14px; font-weight: 700; }
-  .tr-bar-vals .eaten { color: #f0ede6; }
-  .tr-bar-vals .target { color: #3a3a36; font-weight: 400; font-size: 13px; }
-  .tr-track { background: #1e1e1b; border-radius: 20px; height: 6px; overflow: hidden; }
-  .tr-fill { height: 100%; border-radius: 20px; transition: width 0.4s ease; }
-  .tr-fill.over { background: #c84a4a !important; }
-  .tr-macros-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 8px; }
-  .tr-macro-mini { background: #161614; border: 1px solid #1e1e1b; border-radius: 10px; padding: 10px 12px; }
-  .tr-macro-mini-label { font-size: 10px; color: #4a4a46; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; font-weight: 600; }
-  .tr-macro-mini-val { font-size: 17px; font-weight: 700; letter-spacing: -0.2px; }
-  .tr-macro-mini-target { font-size: 11px; color: #3a3a36; margin-top: 3px; }
-  .tr-add-box { background: #161614; border: 1px solid #1e1e1b; border-radius: 12px; padding: 16px; }
-  .tr-suggestions { position: relative; }
-  .tr-sugg-list { background: #1a1a18; border: 1px solid #2e2e2a; border-radius: 10px; max-height: 200px; overflow-y: auto; }
-  .tr-sugg-item { padding: 9px 14px; font-size: 13px; color: #c8c4bc; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e1e1b; transition: background 0.1s; }
-  .tr-sugg-item:last-child { border-bottom: none; }
-  .tr-sugg-item:hover { background: #222220; }
-  .tr-sugg-macros { font-size: 11px; color: #4a4a46; }
-  .tr-preview-chip { background: #1a1a18; border: 1px solid #2e2e2a; border-radius: 8px; padding: 8px 10px; font-size: 11px; text-align: center; }
-  .tr-preview-chip .pv-val { font-size: 15px; font-weight: 700; color: #f0ede6; letter-spacing: -0.2px; }
-  .tr-preview-chip .pv-label { color: #4a4a46; font-size: 10px; margin-top: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
-  .tr-meal-group { margin-bottom: 14px; }
-  .tr-meal-group-title { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #4a4a46; font-weight: 700; margin-bottom: 6px; padding: 4px 0; }
-  .tr-entry { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 10px; padding: 11px 14px; background: #161614; border: 1px solid #1e1e1b; border-radius: 10px; margin-bottom: 5px; transition: border-color 0.15s; }
-  .tr-entry:hover { border-color: #2e2e2a; }
-  .tr-entry-name { font-size: 13px; font-weight: 600; color: #e2dfd8; }
-  .tr-entry-macros { font-size: 11px; color: #4a4a46; margin-top: 2px; }
-  .tr-entry-kcal { font-size: 13px; font-weight: 700; color: #d4943a; white-space: nowrap; }
-  .tr-empty { font-size: 13px; color: #3a3a36; padding: 2rem 0; text-align: center; }
+  /* ── Tracker v2 ── */
+  .tr-track { background:#1e1e1b; border-radius:20px; height:5px; overflow:hidden; }
+  .tr-fill  { height:100%; border-radius:20px; transition:width 0.35s ease; }
+  .tr-fill.over { background:#c84a4a !important; }
+  .tr-day-total { background:#161614; border:1px solid #1e1e1b; border-radius:14px; padding:16px; margin-bottom:14px; }
+  .tr-day-kcal-val { font-size:26px; font-weight:700; color:#c9882a; letter-spacing:-0.5px; line-height:1; }
+  .tr-day-bars { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px; }
+  .tr-day-bar-label { font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; display:flex; justify-content:space-between; margin-bottom:3px; }
+  .tr-meal-tabs { display:flex; gap:6px; overflow-x:auto; padding-bottom:4px; margin-bottom:12px; scrollbar-width:none; }
+  .tr-meal-tabs::-webkit-scrollbar { display:none; }
+  .tr-mtab { flex-shrink:0; padding:7px 14px; border-radius:20px; font-size:12px; font-weight:600; background:#161614; border:1px solid #1e1e1b; color:#6a6a64; cursor:pointer; transition:all 0.15s; white-space:nowrap; }
+  .tr-mtab.active { background:#1e1508; border-color:#c9882a; color:#c9882a; }
+  .tr-meal-card { background:#161614; border:1px solid #1e1e1b; border-radius:14px; padding:16px; margin-bottom:14px; }
+  .tr-meal-card-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; }
+  .tr-meal-card-name { font-size:16px; font-weight:700; color:#f0ede6; }
+  .tr-meal-card-time { font-size:12px; color:#4a4a46; margin-top:2px; }
+  .tr-meal-macro-bars { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:14px; }
+  .tr-mmbar-label { font-size:10px; font-weight:600; display:flex; justify-content:space-between; margin-bottom:3px; }
+  .tr-mmbar-val { font-size:13px; font-weight:700; margin-top:3px; }
+  .tr-meal-added { display:flex; flex-direction:column; gap:5px; min-height:10px; }
+  .tr-added-item { display:grid; grid-template-columns:1fr auto auto; align-items:center; gap:10px; padding:9px 12px; background:#1a1a18; border:1px solid #222220; border-radius:10px; }
+  .tr-added-name { font-size:13px; font-weight:600; color:#d8d4cc; }
+  .tr-added-sub  { font-size:11px; color:#4a4a46; margin-top:1px; }
+  .tr-added-kcal { font-size:12px; font-weight:700; color:#d4943a; white-space:nowrap; }
+  .tr-picker-label { font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:#4a4a46; font-weight:700; margin-bottom:10px; }
+  .tr-pick-search { background:#161614; border:1px solid #1e1e1b; border-radius:10px; padding:10px 14px; color:#e2dfd8; font-size:14px; width:100%; outline:none; font-family:inherit; margin-bottom:10px; transition:border-color 0.15s; box-sizing:border-box; }
+  .tr-pick-search:focus { border-color:#3e3e3a; }
+  .tr-picker-cats { display:flex; gap:6px; overflow-x:auto; padding-bottom:6px; margin-bottom:10px; scrollbar-width:none; }
+  .tr-picker-cats::-webkit-scrollbar { display:none; }
+  .tr-pcat { flex-shrink:0; padding:5px 12px; border-radius:20px; font-size:11px; font-weight:600; background:#161614; border:1px solid #1e1e1b; color:#6a6a64; cursor:pointer; transition:all 0.15s; }
+  .tr-pcat.active { background:#091522; border-color:#5a9fd4; color:#5a9fd4; }
+  .tr-food-list { background:#161614; border:1px solid #1e1e1b; border-radius:12px; overflow:hidden; }
+  .tr-food-row { display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #111110; cursor:pointer; transition:background 0.1s; -webkit-tap-highlight-color:transparent; }
+  .tr-food-row:last-child { border-bottom:none; }
+  .tr-food-row:active { background:#1e1e1b; }
+  .tr-fr-left { flex:1; min-width:0; }
+  .tr-fr-name { font-size:13px; font-weight:600; color:#d8d4cc; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .tr-fr-serving { font-size:11px; color:#4a4a46; margin-top:1px; }
+  .tr-fr-macros { display:flex; gap:3px; flex-shrink:0; }
+  .tr-fmac { font-size:10px; padding:2px 6px; border-radius:5px; font-weight:600; white-space:nowrap; }
+  .tr-fmac-k { background:#1e1508; color:#c9882a; }
+  .tr-fmac-p { background:#091522; color:#6aabde; }
+  .tr-fmac-c { background:#091a10; color:#6ab87e; }
+  .tr-fmac-f { background:#1e1224; color:#c982be; }
+  .tr-fr-add { width:28px; height:28px; border-radius:8px; background:#1e1e1b; border:1px solid #2a2a27; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:300; color:#c9882a; flex-shrink:0; line-height:1; padding-bottom:1px; }
+  .tr-no-results { font-size:13px; color:#3a3a36; padding:2rem; text-align:center; }
+  .tr-meal-empty { font-size:12px; color:#3a3a36; padding:10px 0; }
+  .tr-added-flash { animation: trFlash 0.4s ease; }
+  @keyframes trFlash { 0%{background:#1e2e1e} 100%{background:#1a1a18} }
 
   /* ── Progress ── */
   .log-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
@@ -252,17 +267,6 @@
   <div class="day-tabs" id="mealTabs"></div>
   <div id="mealPanels"></div>
 
-  <!-- Food DB -->
-  <div class="section-label" style="margin-top:2rem;margin-bottom:12px">Databáze potravin — makra na 100 g</div>
-  <input class="search-input" type="text" placeholder="Hledat potravinu..." oninput="filterDB(this.value)">
-  <div class="cat-filters" id="catFilters"></div>
-  <table class="db-table" id="dbTable">
-    <thead><tr>
-      <th>Potravina</th><th>Kategorie</th><th style="text-align:right">Kcal</th>
-      <th style="text-align:right">Bíl.</th><th style="text-align:right">Sach.</th><th style="text-align:right">Tuky</th>
-    </tr></thead>
-    <tbody id="dbBody"></tbody>
-  </table>
 </div>
 </div>
 
@@ -270,61 +274,33 @@
 <div class="section" id="sec-tracker">
 <div class="container">
   <p class="page-title">Kalorický tracker</p>
-  <p class="page-sub">Zaznamenávej co jíš — makra se počítají automaticky</p>
+  <p class="page-sub">Klikni na potravinu — přičte se k aktuálnímu jídlu</p>
 
-  <!-- Date + phase -->
   <div style="display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap;">
     <input type="date" id="tr-date" class="search-input" style="width:160px;margin-bottom:0">
-    <select id="tr-phase" onchange="trRenderSummary()" style="background:#1a1a18;border:0.5px solid #2a2a27;border-radius:8px;padding:8px 12px;color:#e8e6e0;font-size:13px;outline:none;flex:1;min-width:160px;">
+    <select id="tr-phase" onchange="trOnPhaseChange()" style="background:#1a1a18;border:0.5px solid #2a2a27;border-radius:8px;padding:8px 12px;color:#e8e6e0;font-size:13px;outline:none;flex:1;min-width:160px;">
       <option value="cut">Fáze 1 — Mini-cut (2 100 kcal)</option>
       <option value="transition">Přechod — Maintenance (2 635 kcal)</option>
       <option value="bulk">Fáze 2 — Lean bulk (2 900 kcal)</option>
     </select>
   </div>
 
-  <!-- Summary bars -->
-  <div class="tr-summary" id="tr-summary"></div>
+  <div id="tr-day-total"></div>
+  <div class="tr-meal-tabs" id="tr-meal-tabs"></div>
+  <div id="tr-current-meal"></div>
 
-  <!-- Add food -->
-  <div class="section-label" style="margin-top:1.25rem;margin-bottom:8px">Přidat jídlo</div>
-  <div class="tr-add-box">
-    <input type="text" id="tr-search" class="search-input" placeholder="Hledat potravinu z databáze..." oninput="trSearch(this.value)" autocomplete="off" style="margin-bottom:6px">
-    <div id="tr-suggestions" class="tr-suggestions"></div>
-    <div style="display:grid;grid-template-columns:1fr 90px 90px auto;gap:8px;align-items:end;margin-top:6px;">
-      <div class="log-field">
-        <label>Potravina</label>
-        <input type="text" id="tr-food-name" placeholder="název" style="background:#1a1a18;border:0.5px solid #2a2a27;border-radius:8px;padding:8px 10px;color:#e8e6e0;font-size:13px;outline:none;width:100%">
-      </div>
-      <div class="log-field">
-        <label>Gramů</label>
-        <input type="number" id="tr-grams" placeholder="100" min="1" style="background:#1a1a18;border:0.5px solid #2a2a27;border-radius:8px;padding:8px 10px;color:#e8e6e0;font-size:13px;outline:none;width:100%">
-      </div>
-      <div class="log-field">
-        <label>Jídlo</label>
-        <select id="tr-meal-slot" style="background:#1a1a18;border:0.5px solid #2a2a27;border-radius:8px;padding:8px 6px;color:#e8e6e0;font-size:12px;outline:none;width:100%">
-          <option>Snídaně</option>
-          <option>Svačina 1</option>
-          <option>Oběd</option>
-          <option>Svačina 2</option>
-          <option>Večeře</option>
-          <option>Ostatní</option>
-        </select>
-      </div>
-      <button class="log-btn" onclick="trAddEntry()" style="margin-top:14px">+</button>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px;" id="tr-preview"></div>
+  <div class="tr-picker" style="margin-top:16px">
+    <div class="tr-picker-label">Přidat potravinu</div>
+    <input type="text" id="tr-pick-search" class="tr-pick-search" placeholder="Hledat potravinu..." oninput="trPickSearch(this.value)" autocomplete="off">
+    <div class="tr-picker-cats" id="tr-picker-cats"></div>
+    <div id="tr-food-grid"></div>
   </div>
 
-  <!-- Log -->
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;margin-bottom:8px;flex-wrap:wrap;gap:6px;">
-    <div class="section-label" style="margin:0">Záznamy dne</div>
-    <div style="display:flex;gap:6px;">
-      <button class="log-btn" onclick="exportData('tracker')" style="font-size:11px;padding:6px 12px">⬇ Export</button>
-      <button class="log-btn" onclick="importData('tracker')" style="font-size:11px;padding:6px 12px">⬆ Import</button>
-    </div>
+  <div style="display:flex;gap:6px;margin-top:16px;">
+    <button class="log-btn" onclick="trExport()" style="font-size:11px;padding:6px 12px">⬇ Export</button>
+    <button class="log-btn" onclick="trImport()" style="font-size:11px;padding:6px 12px">⬆ Import</button>
   </div>
-  <div id="tr-log"></div>
-  <input type="file" id="import-file-tracker" accept=".json" style="display:none" onchange="handleImport(event,'tracker')">
+  <input type="file" id="tr-import-file" accept=".json" style="display:none" onchange="trHandleImport(event)">
 </div>
 </div>
 
@@ -822,284 +798,336 @@ function setRM(i) { activeRM = i; renderRoadmap(); renderPhaseDetail(); renderNu
 renderRoadmap();
 renderPhaseDetail();
 renderNutrMeals();
-/* ══════════ TRACKER ══════════ */
-const TR_KEY = "calorie_tracker_v1";
+/* ══════════ TRACKER v2 ══════════ */
+const TR_KEY = "calorie_tracker_v2";
 const TR_TARGETS = {
-  cut:        { kcal:2100, p:175, c:170, f:70 },
-  transition: { kcal:2635, p:155, c:310, f:80 },
-  bulk:       { kcal:2900, p:155, c:380, f:85 }
+  cut:        { kcal:2100, p:175, c:170, f:70  },
+  transition: { kcal:2635, p:155, c:310, f:80  },
+  bulk:       { kcal:2900, p:155, c:380, f:85  }
+};
+const MEAL_TARGETS = {
+  cut: [
+    { name:"Snídaně",   time:"7:00",  kcal:450, p:40, c:38, f:14 },
+    { name:"Svačina 1", time:"10:00", kcal:250, p:25, c:28, f:7  },
+    { name:"Oběd",      time:"13:00", kcal:560, p:50, c:55, f:16 },
+    { name:"Svačina 2", time:"16:30", kcal:250, p:25, c:27, f:8  },
+    { name:"Večeře",    time:"19:30", kcal:590, p:35, c:22, f:25 },
+  ],
+  transition: [
+    { name:"Snídaně",   time:"7:00",  kcal:530, p:30, c:65, f:16 },
+    { name:"Svačina 1", time:"10:00", kcal:310, p:20, c:38, f:8  },
+    { name:"Oběd",      time:"13:00", kcal:720, p:45, c:85, f:22 },
+    { name:"Svačina 2", time:"16:30", kcal:310, p:20, c:38, f:8  },
+    { name:"Večeře",    time:"19:30", kcal:765, p:40, c:84, f:26 },
+  ],
+  bulk: [
+    { name:"Snídaně",   time:"7:00",  kcal:580, p:31, c:72, f:16 },
+    { name:"Svačina 1", time:"10:00", kcal:350, p:23, c:45, f:9  },
+    { name:"Oběd",      time:"13:00", kcal:790, p:45, c:100,f:24 },
+    { name:"Svačina 2", time:"16:30", kcal:350, p:23, c:45, f:9  },
+    { name:"Večeře",    time:"19:30", kcal:830, p:33, c:118,f:27 },
+  ],
 };
 
-let trSelected = null; // currently selected food from DB
+let trActiveMeal = 0;
+let trPickCat    = "all";
+let trPickQ      = "";
 
-function trToday() {
-  return new Date().toISOString().slice(0,10);
+function trToday()    { return new Date().toISOString().slice(0,10); }
+function trLoadAll()  { try { return JSON.parse(localStorage.getItem(TR_KEY))||{}; } catch { return {}; } }
+function trSaveAll(d) { localStorage.setItem(TR_KEY, JSON.stringify(d)); }
+function trGetDate()  { return document.getElementById("tr-date").value || trToday(); }
+function trGetPhase() { return document.getElementById("tr-phase").value || "cut"; }
+function trGetDayData() { return trLoadAll()[trGetDate()] || {}; }
+function trGetMealItems(n) { return trGetDayData()[n] || []; }
+function trTotals(items) {
+  return items.reduce((a,e) => ({ kcal:a.kcal+e.kcal, p:a.p+e.p, c:a.c+e.c, f:a.f+e.f }), {kcal:0,p:0,c:0,f:0});
 }
 
-function trLoadAll() {
-  try { return JSON.parse(localStorage.getItem(TR_KEY)) || {}; } catch { return {}; }
+function trRenderAll() {
+  trRenderDayTotal();
+  trRenderMealTabs();
+  trRenderCurrentMeal();
 }
 
-function trSaveAll(data) {
-  localStorage.setItem(TR_KEY, JSON.stringify(data));
-}
-
-function trGetDate() {
-  return document.getElementById("tr-date").value || trToday();
-}
-
-function trGetEntries() {
-  return trLoadAll()[trGetDate()] || [];
-}
-
-function trSaveEntries(entries) {
-  const all = trLoadAll();
-  all[trGetDate()] = entries;
-  trSaveAll(all);
-}
-
-function trGetTarget() {
-  const phase = document.getElementById("tr-phase").value;
-  return TR_TARGETS[phase] || TR_TARGETS.cut;
-}
-
-function trTotals(entries) {
-  return entries.reduce((acc, e) => {
-    acc.kcal += e.kcal; acc.p += e.p; acc.c += e.c; acc.f += e.f;
-    return acc;
-  }, { kcal:0, p:0, c:0, f:0 });
-}
-
-function trRenderSummary() {
-  const entries = trGetEntries();
-  const tot = trTotals(entries);
-  const tgt = trGetTarget();
-  const pct = (v, t) => Math.min(Math.round(v / t * 100), 100);
-  const over = (v, t) => v > t;
-
-  document.getElementById("tr-summary").innerHTML = `
-    <div class="tr-bar-row">
-      <div class="tr-bar-top">
-        <span class="tr-bar-label">Kalorie</span>
-        <span class="tr-bar-vals">
-          <span class="eaten">${Math.round(tot.kcal)}</span>
-          <span class="target"> / ${tgt.kcal} kcal</span>
-          <span style="font-size:11px;color:#555;margin-left:6px">${tgt.kcal - Math.round(tot.kcal) >= 0 ? "zbývá " + (tgt.kcal - Math.round(tot.kcal)) : "přebytek +" + (Math.round(tot.kcal) - tgt.kcal)} kcal</span>
-        </span>
+function trRenderDayTotal() {
+  const tgt  = TR_TARGETS[trGetPhase()];
+  const tot  = trTotals(Object.values(trGetDayData()).flat());
+  const pct  = (v,t) => Math.min(Math.round(v/t*100),100);
+  const over = (v,t) => v > t;
+  document.getElementById("tr-day-total").innerHTML = `
+  <div class="tr-day-total">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+      <div>
+        <div style="font-size:10px;color:#4a4a46;text-transform:uppercase;letter-spacing:0.06em;font-weight:600;margin-bottom:4px">Dnes celkem</div>
+        <div class="tr-day-kcal-val">${Math.round(tot.kcal)}<span style="font-size:14px;color:#4a4a46;font-weight:400"> / ${tgt.kcal} kcal</span></div>
       </div>
-      <div class="tr-track"><div class="tr-fill ${over(tot.kcal,tgt.kcal)?"over":""}" style="width:${pct(tot.kcal,tgt.kcal)}%;background:#c9882a"></div></div>
+      <div style="text-align:right;padding-top:4px">
+        <div style="font-size:13px;font-weight:700;color:${over(tot.kcal,tgt.kcal)?'#c84a4a':'#5aaa7a'}">${over(tot.kcal,tgt.kcal)?'+'+Math.round(tot.kcal-tgt.kcal)+' kcal':Math.round(tgt.kcal-tot.kcal)+' kcal zbývá'}</div>
+      </div>
     </div>
-    <div class="tr-macros-grid">
-      <div class="tr-macro-mini">
-        <div class="tr-macro-mini-label">Bílkoviny</div>
-        <div class="tr-macro-mini-val" style="color:#5a9fd4">${Math.round(tot.p)} g</div>
-        <div class="tr-track" style="margin-top:5px"><div class="tr-fill ${over(tot.p,tgt.p)?"over":""}" style="width:${pct(tot.p,tgt.p)}%;background:#5a9fd4"></div></div>
-        <div class="tr-macro-mini-target">cíl ${tgt.p} g</div>
-      </div>
-      <div class="tr-macro-mini">
-        <div class="tr-macro-mini-label">Sacharidy</div>
-        <div class="tr-macro-mini-val" style="color:#5aaa7a">${Math.round(tot.c)} g</div>
-        <div class="tr-track" style="margin-top:5px"><div class="tr-fill ${over(tot.c,tgt.c)?"over":""}" style="width:${pct(tot.c,tgt.c)}%;background:#5aaa7a"></div></div>
-        <div class="tr-macro-mini-target">cíl ${tgt.c} g</div>
-      </div>
-      <div class="tr-macro-mini">
-        <div class="tr-macro-mini-label">Tuky</div>
-        <div class="tr-macro-mini-val" style="color:#c47aaa">${Math.round(tot.f)} g</div>
-        <div class="tr-track" style="margin-top:5px"><div class="tr-fill ${over(tot.f,tgt.f)?"over":""}" style="width:${pct(tot.f,tgt.f)}%;background:#c47aaa"></div></div>
-        <div class="tr-macro-mini-target">cíl ${tgt.f} g</div>
-      </div>
-    </div>`;
-  trRenderLog();
+    <div class="tr-track" style="height:6px;margin-bottom:12px"><div class="tr-fill ${over(tot.kcal,tgt.kcal)?"over":""}" style="width:${pct(tot.kcal,tgt.kcal)}%;background:#c9882a"></div></div>
+    <div class="tr-day-bars">
+      ${[{l:"Bílkoviny",v:tot.p,t:tgt.p,c:"#5a9fd4"},{l:"Sacharidy",v:tot.c,t:tgt.c,c:"#5aaa7a"},{l:"Tuky",v:tot.f,t:tgt.f,c:"#c47aaa"}].map(m=>`
+        <div>
+          <div class="tr-day-bar-label"><span style="color:#5a5a54">${m.l}</span><span style="color:${over(m.v,m.t)?'#c84a4a':m.c};font-weight:700">${Math.round(m.v)}g</span></div>
+          <div class="tr-track"><div class="tr-fill ${over(m.v,m.t)?"over":""}" style="width:${pct(m.v,m.t)}%;background:${m.c}"></div></div>
+          <div style="font-size:10px;color:#3a3a36;margin-top:2px">cíl ${m.t} g</div>
+        </div>`).join("")}
+    </div>
+  </div>`;
 }
 
-function trRenderLog() {
-  const entries = trGetEntries();
-  const logEl = document.getElementById("tr-log");
-  if (!entries.length) {
-    logEl.innerHTML = `<div class="tr-empty">Žádné záznamy pro tento den. Přidej první jídlo výše.</div>`;
+function trRenderMealTabs() {
+  const meals    = MEAL_TARGETS[trGetPhase()];
+  const dayData  = trGetDayData();
+  document.getElementById("tr-meal-tabs").innerHTML = meals.map((m,i) => {
+    const tot  = trTotals(dayData[m.name]||[]);
+    const pct  = Math.min(Math.round(tot.kcal/m.kcal*100),100);
+    const done = tot.kcal >= m.kcal * 0.95;
+    const extra = done && i!==trActiveMeal ? "border-color:#3a5a3a;color:#5a8a5a" : "";
+    return `<div class="tr-mtab ${i===trActiveMeal?"active":""}" onclick="trSetMeal(${i})" style="${extra}">
+      ${m.name}${(dayData[m.name]||[]).length?`<span style="font-size:10px;opacity:0.65;margin-left:4px">${pct}%</span>`:""}
+    </div>`;
+  }).join("");
+}
+
+function trRenderCurrentMeal() {
+  const m     = MEAL_TARGETS[trGetPhase()][trActiveMeal];
+  const items = trGetMealItems(m.name);
+  const tot   = trTotals(items);
+  const pct   = (v,t) => Math.min(Math.round(v/t*100),100);
+  const over  = (v,t) => v > t;
+  const bars  = [
+    {l:"kcal",  v:tot.kcal, t:m.kcal, c:"#c9882a", unit:""},
+    {l:"B",     v:tot.p,   t:m.p,    c:"#5a9fd4", unit:"g"},
+    {l:"S",     v:tot.c,   t:m.c,    c:"#5aaa7a", unit:"g"},
+    {l:"T",     v:tot.f,   t:m.f,    c:"#c47aaa", unit:"g"},
+  ];
+  const itemsHtml = items.length
+    ? items.map((e,i)=>`
+      <div class="tr-added-item">
+        <div>
+          <div class="tr-added-name">${e.name}</div>
+          <div class="tr-added-sub">${e.grams}g &nbsp;·&nbsp; B:${e.p.toFixed(1)} S:${e.c.toFixed(1)} T:${e.f.toFixed(1)}</div>
+        </div>
+        <div class="tr-added-kcal">${Math.round(e.kcal)} kcal</div>
+        <button class="del-btn" onclick="trRemoveItem('${m.name.replace(/'/g,"\\'")}',${i})">✕</button>
+      </div>`).join("")
+    : `<div class="tr-meal-empty">Žádné potraviny — klikni na kartu níže a přidej</div>`;
+  document.getElementById("tr-current-meal").innerHTML = `
+  <div class="tr-meal-card">
+    <div class="tr-meal-card-top">
+      <div><div class="tr-meal-card-name">${m.name}</div><div class="tr-meal-card-time">${m.time} · cíl ${m.kcal} kcal</div></div>
+      <div style="text-align:right">
+        <div style="font-size:24px;font-weight:700;color:${over(tot.kcal,m.kcal)?'#c84a4a':'#c9882a'};letter-spacing:-0.3px;line-height:1">${Math.round(tot.kcal)}</div>
+        <div style="font-size:10px;color:#4a4a46;margin-top:2px">kcal</div>
+      </div>
+    </div>
+    <div class="tr-meal-macro-bars">
+      ${bars.map(b=>`
+        <div>
+          <div class="tr-mmbar-label"><span style="color:${b.c}">${b.l}</span><span style="color:#3a3a36">${b.t}${b.unit}</span></div>
+          <div class="tr-track"><div class="tr-fill ${over(b.v,b.t)?"over":""}" style="width:${pct(b.v,b.t)}%;background:${b.c}"></div></div>
+          <div class="tr-mmbar-val" style="color:${over(b.v,b.t)?'#c84a4a':b.c}">${b.l==='kcal'?Math.round(b.v):b.v.toFixed(1)}${b.unit}</div>
+        </div>`).join("")}
+    </div>
+    <div class="tr-meal-added">${itemsHtml}</div>
+  </div>`;
+}
+
+function trRenderPickerCats() {
+  const cats   = ["all","protein","dairy","carb","musli","fat","veg","fruit"];
+  const labels = {all:"Vše",protein:"Bílkoviny",dairy:"Mléčné",carb:"Sacharidy",musli:"Müsli",fat:"Tuky",veg:"Zelenina",fruit:"Ovoce"};
+  document.getElementById("tr-picker-cats").innerHTML = cats.map(c=>
+    `<div class="tr-pcat ${c===trPickCat?"active":""}" onclick="trSetPickCat('${c}')">${labels[c]}</div>`
+  ).join("");
+}
+
+function trRenderFoodGrid() {
+  const foods = FOODS.filter(f => {
+    const mc = trPickCat==="all" || f.cat===trPickCat;
+    const mq = !trPickQ || f.name.toLowerCase().includes(trPickQ.toLowerCase());
+    return mc && mq;
+  });
+  if (!foods.length) {
+    document.getElementById("tr-food-grid").innerHTML = `<div class="tr-no-results">Žádná potravina nenalezena</div>`;
     return;
   }
-  const slots = ["Snídaně","Svačina 1","Oběd","Svačina 2","Večeře","Ostatní"];
-  let html = "";
-  slots.forEach(slot => {
-    const slotEntries = entries.filter(e => e.slot === slot);
-    if (!slotEntries.length) return;
-    const slotTot = trTotals(slotEntries);
-    html += `<div class="tr-meal-group">
-      <div class="tr-meal-group-title">${slot} &nbsp;·&nbsp; <span style="color:#c9882a">${Math.round(slotTot.kcal)} kcal</span></div>
-      ${slotEntries.map((e, gi) => {
-        const idx = entries.indexOf(e);
-        return `<div class="tr-entry">
-          <div>
-            <div class="tr-entry-name">${e.name} <span style="color:#555;font-weight:400;font-size:12px">${e.grams} g</span></div>
-            <div class="tr-entry-macros">B: ${e.p.toFixed(1)}g &nbsp; S: ${e.c.toFixed(1)}g &nbsp; T: ${e.f.toFixed(1)}g</div>
-          </div>
-          <div class="tr-entry-kcal">${Math.round(e.kcal)} kcal</div>
-          <button class="del-btn" onclick="trDelete(${idx})">✕</button>
-        </div>`;
-      }).join("")}
-    </div>`;
-  });
-  logEl.innerHTML = html;
+  document.getElementById("tr-food-grid").innerHTML = `<div class="tr-food-list">${
+    foods.map(f => {
+      const r=f.s.g/100, fk=Math.round(f.kcal*r), fp=(f.p*r).toFixed(1), fc=(f.c*r).toFixed(1), ff=(f.f*r).toFixed(1);
+      const safe = JSON.stringify({name:f.name,kcal:f.kcal,p:f.p,c:f.c,f:f.f,s:f.s}).replace(/"/g,'&quot;');
+      return `<div class="tr-food-row" onclick="trAddFood(${safe})">
+        <div class="tr-fr-left">
+          <div class="tr-fr-name">${f.name}</div>
+          <div class="tr-fr-serving">${f.s.l}</div>
+        </div>
+        <div class="tr-fr-macros">
+          <span class="tr-fmac tr-fmac-k">${fk} kcal</span>
+          <span class="tr-fmac tr-fmac-p">B${fp}</span>
+          <span class="tr-fmac tr-fmac-c">S${fc}</span>
+          <span class="tr-fmac tr-fmac-f">T${ff}</span>
+        </div>
+        <div class="tr-fr-add">+</div>
+      </div>`;
+    }).join("")
+  }</div>`;
 }
 
-function trSearch(q) {
-  const sugg = document.getElementById("tr-suggestions");
-  if (!q || q.length < 2) { sugg.innerHTML = ""; trSelected = null; return; }
-  const hits = FOODS.filter(f => f.name.toLowerCase().includes(q.toLowerCase())).slice(0, 8);
-  if (!hits.length) { sugg.innerHTML = ""; return; }
-  sugg.innerHTML = `<div class="tr-sugg-list">${hits.map(f =>
-    `<div class="tr-sugg-item" onclick="trSelectFood(${JSON.stringify(f).replace(/"/g,'&quot;')})">
-      <span>${f.name}</span>
-      <span class="tr-sugg-macros">${f.kcal} kcal &nbsp; B:${f.p}g S:${f.c}g T:${f.f}g &nbsp; /100g</span>
-    </div>`).join("")}</div>`;
+function trSetMeal(i)   { trActiveMeal=i; trRenderMealTabs(); trRenderCurrentMeal(); }
+function trSetPickCat(c){ trPickCat=c; trRenderPickerCats(); trRenderFoodGrid(); }
+function trPickSearch(q){ trPickQ=q; trRenderFoodGrid(); }
+function trOnPhaseChange(){ trRenderAll(); }
+
+function trAddFood(f) {
+  const mealName = MEAL_TARGETS[trGetPhase()][trActiveMeal].name;
+  const r = f.s.g/100;
+  const all  = trLoadAll();
+  const date = trGetDate();
+  if (!all[date]) all[date] = {};
+  if (!all[date][mealName]) all[date][mealName] = [];
+  all[date][mealName].push({ name:f.name, grams:f.s.g, kcal:f.kcal*r, p:f.p*r, c:f.c*r, f:f.f*r, slot:mealName });
+  trSaveAll(all);
+  trRenderAll();
 }
 
-function trSelectFood(f) {
-  trSelected = f;
-  document.getElementById("tr-food-name").value = f.name;
-  document.getElementById("tr-search").value = "";
-  document.getElementById("tr-suggestions").innerHTML = "";
-  document.getElementById("tr-grams").value = 100;
-  trUpdatePreview();
+function trRemoveItem(mealName, idx) {
+  const all  = trLoadAll();
+  const date = trGetDate();
+  if (all[date]&&all[date][mealName]) { all[date][mealName].splice(idx,1); trSaveAll(all); }
+  trRenderAll();
 }
 
-function trUpdatePreview() {
-  const grams = parseFloat(document.getElementById("tr-grams").value) || 0;
-  const prev = document.getElementById("tr-preview");
-  if (!trSelected || !grams) { prev.innerHTML = ""; return; }
-  const ratio = grams / 100;
-  const kcal = trSelected.kcal * ratio;
-  const p = trSelected.p * ratio;
-  const c = trSelected.c * ratio;
-  const f = trSelected.f * ratio;
-  prev.innerHTML = `
-    <div class="tr-preview-chip"><div class="pv-val">${Math.round(kcal)}</div><div class="pv-label">kcal</div></div>
-    <div class="tr-preview-chip"><div class="pv-val" style="color:#5a9fd4">${p.toFixed(1)}g</div><div class="pv-label">bílkoviny</div></div>
-    <div class="tr-preview-chip"><div class="pv-val" style="color:#5aaa7a">${c.toFixed(1)}g</div><div class="pv-label">sacharidy</div></div>
-    <div class="tr-preview-chip"><div class="pv-val" style="color:#c47aaa">${f.toFixed(1)}g</div><div class="pv-label">tuky</div></div>`;
+function trExport() {
+  const blob = new Blob([JSON.stringify(trLoadAll(),null,2)],{type:'application/json'});
+  const a = Object.assign(document.createElement('a'),{href:URL.createObjectURL(blob),download:'tracker-export.json'});
+  a.click(); URL.revokeObjectURL(a.href);
 }
-
-document.addEventListener("input", function(e) {
-  if (e.target.id === "tr-grams") trUpdatePreview();
-  if (e.target.id === "tr-date") trRenderSummary();
-});
-
-function trAddEntry() {
-  const name = document.getElementById("tr-food-name").value.trim();
-  const grams = parseFloat(document.getElementById("tr-grams").value);
-  const slot = document.getElementById("tr-meal-slot").value;
-  if (!name || !grams) return;
-
-  let kcal = 0, p = 0, c = 0, f = 0;
-  if (trSelected && trSelected.name === name) {
-    const r = grams / 100;
-    kcal = trSelected.kcal * r; p = trSelected.p * r;
-    c = trSelected.c * r; f = trSelected.f * r;
-  }
-
-  const entries = trGetEntries();
-  entries.push({ name, grams, kcal, p, c, f, slot, time: new Date().toLocaleTimeString("cs-CZ",{hour:"2-digit",minute:"2-digit"}) });
-  trSaveEntries(entries);
-
-  document.getElementById("tr-food-name").value = "";
-  document.getElementById("tr-grams").value = "";
-  document.getElementById("tr-preview").innerHTML = "";
-  document.getElementById("tr-search").value = "";
-  trSelected = null;
-  trRenderSummary();
-}
-
-function trDelete(i) {
-  const entries = trGetEntries();
-  entries.splice(i, 1);
-  trSaveEntries(entries);
-  trRenderSummary();
+function trImport() { document.getElementById("tr-import-file").click(); }
+function trHandleImport(e) {
+  const file = e.target.files[0]; if (!file) return;
+  const r = new FileReader();
+  r.onload = ev => { try { trSaveAll(JSON.parse(ev.target.result)); trRenderAll(); } catch { alert("Neplatný soubor"); } };
+  r.readAsText(file);
 }
 
 function trInit() {
   document.getElementById("tr-date").value = trToday();
-  trRenderSummary();
+  document.getElementById("tr-date").addEventListener("change", trRenderAll);
+  trRenderPickerCats();
+  trRenderAll();
 }
 trInit();
 
+/* ── Food DB ──
 /* ── Food DB ── */
 const FOODS = [
-  { name:"Kuřecí prsa", cat:"protein",  kcal:165, p:31, c:0,  f:3.6 },
-  { name:"Hovězí mleté (90%)", cat:"protein", kcal:218, p:26, c:0, f:13 },
-  { name:"Losos",        cat:"protein",  kcal:208, p:20, c:0,  f:13 },
-  { name:"Tuňák v nálevu", cat:"protein", kcal:109, p:24, c:0, f:1 },
-  { name:"Treska",       cat:"protein",  kcal:82,  p:18, c:0,  f:0.7 },
-  { name:"Vejce (celé)", cat:"protein",  kcal:155, p:13, c:1.1,f:11 },
-  { name:"Vaječný bílek",cat:"protein",  kcal:52,  p:11, c:0.7,f:0.2 },
-  { name:"Hovězí steak (libový)", cat:"protein", kcal:190, p:28, c:0, f:8 },
-  { name:"Vepřová panenka", cat:"protein", kcal:143, p:22, c:0, f:6 },
-  { name:"Krůtí šunka",  cat:"protein",  kcal:104, p:17, c:2,  f:3 },
-  { name:"Protein syrovátkový", cat:"protein", kcal:380, p:75, c:8, f:5 },
-  { name:"Tvaroh (tučný 10%)", cat:"dairy", kcal:132, p:14, c:3, f:7 },
-  { name:"Tvaroh (měkký, nízkotučný)", cat:"dairy", kcal:73, p:12, c:3.5, f:0.5 },
-  { name:"Řecký jogurt (0%)", cat:"dairy", kcal:59, p:10, c:3.6, f:0.4 },
-  { name:"Mléko polotučné", cat:"dairy", kcal:46,  p:3.4,c:4.8, f:1.5 },
-  { name:"Kefír",         cat:"dairy",   kcal:61,  p:3.3,c:4.5, f:3.2 },
-  { name:"Parmazán",      cat:"dairy",   kcal:431, p:38, c:0,   f:29 },
-  { name:"Rýže basmati (vařená)", cat:"carb", kcal:130, p:2.7, c:28, f:0.3 },
-  { name:"Ovesné vločky", cat:"carb",   kcal:379, p:13, c:67,  f:7 },
-  { name:"Těstoviny celozrnné (vařené)", cat:"carb", kcal:131, p:5, c:26, f:1 },
-  { name:"Brambory vařené", cat:"carb", kcal:87,  p:1.9,c:20,  f:0.1 },
-  { name:"Batáty pečené", cat:"carb",   kcal:90,  p:2,  c:21,  f:0.1 },
-  { name:"Celozrnný chléb", cat:"carb", kcal:247, p:9,  c:46,  f:3.4 },
-  { name:"Pohanka vařená", cat:"carb",  kcal:92,  p:3.4,c:20,  f:0.6 },
-  { name:"Kuskus vařený", cat:"carb",   kcal:112, p:3.8,c:23,  f:0.2 },
-  { name:"Quinoa vařená", cat:"carb",   kcal:120, p:4.4,c:22,  f:1.9 },
-  { name:"Banán",         cat:"carb",   kcal:89,  p:1.1,c:23,  f:0.3 },
-  { name:"Ovesná tyčinka (bez cukru)", cat:"carb", kcal:400, p:10, c:60, f:12 },
-  { name:"Olivový olej",  cat:"fat",    kcal:884, p:0,  c:0,   f:100 },
-  { name:"Arašídové máslo (natural)", cat:"fat", kcal:598, p:25, c:20, f:50 },
-  { name:"Avokádo",       cat:"fat",    kcal:160, p:2,  c:9,   f:15 },
-  { name:"Mandle",        cat:"fat",    kcal:579, p:21, c:22,  f:50 },
-  { name:"Máslo",         cat:"fat",    kcal:717, p:0.9,c:0.1, f:81 },
-  { name:"Chia semínka",  cat:"fat",    kcal:486, p:17, c:42,  f:31 },
-  { name:"Brokolice",     cat:"veg",    kcal:34,  p:2.8,c:7,   f:0.4 },
-  { name:"Špenát",        cat:"veg",    kcal:23,  p:2.9,c:3.6, f:0.4 },
-  { name:"Rajče",         cat:"veg",    kcal:18,  p:0.9,c:3.9, f:0.2 },
-  { name:"Paprika červená",cat:"veg",   kcal:31,  p:1,  c:6,   f:0.3 },
-  { name:"Cuketa",        cat:"veg",    kcal:17,  p:1.2,c:3.1, f:0.3 },
-  { name:"Mrkev",         cat:"veg",    kcal:41,  p:0.9,c:10,  f:0.2 },
-  { name:"Zelená fazolka",cat:"veg",    kcal:31,  p:1.8,c:7,   f:0.1 },
-  { name:"Hrášek",        cat:"veg",    kcal:81,  p:5.4,c:14,  f:0.4 },
+  // Bílkoviny
+  { name:"Kuřecí prsa",             cat:"protein", kcal:165, p:31,  c:0,   f:3.6, s:{g:150, l:"150 g"} },
+  { name:"Hovězí mleté (90%)",      cat:"protein", kcal:218, p:26,  c:0,   f:13,  s:{g:150, l:"150 g"} },
+  { name:"Losos",                   cat:"protein", kcal:208, p:20,  c:0,   f:13,  s:{g:150, l:"150 g"} },
+  { name:"Tuňák v nálevu",          cat:"protein", kcal:109, p:24,  c:0,   f:1,   s:{g:120, l:"1 plechovka"} },
+  { name:"Treska",                  cat:"protein", kcal:82,  p:18,  c:0,   f:0.7, s:{g:150, l:"150 g"} },
+  { name:"Vejce (celé)",            cat:"protein", kcal:155, p:13,  c:1.1, f:11,  s:{g:55,  l:"1 vejce"} },
+  { name:"Vaječný bílek",           cat:"protein", kcal:52,  p:11,  c:0.7, f:0.2, s:{g:33,  l:"1 bílek"} },
+  { name:"Hovězí steak (libový)",   cat:"protein", kcal:190, p:28,  c:0,   f:8,   s:{g:200, l:"200 g"} },
+  { name:"Vepřová panenka",         cat:"protein", kcal:143, p:22,  c:0,   f:6,   s:{g:150, l:"150 g"} },
+  { name:"Krůtí šunka",             cat:"protein", kcal:104, p:17,  c:2,   f:3,   s:{g:60,  l:"3 plátky"} },
+  { name:"Protein syrovátkový",     cat:"protein", kcal:380, p:75,  c:8,   f:5,   s:{g:30,  l:"1 kopec"} },
+  // Mléčné
+  { name:"Tvaroh (tučný 10%)",      cat:"dairy",   kcal:132, p:14,  c:3,   f:7,   s:{g:150, l:"150 g"} },
+  { name:"Tvaroh (nízkotučný)",     cat:"dairy",   kcal:73,  p:12,  c:3.5, f:0.5, s:{g:200, l:"200 g"} },
+  { name:"Řecký jogurt (0%)",       cat:"dairy",   kcal:59,  p:10,  c:3.6, f:0.4, s:{g:200, l:"200 g"} },
+  { name:"Mléko polotučné",         cat:"dairy",   kcal:46,  p:3.4, c:4.8, f:1.5, s:{g:250, l:"250 ml"} },
+  { name:"Kefír",                   cat:"dairy",   kcal:61,  p:3.3, c:4.5, f:3.2, s:{g:250, l:"250 ml"} },
+  { name:"Parmazán",                cat:"dairy",   kcal:431, p:38,  c:0,   f:29,  s:{g:15,  l:"1 lžíce"} },
+  { name:"Cottage cheese",          cat:"dairy",   kcal:98,  p:11,  c:3.4, f:4.3, s:{g:150, l:"150 g"} },
+  // Sacharidy
+  { name:"Rýže basmati (vařená)",   cat:"carb",    kcal:130, p:2.7, c:28,  f:0.3, s:{g:150, l:"150 g"} },
+  { name:"Ovesné vločky",           cat:"carb",    kcal:379, p:13,  c:67,  f:7,   s:{g:60,  l:"60 g"} },
+  { name:"Těstoviny celozrn. (var.)",cat:"carb",   kcal:131, p:5,   c:26,  f:1,   s:{g:200, l:"200 g"} },
+  { name:"Brambory vařené",         cat:"carb",    kcal:87,  p:1.9, c:20,  f:0.1, s:{g:200, l:"200 g"} },
+  { name:"Batáty pečené",           cat:"carb",    kcal:90,  p:2,   c:21,  f:0.1, s:{g:200, l:"200 g"} },
+  { name:"Celozrnný chléb",         cat:"carb",    kcal:247, p:9,   c:46,  f:3.4, s:{g:50,  l:"2 plátky"} },
+  { name:"Pohanka vařená",          cat:"carb",    kcal:92,  p:3.4, c:20,  f:0.6, s:{g:150, l:"150 g"} },
+  { name:"Kuskus vařený",           cat:"carb",    kcal:112, p:3.8, c:23,  f:0.2, s:{g:150, l:"150 g"} },
+  { name:"Quinoa vařená",           cat:"carb",    kcal:120, p:4.4, c:22,  f:1.9, s:{g:150, l:"150 g"} },
+  { name:"Banán",                   cat:"carb",    kcal:89,  p:1.1, c:23,  f:0.3, s:{g:120, l:"1 ks"} },
+  { name:"Ovesná tyčinka",          cat:"carb",    kcal:400, p:10,  c:60,  f:12,  s:{g:40,  l:"1 tyčinka"} },
+  { name:"Müsli (bez cukru)",       cat:"carb",    kcal:370, p:10,  c:65,  f:8,   s:{g:55,  l:"55 g"} },
+  // Tuky
+  { name:"Olivový olej",            cat:"fat",     kcal:884, p:0,   c:0,   f:100, s:{g:10,  l:"1 lžíce"} },
+  { name:"Arašídové máslo",         cat:"fat",     kcal:598, p:25,  c:20,  f:50,  s:{g:32,  l:"2 lžíce"} },
+  { name:"Avokádo",                 cat:"fat",     kcal:160, p:2,   c:9,   f:15,  s:{g:80,  l:"½ avokáda"} },
+  { name:"Mandle",                  cat:"fat",     kcal:579, p:21,  c:22,  f:50,  s:{g:20,  l:"20 g"} },
+  { name:"Máslo",                   cat:"fat",     kcal:717, p:0.9, c:0.1, f:81,  s:{g:10,  l:"1 lžička"} },
+  { name:"Chia semínka",            cat:"fat",     kcal:486, p:17,  c:42,  f:31,  s:{g:15,  l:"1 lžíce"} },
+  // Bílkoviny (doplněk)
+  { name:"Kuřecí stehno (bez kosti)", cat:"protein", kcal:189, p:26,  c:0,   f:9.3, s:{g:150, l:"150 g"} },
+  { name:"Sardinky v oleji",          cat:"protein", kcal:208, p:25,  c:0,   f:12,  s:{g:100, l:"1 konzerva"} },
+  { name:"Makrela",                   cat:"protein", kcal:205, p:19,  c:0,   f:14,  s:{g:100, l:"100 g"} },
+  { name:"Krevetky vařené",           cat:"protein", kcal:99,  p:21,  c:0,   f:1.1, s:{g:100, l:"100 g"} },
+  { name:"Edamame",                   cat:"protein", kcal:121, p:11,  c:9,   f:5,   s:{g:100, l:"100 g"} },
+  { name:"Čočka červená vařená",      cat:"protein", kcal:116, p:9,   c:20,  f:0.4, s:{g:150, l:"150 g"} },
+  { name:"Fazole červené vařené",     cat:"protein", kcal:127, p:8.7, c:23,  f:0.5, s:{g:150, l:"150 g"} },
+  // Mléčné (doplněk)
+  { name:"Skyr",                    cat:"dairy",   kcal:63,  p:11,  c:4,   f:0.2, s:{g:200, l:"200 g"} },
+  { name:"Mozzarella",              cat:"dairy",   kcal:280, p:18,  c:2.2, f:22,  s:{g:50,  l:"½ kuličky"} },
+  { name:"Eidam 30%",               cat:"dairy",   kcal:260, p:26,  c:0,   f:17,  s:{g:30,  l:"2 plátky"} },
+  { name:"Tvarohový dezert 0%",     cat:"dairy",   kcal:60,  p:10,  c:4.5, f:0.1, s:{g:150, l:"150 g"} },
+  { name:"Kysaná smetana 12%",      cat:"dairy",   kcal:116, p:3.5, c:3.5, f:10,  s:{g:50,  l:"2 lžíce"} },
+  // Sacharidy (doplněk)
+  { name:"Celozrnná tortilla",      cat:"carb",    kcal:240, p:7,   c:45,  f:4,   s:{g:40,  l:"1 tortilla"} },
+  { name:"Rýžové chlebíčky",        cat:"carb",    kcal:387, p:7.5, c:81,  f:3,   s:{g:20,  l:"2 ks"} },
+  { name:"Čočka zelená vařená",     cat:"carb",    kcal:116, p:9,   c:20,  f:0.4, s:{g:150, l:"150 g"} },
+  { name:"Chleba žitný",            cat:"carb",    kcal:259, p:8.5, c:49,  f:3.3, s:{g:50,  l:"2 plátky"} },
+  { name:"Ovesné otruby",           cat:"carb",    kcal:246, p:17,  c:66,  f:7,   s:{g:30,  l:"30 g"} },
+  // Müsli
+  { name:"Ovesné vločky",           cat:"musli",   kcal:379, p:13,  c:67,  f:7,   s:{g:60,  l:"60 g"} },
+  { name:"Müsli (bez cukru)",       cat:"musli",   kcal:370, p:10,  c:65,  f:8,   s:{g:60,  l:"60 g"} },
+  { name:"Granola",                 cat:"musli",   kcal:450, p:10,  c:65,  f:17,  s:{g:50,  l:"50 g"} },
+  { name:"Protein granola",         cat:"musli",   kcal:390, p:20,  c:52,  f:9,   s:{g:50,  l:"50 g"} },
+  { name:"Cornflakes",              cat:"musli",   kcal:378, p:7,   c:84,  f:1,   s:{g:40,  l:"40 g"} },
+  { name:"Müsli s ovocem",          cat:"musli",   kcal:350, p:9,   c:65,  f:5,   s:{g:60,  l:"60 g"} },
+  { name:"Pšeničné klíčky",         cat:"musli",   kcal:360, p:26,  c:52,  f:7,   s:{g:30,  l:"2 lžíce"} },
+  { name:"Ovesné otruby (müsli)",   cat:"musli",   kcal:246, p:17,  c:66,  f:7,   s:{g:30,  l:"2 lžíce"} },
+  // Tuky (doplněk)
+  { name:"Vlašské ořechy",          cat:"fat",     kcal:654, p:15,  c:14,  f:65,  s:{g:20,  l:"20 g"} },
+  { name:"Kešu ořechy",             cat:"fat",     kcal:553, p:18,  c:30,  f:44,  s:{g:20,  l:"20 g"} },
+  { name:"Lněná semínka",           cat:"fat",     kcal:534, p:18,  c:29,  f:42,  s:{g:15,  l:"1 lžíce"} },
+  { name:"Kokosový olej",           cat:"fat",     kcal:862, p:0,   c:0,   f:100, s:{g:10,  l:"1 lžička"} },
+  { name:"Slunečnicová semínka",    cat:"fat",     kcal:584, p:21,  c:20,  f:51,  s:{g:20,  l:"20 g"} },
+  { name:"Tahini (sezamová pasta)", cat:"fat",     kcal:595, p:17,  c:21,  f:54,  s:{g:15,  l:"1 lžíce"} },
+  // Zelenina
+  { name:"Brokolice",               cat:"veg",     kcal:34,  p:2.8, c:7,   f:0.4, s:{g:150, l:"150 g"} },
+  { name:"Špenát",                  cat:"veg",     kcal:23,  p:2.9, c:3.6, f:0.4, s:{g:80,  l:"velká hrst"} },
+  { name:"Rajče",                   cat:"veg",     kcal:18,  p:0.9, c:3.9, f:0.2, s:{g:120, l:"1 rajče"} },
+  { name:"Paprika červená",         cat:"veg",     kcal:31,  p:1,   c:6,   f:0.3, s:{g:120, l:"½ papriky"} },
+  { name:"Cuketa",                  cat:"veg",     kcal:17,  p:1.2, c:3.1, f:0.3, s:{g:150, l:"150 g"} },
+  { name:"Mrkev",                   cat:"veg",     kcal:41,  p:0.9, c:10,  f:0.2, s:{g:80,  l:"1 mrkev"} },
+  { name:"Zelená fazolka",          cat:"veg",     kcal:31,  p:1.8, c:7,   f:0.1, s:{g:100, l:"100 g"} },
+  { name:"Hrášek",                  cat:"veg",     kcal:81,  p:5.4, c:14,  f:0.4, s:{g:80,  l:"80 g"} },
+  { name:"Kukuřice vařená",         cat:"veg",     kcal:86,  p:3.2, c:19,  f:1.2, s:{g:100, l:"100 g"} },
+  { name:"Červená cibule",          cat:"veg",     kcal:40,  p:1.1, c:9,   f:0.1, s:{g:60,  l:"½ cibule"} },
+  { name:"Čerstvá okurka",          cat:"veg",     kcal:15,  p:0.6, c:3.6, f:0.1, s:{g:150, l:"½ okurky"} },
+  { name:"Lilek",                   cat:"veg",     kcal:25,  p:1,   c:6,   f:0.2, s:{g:150, l:"150 g"} },
+  // Ovoce
+  { name:"Jablko",                  cat:"fruit",   kcal:52,  p:0.3, c:14,  f:0.2, s:{g:150, l:"1 jablko"} },
+  { name:"Pomeranč",                cat:"fruit",   kcal:47,  p:0.9, c:12,  f:0.1, s:{g:150, l:"1 pomeranč"} },
+  { name:"Jahody",                  cat:"fruit",   kcal:32,  p:0.7, c:7.7, f:0.3, s:{g:150, l:"hrst"} },
+  { name:"Borůvky",                 cat:"fruit",   kcal:57,  p:0.7, c:14,  f:0.3, s:{g:100, l:"100 g"} },
+  { name:"Mango",                   cat:"fruit",   kcal:60,  p:0.8, c:15,  f:0.4, s:{g:150, l:"½ manga"} },
+  { name:"Hrozny",                  cat:"fruit",   kcal:69,  p:0.7, c:18,  f:0.2, s:{g:100, l:"100 g"} },
+  { name:"Kiwi",                    cat:"fruit",   kcal:61,  p:1.1, c:15,  f:0.5, s:{g:100, l:"2 ks"} },
+  { name:"Ananas",                  cat:"fruit",   kcal:50,  p:0.5, c:13,  f:0.1, s:{g:150, l:"150 g"} },
+  { name:"Maliny",                  cat:"fruit",   kcal:52,  p:1.2, c:12,  f:0.7, s:{g:100, l:"100 g"} },
+  { name:"Meruňky",                 cat:"fruit",   kcal:48,  p:1.4, c:11,  f:0.4, s:{g:100, l:"2 ks"} },
+  { name:"Grapefruit",              cat:"fruit",   kcal:42,  p:0.8, c:11,  f:0.1, s:{g:200, l:"½ grapefruitu"} },
+  { name:"Švestky",                 cat:"fruit",   kcal:46,  p:0.7, c:11,  f:0.3, s:{g:80,  l:"2 švestky"} },
 ];
 
-const CAT_LABELS = { all:"Vše", protein:"Bílkoviny", dairy:"Mléčné", carb:"Sacharidy", fat:"Tuky", veg:"Zelenina" };
-const CAT_CLS    = { protein:"cp-protein", dairy:"cp-dairy", carb:"cp-carb", fat:"cp-fat", veg:"cp-veg" };
-let activecat = "all";
-let searchQ = "";
 
-function renderDB() {
-  const rows = FOODS.filter(f => {
-    const matchCat = activecat === "all" || f.cat === activecat;
-    const matchQ   = !searchQ || f.name.toLowerCase().includes(searchQ.toLowerCase());
-    return matchCat && matchQ;
-  }).map(f => `<tr>
-    <td>${f.name}</td>
-    <td><span class="cat-pill ${CAT_CLS[f.cat]||""}">${CAT_LABELS[f.cat]||f.cat}</span></td>
-    <td style="text-align:right">${f.kcal}</td>
-    <td style="text-align:right;color:#5a9fd4">${f.p}g</td>
-    <td style="text-align:right;color:#5aaa7a">${f.c}g</td>
-    <td style="text-align:right;color:#c47aaa">${f.f}g</td>
-  </tr>`).join("");
-  document.getElementById("dbBody").innerHTML = rows || `<tr><td colspan="6" style="color:#444;padding:1rem 8px">Nic nenalezeno</td></tr>`;
-}
-
-function initCatFilters() {
-  document.getElementById("catFilters").innerHTML = Object.entries(CAT_LABELS).map(([k,v]) =>
-    `<div class="cat-btn ${k===activecat?"active":""}" onclick="setCat('${k}')">${v}</div>`).join("");
-}
-
-function setCat(c) { activecat = c; initCatFilters(); renderDB(); }
-function filterDB(q) { searchQ = q; renderDB(); }
-
-initCatFilters();
-renderDB();
 
 /* ══════════ PROGRESS ══════════ */
 const STORE_KEY = "workout_progress_v1";
