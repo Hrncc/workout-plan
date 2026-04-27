@@ -111,15 +111,83 @@
   .cp-dairy   { background: #2a2010; color: #d4aa5a; }
   .cp-veg     { background: #102a15; color: #6acc8a; }
 
-  /* Phase cards */
-  .phase-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .phase-card { background: #1a1a18; border: 0.5px solid #2a2a27; border-radius: 10px; padding: 12px 14px; cursor: pointer; transition: all 0.12s; user-select: none; }
-  .phase-card:hover { background: #222; }
-  .phase-card.active { border-width: 1.5px; }
-  .pc-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; margin-bottom: 4px; }
-  .pc-kcal { font-size: 18px; font-weight: 700; color: #f0ede8; margin-bottom: 2px; }
-  .pc-desc { font-size: 11px; color: #666; line-height: 1.4; }
-  .pc-rec { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-top: 6px; display: inline-block; }
+
+  /* Roadmap */
+  .roadmap { display: grid; grid-template-columns: 1fr 44px 1fr 44px 1fr; align-items: stretch; gap: 0; margin-bottom: 1.25rem; }
+  .rm-step { background: #1a1a18; border: 0.5px solid #2a2a27; border-radius: 10px; padding: 14px; cursor: pointer; transition: all 0.12s; user-select: none; }
+  .rm-step:hover { background: #222; }
+  .rm-step.active { border-width: 1.5px; }
+  .rm-arrow { display: flex; align-items: center; justify-content: center; font-size: 20px; color: #333; }
+  .rm-num { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
+  .rm-title { font-size: 14px; font-weight: 700; color: #f0ede8; margin-bottom: 3px; }
+  .rm-dur { font-size: 11px; color: #555; margin-bottom: 10px; }
+  .rm-kcal-big { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+  .rm-macros { display: flex; flex-direction: column; gap: 4px; }
+  .rm-macro-row { display: flex; justify-content: space-between; font-size: 12px; }
+  .rm-macro-label { color: #666; }
+  .rm-macro-val { font-weight: 700; }
+  .rm-tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 700; margin-top: 8px; }
+
+  /* Phase detail */
+  .phase-detail-box { background: #1a1a18; border-radius: 10px; border: 0.5px solid #2a2a27; padding: 14px 16px; margin-bottom: 1.25rem; }
+  .phase-detail-title { font-size: 12px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+  .phase-rules { display: flex; flex-direction: column; gap: 7px; }
+  .phase-rule { font-size: 13px; color: #888; line-height: 1.55; padding-left: 12px; border-left: 2px solid #2a2a27; }
+  .phase-rule strong { color: #ddd; }
+
+  /* Meal cards */
+  .meal-card { background: #1a1a18; border: 0.5px solid #2a2a27; border-radius: 10px; padding: 14px; margin-bottom: 10px; }
+  .meal-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .meal-name { font-size: 14px; font-weight: 700; color: #f0ede8; }
+  .meal-time { font-size: 11px; color: #555; margin-top: 2px; }
+  .meal-macros { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+  .mm { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+  .mm-k { background: #2a1f0a; color: #c9882a; }
+  .mm-p { background: #0d1e30; color: #5a9fd4; }
+  .mm-c { background: #0f1f15; color: #5aaa7a; }
+  .mm-f { background: #2a1a2a; color: #c47aaa; }
+  .meal-ex-header { font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: #444; font-weight: 700; margin-bottom: 7px; }
+  .meal-ex-row { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 0.5px solid #1e1e1c; }
+  .meal-ex-row:last-child { border-bottom: none; }
+  .meal-ex-cat { font-size: 10px; color: #555; width: 72px; flex-shrink: 0; padding-top: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; }
+  .meal-ex-opts { font-size: 13px; color: #aaa; line-height: 1.5; }
+  .meal-ex-note { font-size: 11px; color: #555; margin-top: 2px; }
+  .day-total-bar { display: flex; gap: 8px; margin-top: 14px; padding: 10px 14px; background: #111; border-radius: 8px; flex-wrap: wrap; align-items: center; }
+  .day-total-bar span { font-size: 12px; font-weight: 700; }
+
+  /* ── Tracker ── */
+  .tr-summary { display: grid; grid-template-columns: 1fr; gap: 6px; margin-bottom: 4px; }
+  .tr-bar-row { background: #1a1a18; border: 0.5px solid #2a2a27; border-radius: 10px; padding: 12px 14px; }
+  .tr-bar-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .tr-bar-label { font-size: 12px; color: #888; }
+  .tr-bar-vals { font-size: 13px; font-weight: 700; }
+  .tr-bar-vals .eaten { color: #f0ede8; }
+  .tr-bar-vals .target { color: #555; font-weight: 400; }
+  .tr-track { background: #2a2a27; border-radius: 20px; height: 7px; overflow: hidden; }
+  .tr-fill { height: 100%; border-radius: 20px; transition: width 0.3s; }
+  .tr-fill.over { background: #d45a5a !important; }
+  .tr-macros-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin-top: 6px; }
+  .tr-macro-mini { background: #1a1a18; border: 0.5px solid #2a2a27; border-radius: 8px; padding: 8px 10px; }
+  .tr-macro-mini-label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 3px; }
+  .tr-macro-mini-val { font-size: 15px; font-weight: 700; }
+  .tr-macro-mini-target { font-size: 11px; color: #555; margin-top: 1px; }
+  .tr-add-box { background: #1a1a18; border: 0.5px solid #2a2a27; border-radius: 10px; padding: 14px; }
+  .tr-suggestions { position: relative; }
+  .tr-sugg-list { background: #222; border: 0.5px solid #3a3a37; border-radius: 8px; max-height: 180px; overflow-y: auto; }
+  .tr-sugg-item { padding: 8px 12px; font-size: 13px; color: #ccc; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 0.5px solid #2a2a27; }
+  .tr-sugg-item:last-child { border-bottom: none; }
+  .tr-sugg-item:hover { background: #2a2a27; }
+  .tr-sugg-macros { font-size: 11px; color: #555; }
+  .tr-preview-chip { background: #2a2a27; border-radius: 6px; padding: 6px 8px; font-size: 11px; text-align: center; }
+  .tr-preview-chip .pv-val { font-size: 14px; font-weight: 700; color: #f0ede8; }
+  .tr-preview-chip .pv-label { color: #555; font-size: 10px; margin-top: 1px; }
+  .tr-meal-group { margin-bottom: 12px; }
+  .tr-meal-group-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #555; font-weight: 700; margin-bottom: 6px; }
+  .tr-entry { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 8px; padding: 9px 12px; background: #1a1a18; border: 0.5px solid #2a2a27; border-radius: 8px; margin-bottom: 5px; }
+  .tr-entry-name { font-size: 13px; font-weight: 600; color: #e8e6e0; }
+  .tr-entry-macros { font-size: 11px; color: #666; margin-top: 2px; }
+  .tr-entry-kcal { font-size: 13px; font-weight: 700; color: #c9882a; white-space: nowrap; }
+  .tr-empty { font-size: 13px; color: #444; padding: 1.5rem 0; text-align: center; }
 
   /* ── Progress ── */
   .log-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
@@ -157,6 +225,7 @@
 <nav class="top-nav">
   <button class="nav-btn active" onclick="showSection('workout')">Trénink</button>
   <button class="nav-btn" onclick="showSection('nutrition')">Výživa</button>
+  <button class="nav-btn" onclick="showSection('tracker')">Tracker</button>
   <button class="nav-btn" onclick="showSection('progress')">Progres</button>
 </nav>
 
@@ -180,41 +249,19 @@
 <!-- ════════════════════════════════ NUTRITION ════════════════════════════════ -->
 <div class="section" id="sec-nutrition">
 <div class="container">
-  <p class="page-title">Nutrition Plan</p>
-  <p class="page-sub">Vědecky podložený protokol · 3–4 jídla denně · Bez omezení</p>
-  <div class="inbody-note">Skutečný maintenance: ~2 635 kcal (BMR 1 700 × 1.55) · InBody 2 902 kcal nadhodnocuje o ~250 kcal · Tuk v trupu 178 % normy → konvenční bulk nedoporučen</div>
+  <p class="page-title">Výživa</p>
+  <p class="page-sub">Vědecky podložený protokol · Maintenance: ~2 635 kcal · BMR 1 700 kcal</p>
+  <div class="inbody-note">Váha 77.5 kg · BF 20.6 % · Tuk v trupu 178 % normy → bulk nyní = více tuku než svalů → nejdřív mini-cut</div>
 
-  <!-- Phase selector -->
-  <div class="section-label">Vyber fázi</div>
-  <div class="phase-cards" id="phaseCards"></div>
+  <!-- Roadmap -->
+  <div class="section-label">Roadmapa</div>
+  <div class="roadmap" id="roadmap"></div>
 
-  <!-- Active phase macro targets -->
-  <div class="macro-targets" style="margin-top:14px">
-    <div class="macro-row">
-      <span class="macro-lbl">Kalorie</span>
-      <div class="macro-track"><div class="macro-fill" id="mf-kcal" style="background:#c9882a"></div></div>
-      <span class="macro-val" id="mv-kcal" style="color:#c9882a"></span>
-    </div>
-    <div class="macro-row">
-      <span class="macro-lbl">Bílkoviny</span>
-      <div class="macro-track"><div class="macro-fill" id="mf-p" style="background:#5a9fd4"></div></div>
-      <span class="macro-val" id="mv-p" style="color:#5a9fd4"></span>
-    </div>
-    <div class="macro-row">
-      <span class="macro-lbl">Sacharidy</span>
-      <div class="macro-track"><div class="macro-fill" id="mf-c" style="background:#5aaa7a"></div></div>
-      <span class="macro-val" id="mv-c" style="color:#5aaa7a"></span>
-    </div>
-    <div class="macro-row">
-      <span class="macro-lbl">Tuky</span>
-      <div class="macro-track"><div class="macro-fill" id="mf-f" style="background:#c47aaa"></div></div>
-      <span class="macro-val" id="mv-f" style="color:#c47aaa"></span>
-    </div>
-  </div>
-  <div id="phase-tip" class="tip-box" style="margin-bottom:1.5rem"></div>
+  <!-- Phase detail -->
+  <div id="phase-detail"></div>
 
-  <!-- Weekly meal plan -->
-  <div class="section-label" style="margin-bottom:12px">Týdenní jídelníček</div>
+  <!-- Meal plan -->
+  <div class="section-label" style="margin-top:1.5rem;margin-bottom:10px" id="meal-section-label">Jídelníček — příklady jídel</div>
   <div class="day-tabs" id="mealTabs"></div>
   <div id="mealPanels"></div>
 
@@ -229,6 +276,61 @@
     </tr></thead>
     <tbody id="dbBody"></tbody>
   </table>
+</div>
+</div>
+
+<!-- ════════════════════════════════ TRACKER ════════════════════════════════ -->
+<div class="section" id="sec-tracker">
+<div class="container">
+  <p class="page-title">Kalorický tracker</p>
+  <p class="page-sub">Zaznamenávej co jíš — makra se počítají automaticky</p>
+
+  <!-- Date + phase -->
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap;">
+    <input type="date" id="tr-date" class="search-input" style="width:160px;margin-bottom:0">
+    <select id="tr-phase" onchange="trRenderSummary()" style="background:#1a1a18;border:0.5px solid #2a2a27;border-radius:8px;padding:8px 12px;color:#e8e6e0;font-size:13px;outline:none;flex:1;min-width:160px;">
+      <option value="cut">Fáze 1 — Mini-cut (2 100 kcal)</option>
+      <option value="transition">Přechod — Maintenance (2 635 kcal)</option>
+      <option value="bulk">Fáze 2 — Lean bulk (2 900 kcal)</option>
+    </select>
+  </div>
+
+  <!-- Summary bars -->
+  <div class="tr-summary" id="tr-summary"></div>
+
+  <!-- Add food -->
+  <div class="section-label" style="margin-top:1.25rem;margin-bottom:8px">Přidat jídlo</div>
+  <div class="tr-add-box">
+    <input type="text" id="tr-search" class="search-input" placeholder="Hledat potravinu z databáze..." oninput="trSearch(this.value)" autocomplete="off" style="margin-bottom:6px">
+    <div id="tr-suggestions" class="tr-suggestions"></div>
+    <div style="display:grid;grid-template-columns:1fr 90px 90px auto;gap:8px;align-items:end;margin-top:6px;">
+      <div class="log-field">
+        <label>Potravina</label>
+        <input type="text" id="tr-food-name" placeholder="název" style="background:#1a1a18;border:0.5px solid #2a2a27;border-radius:8px;padding:8px 10px;color:#e8e6e0;font-size:13px;outline:none;width:100%">
+      </div>
+      <div class="log-field">
+        <label>Gramů</label>
+        <input type="number" id="tr-grams" placeholder="100" min="1" style="background:#1a1a18;border:0.5px solid #2a2a27;border-radius:8px;padding:8px 10px;color:#e8e6e0;font-size:13px;outline:none;width:100%">
+      </div>
+      <div class="log-field">
+        <label>Jídlo</label>
+        <select id="tr-meal-slot" style="background:#1a1a18;border:0.5px solid #2a2a27;border-radius:8px;padding:8px 6px;color:#e8e6e0;font-size:12px;outline:none;width:100%">
+          <option>Snídaně</option>
+          <option>Svačina 1</option>
+          <option>Oběd</option>
+          <option>Svačina 2</option>
+          <option>Večeře</option>
+          <option>Ostatní</option>
+        </select>
+      </div>
+      <button class="log-btn" onclick="trAddEntry()" style="margin-top:14px">+</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px;" id="tr-preview"></div>
+  </div>
+
+  <!-- Log -->
+  <div class="section-label" style="margin-top:1.5rem;margin-bottom:8px">Záznamy dne</div>
+  <div id="tr-log"></div>
 </div>
 </div>
 
@@ -283,19 +385,19 @@ const DAYS = [
     tip:"Odpočívej 60–90 s mezi sériemi. Cíl: přidat 1 opakování na sérii každý týden — to je tvůj progresivní přetěžování s vlastní váhou.",
     sections:[
       { label:"Zahřátí (5 min)", ex:[
-        { name:"Švihadlo", note:"Lehké tempo", sets:"3 min", tags:["švihadlo"] },
-        { name:"Kroužení paží + rameny", note:"Dynamická mobilita", sets:"2 min", tags:[] },
+        { name:"Švihadlo", note:"Skákej pohodlným tempem, chodidla dopadají na přední část chodidla — 60–70 skoků/min", sets:"3 min", tags:["švihadlo"] },
+        { name:"Kroužení paží + rameny", note:"10× kroužení vpřed + vzad každou paží, pak 10× rolování ramen — rozehřej klouby, ne svaly", sets:"2 min", tags:[] },
       ]},
       { label:"Hlavní trénink", ex:[
-        { name:"Kliky na šíři — hrudník", note:"Široký úchop, lokty svírají 45° od těla", sets:"4 × 12–15", tags:["vlastní váha"] },
-        { name:"Kliky v pike — ramena", note:"Hýždě vysoko, tělo tvoří obrácenou V, tlač čelo ke kolenům", sets:"4 × 10–12", tags:["vlastní váha"] },
-        { name:"Diamantové kliky — triceps", note:"Ukazováky a palce se dotýkají — tvoří trojúhelník pod hrudníkem", sets:"3 × 8–10", tags:["vlastní váha"] },
-        { name:"Tlak s gumou na hrudník", note:"Zakotvi gumu za sebou, tlač obě ruce vpřed jako bench press", sets:"3 × 15", tags:["band"] },
-        { name:"Upažování s gumou", note:"Stoj na středu gumy, zvedej rovné paže do strany do výšky ramen", sets:"3 × 12", tags:["band"] },
-        { name:"Tlak s gumou nad hlavu", note:"Stoj na středu gumy, tlač obě ruce kolmo nad hlavu", sets:"3 × 12", tags:["band"] },
+        { name:"Kliky na šíři — hrudník", note:"Ruce wider než ramena, lokty nejdou ani rovně do stran ani k tělu — tvoří šipku ~45°. Hruď se dotkne země v dolní poloze, v horní poloze plně natáhni lokty.", sets:"4 × 12–15", tags:["vlastní váha"] },
+        { name:"Kliky v pike — ramena", note:"Z kliku přesuň ruce blíže ke kolenům a vytlač hýždě co nejvýše — tělo tvoří \"A\". Ohýbej lokty a spouštěj hlavu mezi ruce, dokud se temeno nepřiblíží k podlaze. Zpět tlač do výchozí polohy.", sets:"4 × 10–12", tags:["vlastní váha"] },
+        { name:"Diamantové kliky — triceps", note:"Ruce pod středem hrudníku, palce a ukazováky tvoří trojúhelník. Lokty jdou dozadu (ne do stran). Spusť se co nejníže a zpět — cítíš výrazné pálení v tricepsu.", sets:"3 × 8–10", tags:["vlastní váha"] },
+        { name:"Tlak s gumou na hrudník", note:"Přešlápni gumu a zakotvi ji na zádech pod lopatkami. Ruce ve výšce hrudníku, lokty 45° od těla. Tlač obě ruce vpřed do plného natažení — pak pomalu zpět.", sets:"3 × 15", tags:["band"] },
+        { name:"Upažování s gumou", note:"Stoj na středu gumy, konce drž v rukou podél těla. Mírně pokrčené lokty — zvedej paže přesně do výšky ramen (ne výše). Pomalu zpět — 2 s nahoru, 3 s dolů.", sets:"3 × 12", tags:["band"] },
+        { name:"Tlak s gumou nad hlavu", note:"Stoj na středu gumy, ruce ve výšce ramen dlaněmi vpřed. Tlač obě ruce nad hlavu do plného natažení, stáhni lopatky k sobě. Pomalu zpět na úroveň ramen.", sets:"3 × 12", tags:["band"] },
       ]},
       { label:"Doplněk", ex:[
-        { name:"Výdrž v dolní poloze kliku", note:"Drž spodní pozici kliku 2–3 cm nad zemí, tělo zpevněné", sets:"3 × 20–30s", tags:["vlastní váha"] },
+        { name:"Výdrž v dolní poloze kliku", note:"Spusť se do kliku a zastav 2–3 cm nad zemí. Drž tuto polohu 20–30 s — hýždě a břicho zatnuté, tělo jako prkno. Nezapadej v bocích ani nepoklesávej v zádech.", sets:"3 × 20–30s", tags:["vlastní váha"] },
       ]},
     ]
   },
@@ -304,19 +406,19 @@ const DAYS = [
     tip:"Paže dosáhly 91–95 % na InBody — tahová práce je priorita. Použij odporovou gumu přes hrazdu pro asistované shyby, pokud je potřeba.",
     sections:[
       { label:"Zahřátí (5 min)", ex:[
-        { name:"Švihadlo", note:"Střední intenzita, pravidelný rytmus", sets:"3 min", tags:["švihadlo"] },
-        { name:"Roztahování gumy — zadní deltové", note:"Guma před sebou v natažených rukou, roztáhni ji ke hrudi — lopatky k sobě", sets:"2 × 15", tags:["band"] },
+        { name:"Švihadlo", note:"Udržuj pravidelný rytmus, dýchej nosem — tempo, při kterém udržíš rozhovor", sets:"3 min", tags:["švihadlo"] },
+        { name:"Roztahování gumy — zadní deltové", note:"Drž gumu oběma rukama před sebou v šíři ramen, paže natažené. Roztahuj gumu horizontálně dokud se nedotkne hrudníku — lopatky zmáčkni k sobě. 2 s zpět. Lokty mírně pokrčené po celou dobu.", sets:"2 × 15", tags:["band"] },
       ]},
       { label:"Hlavní trénink", ex:[
-        { name:"Shyby (nadhmat, šíře)", note:"Z mrtvého visu plynule přitáhni, dokud brada nepřekryje hrazdu", sets:"4 × max", tags:["hrazda"] },
-        { name:"Shyby podhmatem", note:"Podhmat aktivuje biceps více, soustřeď se na stlačení lopatek dole", sets:"3 × max", tags:["hrazda"] },
-        { name:"Shyby neutrálním úchopem", note:"Ruce blíže k sobě, neutrální úchop — více pracuje střed zad", sets:"3 × max", tags:["hrazda"] },
-        { name:"Veslování s gumou v předklonu", note:"Předkloň se do 45°, stoj na středu gumy, přitahuj loket k boku těla", sets:"4 × 15", tags:["band"] },
-        { name:"Bicepsové zdvihy s gumou", note:"Lokty přitisklé k tělu po celou dobu, zvedej předloktí — nekývej trupem", sets:"3 × 12–15", tags:["band"] },
-        { name:"Přítahy k obličeji s gumou", note:"Guma ukotvena ve výšce očí, přitahuj obě ruce k uším — lokte nahoru", sets:"3 × 15", tags:["band"] },
+        { name:"Shyby (nadhmat, šíře)", note:"Nadhmat širší než ramena. Začni plným visem — ramena aktivně stáhni dolů (ne k uším). Přitahuj lokty k bokům těla dokud brada nepřejde přes hrazdu. Pomalu spusť do plného visu — 3 sekundy dolů.", sets:"4 × max", tags:["hrazda"] },
+        { name:"Shyby podhmatem", note:"Podhmat v šíři ramen. Pohyb zahaj stažením lopatek dolů — pak teprve ohýbej lokty. Přitáhni se dokud hrudník nesměřuje k hrazdě. Pomalé spouštění 3 s.", sets:"3 × max", tags:["hrazda"] },
+        { name:"Shyby neutrálním úchopem", note:"Ruce vedle sebe neutrálním úchopem (palce k sobě). Přitahuj se tak, aby hrudník směřoval k hrazdě — lokte jdou přímo dolů podél těla. Cíl: střed zad, ne biceps.", sets:"3 × max", tags:["hrazda"] },
+        { name:"Veslování s gumou v předklonu", note:"Stoj na středu gumy, mírný předklon v bocích (~45°), záda rovná. Jednou rukou se opři o koleno. Druhá ruka táhne loket přimo k boku — lopatka se přitlačí k páteři. Pomalu zpět. 15× každá strana.", sets:"4 × 15", tags:["band"] },
+        { name:"Bicepsové zdvihy s gumou", note:"Stoj na středu gumy, uchop konce v rukou, lokty pevně přitisknuté k bokům těla — po celou dobu se nehýbou. Ohýbej jen předloktí nahoru k ramenům. Pokud kýváš trupem, guma je příliš silná.", sets:"3 × 12–15", tags:["band"] },
+        { name:"Přítahy k obličeji s gumou", note:"Zakotvi gumu do výšky obličeje (dveřní zárubeň, hrazda). Drž konce oběma rukama, lokty nahoru a do stran. Přitahuj ruce k uším/tvářím — lopatky se zmáčknou. Drž 1 s v záběru, pak pomalu zpět.", sets:"3 × 15", tags:["band"] },
       ]},
       { label:"Core", ex:[
-        { name:"Hollow body výdrž", note:"Vleže na zádech, dolní záda tlač do podlahy, paže a nohy natáhni od těla", sets:"3 × 30s", tags:["vlastní váha"] },
+        { name:"Hollow body výdrž", note:"Lehni na záda, paže za hlavu, nohy natažené. Stáhni břicho a přimáčkni bedra k podlaze — tato poloha se nesmí změnit. Zvedej paže i nohy jen do výšky, dokud bederní opora vydrží. Začínáš asi 15–20 cm nad zemí.", sets:"3 × 30s", tags:["vlastní váha"] },
       ]},
     ]
   },
@@ -325,20 +427,20 @@ const DAYS = [
     tip:"Nohy dosáhly 103–104 % na InBody — jsou na tom dobře. Tento trénink udržuje svalovou hmotu nohou, spaluje kalorie a útočí na tuk v trupu přes core cvičení.",
     sections:[
       { label:"Zahřátí (5 min)", ex:[
-        { name:"Švihadlo", note:"Začni pomalu, za 1 minutu přejdi na střední tempo", sets:"3 min", tags:["švihadlo"] },
-        { name:"Kroužení kyčlemi + švihy nohama", note:"Uvolní kyčelní klouby před silovými cviky na nohy", sets:"2 min", tags:[] },
+        { name:"Švihadlo", note:"1. minuta pomalé skoky na zahřátí, 2.–3. minuta střední tempo — připrav kolena a kotníky", sets:"3 min", tags:["švihadlo"] },
+        { name:"Kroužení kyčlemi + švihy nohama", note:"Ruce na bocích: 10× velké kroužení kyčlemi každým směrem. Pak přidej švihy nohama — 10× vpřed/vzad a 10× do strany. Pomalé plynné pohyby.", sets:"2 min", tags:[] },
       ]},
       { label:"Hlavní trénink", ex:[
-        { name:"Bulharské dřepy", note:"Zadní nohu polož na okraj židle, přední noha krok vpřed, klesej koleno k zemi", sets:"4 × 10 / side", tags:["vlastní váha"] },
-        { name:"Výbušné dřepy s výskokem", note:"Z dřepu výskoč co nejvýše, dopadni do měkkého dřepu na špičky", sets:"3 × 12", tags:["vlastní váha"] },
-        { name:"Mrtvý tah na jedné noze", note:"Na jedné noze se předkloň a spouštěj záda rovně dolů — druhá noha jde dozadu", sets:"3 × 10 / side", tags:["vlastní váha"] },
-        { name:"Hýžďový most s gumou", note:"Lehni na záda, nohy pokrčeny, guma nad koleny — zvedni pánev co nejvýše a drž nahoře", sets:"4 × 20", tags:["band"] },
-        { name:"Boční chůze s gumou", note:"Polodřep, guma nad koleny, udělej 15 kroků do strany — kolena tlač ven od sebe", sets:"3 × 15 / side", tags:["band"] },
+        { name:"Bulharské dřepy", note:"Přední noha velký krok vpřed, nártem zadní nohy se opři o okraj židle. Trup vzpřímený. Pomalu klesej tak, aby přední koleno mířilo přímo nad přední špičku — zadní koleno se zastaví 2–3 cm nad zemí. Zpět tlačením přes přední patu.", sets:"4 × 10 / side", tags:["vlastní váha"] },
+        { name:"Výbušné dřepy s výskokem", note:"Stoj na šíři ramen. Klesni do dřepu kde stehna jsou rovnoběžně se zemí. Exploduj nahoru maximálním výskokem — ruce pomohou švihem. Dopad na přední část chodidla, ihned přejdi do dalšího dřepu.", sets:"3 × 12", tags:["vlastní váha"] },
+        { name:"Mrtvý tah na jedné noze", note:"Stoj na jedné noze, ruce podél těla nebo před sebe. Předkloň trup a zároveň zvedej volnou nohu dozadu — tělo a noha tvoří rovnou linii rovnoběžně se zemí. Cítíš tah v hamstrinzích stojné nohy. Pomalu zpět.", sets:"3 × 10 / side", tags:["vlastní váha"] },
+        { name:"Hýžďový most s gumou", note:"Lehni na záda, chodidla na šíři boků, guma nad koleny. Kolena aktivně tlač od sebe proti gumě. Stáhni hýždě a zvedni pánev co nejvýše — v horní poloze svěr hýždě 2 sekundy. Pomalu dolů, nedotýkej se podlahy mezi opakováními.", sets:"4 × 20", tags:["band"] },
+        { name:"Boční chůze s gumou", note:"Guma těsně nad koleny, nohy na šíři ramen, polodřep (stehna ~45°). V této poloze kroky do strany — vždy přines nohu zpět na šíři ramen, nekřiž. Kolena aktivně tlač ven proti gumě. Pak 15 kroků zpět.", sets:"3 × 15 / side", tags:["band"] },
       ]},
       { label:"Core okruh (3 kola)", ex:[
-        { name:"Plank", note:"Podepři se na předloktí a špičky, tělo jako prkno — nestoupej ani neklesej v bocích", sets:"3 × 45s", tags:["vlastní váha"] },
-        { name:"V-sed — zdvihy", note:"Z lehu na zádech zvedni ruce i nohy najednou a dotkni se špiček v nejvyšším bodě", sets:"3 × 12", tags:["vlastní váha"] },
-        { name:"Boční plank", note:"Opři se na jedno předloktí a stranu chodidla, tělo v rovné linii", sets:"3 × 20s / side", tags:["vlastní váha"] },
+        { name:"Plank", note:"Předloktí na zemi, lokty pod rameny, špičky na šíři boků. Stáhni břicho a hýždě — tělo tvoří přímou linii od kotníků po ramena. Neklesej v bedrech, nevystrkuj hýždě nahoru. Dýchej pravidelně.", sets:"3 × 45s", tags:["vlastní váha"] },
+        { name:"V-sed — zdvihy", note:"Lehni na záda, paže natažené za hlavu, nohy rovné. Stáhni břicho a v jednom pohybu zvedni ruce i nohy — v horním bodě se dotkni prsty špiček. Pomalu zpět bez dotyku se zemí a opakuj.", sets:"3 × 12", tags:["vlastní váha"] },
+        { name:"Boční plank", note:"Předloktí na zemi kolmo k tělu, chodidla na sobě (nebo jedno před druhým). Zvedni boky — tělo od kotníků po ramena tvoří přímku. Nevystrčuj hýždě, neklesej v bocích. Volná ruka podél těla nebo na boku.", sets:"3 × 20s / side", tags:["vlastní váha"] },
       ]},
     ]
   },
@@ -347,19 +449,19 @@ const DAYS = [
     tip:"Push B má vyšší objem než A. Mírná svalová bolestivost z pondělí nevadí. Dodrž všechny série, i když počet opakování mírně klesne.",
     sections:[
       { label:"Zahřátí (5 min)", ex:[
-        { name:"Švihadlo", note:"Střední intenzita, pravidelný rytmus", sets:"3 min", tags:["švihadlo"] },
-        { name:"Mobilita ramen + zápěstí", note:"", sets:"2 min", tags:[] },
+        { name:"Švihadlo", note:"Udržuj pravidelný rytmus, dýchej nosem — tempo, při kterém udržíš rozhovor", sets:"3 min", tags:["švihadlo"] },
+        { name:"Mobilita ramen + zápěstí", note:"Pomalé kroužení ramenou vpřed + vzad, pak kroužení zápěstím — 10× každým směrem", sets:"2 min", tags:[] },
       ]},
       { label:"Hlavní trénink", ex:[
-        { name:"Kliky s nohama nahoře", note:"Nohy na výšce (židle, postel), kliky aktivují více horní část hrudníku", sets:"4 × 12", tags:["vlastní váha"] },
-        { name:"Kliky s rukama nahoře", note:"Ruce na nízké ploše, tělo ve šikmé linii — pracuje spodní hrudník", sets:"3 × 15", tags:["vlastní váha"] },
-        { name:"Střelecké kliky", note:"Velmi široký úchop, v každém kliku přesuň váhu na jednu ruku — druhá je téměř natažená", sets:"3 × 6 / side", tags:["vlastní váha"] },
-        { name:"Tricepsové natahování s gumou", note:"Drž gumu nad sebou, ohni lokty za hlavu a natáhni zpět — pohybují se jen předloktí", sets:"4 × 12", tags:["band"] },
-        { name:"Předpažování s gumou", note:"Stoj na středu gumy, zvedej rovné paže vpřed do výšky ramen", sets:"3 × 12", tags:["band"] },
-        { name:"Dips na židli", note:"Ruce na sedáku, nohy napnuté vpřed, ohýbej lokty dozadu dokud nedosáhneš 90°", sets:"4 × 10–12", tags:["vlastní váha"] },
+        { name:"Kliky s nohama nahoře", note:"Nohy vlož na okraj židle nebo postele, ruce na podlaze. Čím vyšší jsou nohy, tím více pracuje horní část hrudníku. Pohyb stejný jako normální klik — lokty 45° od těla, hruď k podlaze.", sets:"4 × 12", tags:["vlastní váha"] },
+        { name:"Kliky s rukama nahoře", note:"Ruce na okraji nízké stoličky nebo schodu, tělo v šikmé linii — hlava výše než nohy. Klesej hrudníkem k hraně plochy. Cítíš tah ve spodní části hrudníku a protažení.", sets:"3 × 15", tags:["vlastní váha"] },
+        { name:"Střelecké kliky", note:"Ruce co nejdál od sebe na šíři 1.5× ramen. V každém kliku přesuň váhu na JEDNU ruku — tato ruka se ohýbá, druhá zůstává téměř natažená. Střídej strany. Je to náročný cvik — pokud nestíháš, začni s menším přesunem váhy.", sets:"3 × 6 / side", tags:["vlastní váha"] },
+        { name:"Tricepsové natahování s gumou", note:"Stoj na středu gumy, uchop konce za hlavou. Paže drž svisle, lokty mírí ke stropu — tato pozice se nemění. Ohýbej jen předloktí dolů za hlavu a zpět nahoru. Pohybují se POUZE předloktí, lokte zůstávají na místě.", sets:"4 × 12", tags:["band"] },
+        { name:"Předpažování s gumou", note:"Stoj na středu gumy, konce drž v rukou podél těla. Zvedej obě paže rovně vpřed (palce nahoru) do výšky ramen — ne výše. 2 s nahoru, 3 s dolů. Nezakláněj trup dozadu.", sets:"3 × 12", tags:["band"] },
+        { name:"Dips na židli", note:"Sedni si na okraj židle, ruce na okraji sedáku vedle boků, prsty vpřed. Přesuň se před židli — váha na rukou. Nohy napnuté vpřed na patách. Ohýbej lokty přímo dozadu (ne do stran) a klesej dokud lokty nesvírají 90°. Tlačením z dlaní zpět nahoru.", sets:"4 × 10–12", tags:["vlastní váha"] },
       ]},
       { label:"Doplněk", ex:[
-        { name:"Kliky — žebřík", note:"Udělej 10 kliků, 10 s odpočinek, pak 9, 8… až do 1 — bez přestávky mezi čísly", sets:"1 × ladder", tags:["vlastní váha"] },
+        { name:"Kliky — žebřík", note:"Udělej 10 kliků, odpočiň 10 s, pak 9 kliků, 10 s odpočinek, pak 8… pokračuj až do 1 opakování. Celkem 55 kliků s minimálními pauzami — finišer pro vyčerpání.", sets:"1 × ladder", tags:["vlastní váha"] },
       ]},
     ]
   },
@@ -368,19 +470,19 @@ const DAYS = [
     tip:"Zaznamenávej svůj max shybů bez asistence každý týden. Toto číslo je nejjasnějším signálem pokroku horní části těla.",
     sections:[
       { label:"Zahřátí (5 min)", ex:[
-        { name:"Švihadlo", note:"Střední intenzita, pravidelný rytmus", sets:"3 min", tags:["švihadlo"] },
+        { name:"Švihadlo", note:"Udržuj pravidelný rytmus, dýchej nosem — tempo, při kterém udržíš rozhovor", sets:"3 min", tags:["švihadlo"] },
         { name:"Visení na hrazdě", note:"Pouze vis, nevis jen na kloubech — aktivně zatáhni lopatky dolů", sets:"2 × 25s", tags:["hrazda"] },
       ]},
       { label:"Hlavní trénink", ex:[
-        { name:"Výbušné shyby", note:"Výbušný přítah nahoru, pak pomalé 3sekundové spouštění dolů", sets:"4 × max", tags:["hrazda"] },
-        { name:"Shyby s L-sedem", note:"V průběhu shybu drž nohy vodorovně před sebou — extrémní zapojení core", sets:"3 × 5–8", tags:["hrazda"] },
-        { name:"Veslování jednou rukou s gumou", note:"Stoj na středu gumy, jednou rukou se opři o koleno, druhou táhni loket k boku", sets:"4 × 12 / side", tags:["band"] },
-        { name:"Kladivový zdvih s gumou", note:"Palce nahoru (jako při úchopu kladiva), zdvihaj pomalým tempem", sets:"3 × 15", tags:["band"] },
-        { name:"Zpětné upažování s gumou", note:"Předkloň se do 90°, guma pod nohama, zvedej rovné paže do stran do výšky ramen", sets:"3 × 15", tags:["band"] },
-        { name:"Výdrž ve visu na hrazdě", note:"Ve visu aktivně stáhni lopatky dolů, drž 30 s — nezabokuj ramena k uším", sets:"3 × 30s", tags:["hrazda"] },
+        { name:"Výbušné shyby", note:"Z visu přitáhni co nejrychleji a nejsilněji — explozivní fáze nahoru. Pak se záměrně spouštěj přesně 3 sekundy dolů do plného visu. Tato excentrická fáze buduje sílu nejvíce.", sets:"4 × max", tags:["hrazda"] },
+        { name:"Shyby s L-sedem", note:"Před shybem natáhni nohy před sebe do vodorovné polohy (tvar \"L\"). V této poloze proveď celý shyb — nohy stále vodorovně. Extrémně náročné na core. Pokud nestíháš, začni s pokrčenými koleny před sebou.", sets:"3 × 5–8", tags:["hrazda"] },
+        { name:"Veslování jednou rukou s gumou", note:"Stoj na středu gumy, předkloň se, volnou rukou se opři o koleno. Druhá ruka drží konec gumy — táhni loket přímo k boku těla dokud lopatka není zcela stažena. 1 s pauza v záběru, pak pomalu zpět. 12× každá strana.", sets:"4 × 12 / side", tags:["band"] },
+        { name:"Kladivový zdvih s gumou", note:"Stoj na středu gumy, uchop konce s palci nahoru (neutrální úchop). Lokty přitiskni k tělu — nehýbají se. Zdvihej pomalým tempem: 2 s nahoru, 3 s dolů. Pohybují se POUZE předloktí.", sets:"3 × 15", tags:["band"] },
+        { name:"Zpětné upažování s gumou", note:"Přestoupni gumu oběma nohama, předkloň trup téměř do 90° — záda rovná. Ruce svisle dolů s konci gumy. Zvedej rovné paže do stran (jako motýlek) dokud nejsou v rovině se zády. 2 s nahoru, 3 s dolů.", sets:"3 × 15", tags:["band"] },
+        { name:"Výdrž ve visu na hrazdě", note:"Chop se hrazdy. Ve visu aktivně stáhni lopatky dolů od uší. Drž tuto aktivní polohu 30 s — chráníš ramenní klouby a buduješ sílu lopatek.", sets:"3 × 30s", tags:["hrazda"] },
       ]},
       { label:"Core", ex:[
-        { name:"Přítahy kolen ve visu", note:"Ve visu pokrč kolena k hrudníku a zpět — brzdi kývání zpevněným tělem", sets:"3 × 12", tags:["hrazda"] },
+        { name:"Přítahy kolen ve visu", note:"Ve visu na hrazdě. Stáhni břicho a přitáhni pokrčená kolena k hrudníku — pak pomalu zpět. Nekývej — pohyb jde jen z kyčlí. Pokud kýváš, zastav se a začni znovu.", sets:"3 × 12", tags:["hrazda"] },
       ]},
     ]
   },
@@ -389,16 +491,16 @@ const DAYS = [
     tip:"Udržuj TF na 60–70 % max (~117–136 BPM). Tato zóna spaluje tuk bez odbourávání svalů. Jde o aktivní regeneraci, ne o tvrdý výkon.",
     sections:[
       { label:"Varianta A — kolo (doporučeno)", ex:[
-        { name:"Jízda na kole", note:"40–60 min na 60–70 % max TF, pohodlné tempo — musíš být schopen mluvit", sets:"40–60 min", tags:["kolo"] },
+        { name:"Jízda na kole", note:"Cílová tepová frekvence 117–136 BPM (60–70 % maxima). Test: musíš být schopen pohodlně mluvit celou větu. Pokud dýcháš příliš, zpomal.", sets:"40–60 min", tags:["kolo"] },
       ]},
       { label:"Varianta B — švihadlo HIIT", ex:[
-        { name:"Intervalové švihadlo", note:"Střídej 30 s na maximum a 30 s volné švihadlo nebo chůze", sets:"15 min", tags:["švihadlo"] },
-        { name:"Vychladnutí — chůze", note:"", sets:"5–10 min", tags:[] },
+        { name:"Intervalové švihadlo", note:"30 s skákej co nejrychleji (maximální úsilí), pak 30 s pomalé švihadlo nebo chůze na místě. Opakuj 15 kol = 15 minut celkem.", sets:"15 min", tags:["švihadlo"] },
+        { name:"Vychladnutí — chůze", note:"Pomalé kroužení ramenou vpřed + vzad, pak kroužení zápěstím — 10× každým směrem", sets:"5–10 min", tags:[] },
       ]},
       { label:"Mobilita (obě varianty)", ex:[
-        { name:"Protažení flexorů kyčle", note:"Výpad vpřed, zadní koleno těsně nad zemí — cítíš protažení v přední části stehna", sets:"2 × 60s", tags:[] },
-        { name:"Rotace hrudní páteře", note:"Vleže na zádech, jednu ruku za hlavou, druhou rukou rotuj trup na stranu", sets:"2 × 10 / side", tags:[] },
-        { name:"Protažení hrudníku v rámu dveří", note:"Předloktí opři o oba rámy dveří ve výšce ramen, mírný krok vpřed — cítíš tah v hrudníku", sets:"2 × 30s", tags:[] },
+        { name:"Protažení flexorů kyčle", note:"Výpad vpřed tak, aby obě kolena svírala 90°. Zadní koleno 2–3 cm nad zemí. Trup vzpřímený — nekloň se vpřed. Cítíš tah v přední části stehna zadní nohy. Drž 60 s, pak nohy vystřídej.", sets:"2 × 60s", tags:[] },
+        { name:"Rotace hrudní páteře", note:"Lehni na záda, kolena pokrčena. Jednu ruku dej za hlavu. Rotuj horní část trupu na stranu tak, aby loket smeroval k protilehlému kolenu — bedra zůstávají na zemi. Pomalu zpět a na druhou stranu.", sets:"2 × 10 / side", tags:[] },
+        { name:"Protažení hrudníku v rámu dveří", note:"Stoj ve dveřním rámu, předloktí opři o oba svislé rámy ve výšce ramen (lokty 90°). Udělej mírný krok vpřed — cítíš protažení hrudníku a přední části ramen. Nehýbej se, jen drž pozici 30 s.", sets:"2 × 30s", tags:[] },
       ]},
     ]
   },
@@ -454,650 +556,441 @@ renderWorkout();
 
 /* ══════════ NUTRITION ══════════ */
 
-const PHASES = [
+const ROADMAP = [
   {
-    id: "mini-cut",
-    label: "Mini-cut",
-    kcal: 2100, p: 175, c: 170, f: 70,
-    color: "#d45a5a", bg: "#2a1010",
-    duration: "8–12 týdnů",
-    desc: "Deficit −500 kcal · Redukce tuku na ~14–15 % BF před bulkem",
-    tip: "Doporučený první krok — výzkum (Iraki et al. 2019, Helms 2023) jasně ukazuje, že při 20.6 % BF s androidním rozložením tuku (trunk 178 % normy) konvenční bulk přinese více tuku než svalů. Mini-cut 8–12 týdnů sníží BF na ~14–15 %, zlepší inzulinovou senzitivitu a nastaví tělo pro efektivní nabírání. Cíl: −0.5–0.7 % tělesné hmotnosti týdně. Protein zvyš na 175 g/den pro ochranu svalové hmoty v deficitu (Helms, Zinn & Rowlands 2014).",
-    rec: true,
+    id: "cut", num: "Fáze 1", title: "Mini-cut", dur: "8–12 týdnů", kcal: 2100,
+    color: "#d45a5a", bg: "#2a1010", macros: { p: 175, c: 170, f: 70 }, tag: "Začni tady",
+    rules: [
+      "<strong>2 100 kcal/den</strong> — deficit ~500 kcal pod maintenance",
+      "<strong>175 g bílkovin</strong> (2.26 g/kg) — zvýšeno pro ochranu svalů v deficitu",
+      "<strong>170 g sacharidů</strong> — dostatek energie na trénink",
+      "<strong>70 g tuků</strong> — minimum pro hormonální funkci (testosteron)",
+      "<strong>Cíl:</strong> zhubnout 0.5–0.7 % tělesné hmotnosti týdně (~0.4–0.5 kg)",
+      "<strong>Výsledek:</strong> BF z 20.6 % na ~14–15 %, ztráta ~5 kg tuku při zachování svalů",
+      "<strong>Kontrola:</strong> vážit se každé ráno nalačno, počítat týdenní průměr"
+    ],
     meals: [
-      { label:"Po", name:"Pondělí — Push A", meals:[
-        { name:"Snídaně", time:"7:00", kcal:480, p:45, c:40, f:14, foods:[
-          { name:"Ovesné vločky", amt:"70 g" },
-          { name:"Řecký jogurt (0%)", amt:"200 g" },
-          { name:"Tvaroh (měkký)", amt:"100 g" },
-          { name:"Borůvky", amt:"100 g" },
-        ]},
-        { name:"Oběd", time:"12:30", kcal:620, p:58, c:55, f:18, foods:[
-          { name:"Kuřecí prsa", amt:"250 g" },
-          { name:"Rýže basmati (vařená)", amt:"150 g" },
-          { name:"Brokolice + paprika", amt:"200 g" },
-          { name:"Olivový olej", amt:"1 lžíce (10 g)" },
-        ]},
-        { name:"Svačina", time:"16:00", kcal:320, p:36, c:30, f:8, foods:[
-          { name:"Tvaroh (měkký)", amt:"250 g" },
-          { name:"Celozrnný chléb", amt:"1 plátek (35 g)" },
-          { name:"Vejce (vařené)", amt:"2 ks" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:580, p:48, c:42, f:18, foods:[
-          { name:"Losos", amt:"200 g" },
-          { name:"Brambory vařené", amt:"150 g" },
-          { name:"Špenát + cuketa (dušené)", amt:"200 g" },
-          { name:"Olivový olej", amt:"1 lžíce" },
-        ]},
-      ]},
-      { label:"Út", name:"Úterý — Pull A", meals:[
-        { name:"Snídaně", time:"7:00", kcal:470, p:42, c:42, f:12, foods:[
-          { name:"Vejce míchaná", amt:"3 ks" },
-          { name:"Celozrnný toast", amt:"2 plátky (70 g)" },
-          { name:"Šunka krůtí", amt:"60 g" },
-          { name:"Rajče", amt:"1 ks" },
-        ]},
-        { name:"Oběd", time:"12:30", kcal:610, p:55, c:52, f:17, foods:[
-          { name:"Hovězí mleté (90%)", amt:"200 g" },
-          { name:"Těstoviny celozrnné (vařené)", amt:"150 g" },
-          { name:"Rajčatová omáčka", amt:"150 g" },
-          { name:"Olivový olej", amt:"½ lžíce" },
-        ]},
-        { name:"Svačina", time:"16:30", kcal:380, p:38, c:35, f:9, foods:[
-          { name:"Protein shake", amt:"1 odměrka (30 g)" },
-          { name:"Mléko polotučné", amt:"300 ml" },
-          { name:"Ovesné vločky", amt:"40 g" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:560, p:48, c:40, f:16, foods:[
-          { name:"Kuřecí stehno (bez kůže)", amt:"220 g" },
-          { name:"Pohanka vařená", amt:"130 g" },
-          { name:"Zelenina dušená (mix)", amt:"200 g" },
-          { name:"Olivový olej", amt:"1 lžíce" },
-        ]},
-      ]},
-      { label:"St", name:"Středa — Legs + Core", meals:[
-        { name:"Snídaně", time:"7:00", kcal:490, p:40, c:48, f:13, foods:[
-          { name:"Ovesné vločky", amt:"80 g" },
-          { name:"Mléko polotučné", amt:"300 ml" },
-          { name:"Protein prášek", amt:"1 odměrka (30 g)" },
-          { name:"Borůvky", amt:"80 g" },
-        ]},
-        { name:"Oběd", time:"12:30", kcal:620, p:58, c:52, f:17, foods:[
-          { name:"Tuňák v nálevu", amt:"2 konzervičky (280 g)" },
-          { name:"Rýže (vařená)", amt:"150 g" },
-          { name:"Hrášek + kukuřice", amt:"100 g" },
-          { name:"Majonéza light", amt:"1 lžíce" },
-        ]},
-        { name:"Svačina", time:"15:30", kcal:310, p:30, c:28, f:8, foods:[
-          { name:"Řecký jogurt (0%)", amt:"250 g" },
-          { name:"Ovesné vločky", amt:"30 g" },
-          { name:"Med", amt:"½ lžičky" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:580, p:48, c:42, f:18, foods:[
-          { name:"Vepřová panenka", amt:"220 g" },
-          { name:"Batáty pečené", amt:"160 g" },
-          { name:"Zelený salát + olivový olej", amt:"150 g + 1 lžíce" },
-        ]},
-      ]},
-      { label:"Čt", name:"Čtvrtek — Push B", meals:[
-        { name:"Snídaně", time:"7:00", kcal:480, p:44, c:42, f:13, foods:[
-          { name:"Celozrnný toast", amt:"2 plátky (70 g)" },
-          { name:"Arašídové máslo (natural)", amt:"20 g" },
-          { name:"Tvaroh (měkký)", amt:"200 g" },
-          { name:"Jablko", amt:"1 ks" },
-        ]},
-        { name:"Oběd", time:"12:30", kcal:620, p:56, c:55, f:17, foods:[
-          { name:"Kuřecí prsa", amt:"250 g" },
-          { name:"Kuskus (vařený)", amt:"160 g" },
-          { name:"Paprika + cuketa (grilovaná)", amt:"200 g" },
-          { name:"Olivový olej", amt:"1 lžíce" },
-        ]},
-        { name:"Svačina", time:"16:00", kcal:370, p:36, c:32, f:9, foods:[
-          { name:"Protein shake", amt:"1 odměrka (30 g)" },
-          { name:"Mléko polotučné", amt:"300 ml" },
-          { name:"Banán", amt:"½ ks" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:560, p:46, c:42, f:16, foods:[
-          { name:"Treska filé", amt:"220 g" },
-          { name:"Brambory vařené", amt:"160 g" },
-          { name:"Zelená fazolka", amt:"150 g" },
-          { name:"Máslo", amt:"10 g" },
-        ]},
-      ]},
-      { label:"Pá", name:"Pátek — Pull B", meals:[
-        { name:"Snídaně", time:"7:00", kcal:490, p:46, c:42, f:14, foods:[
-          { name:"Ovesné vločky", amt:"80 g" },
-          { name:"Vejce (vařené)", amt:"2 ks" },
-          { name:"Tvaroh (tučný 10%)", amt:"150 g" },
-          { name:"Jahody", amt:"120 g" },
-        ]},
-        { name:"Oběd", time:"12:30", kcal:630, p:58, c:54, f:17, foods:[
-          { name:"Hovězí steak (libový)", amt:"220 g" },
-          { name:"Rýže basmati (vařená)", amt:"160 g" },
-          { name:"Brokolice + mrkev", amt:"200 g" },
-          { name:"Olivový olej", amt:"1 lžíce" },
-        ]},
-        { name:"Svačina", time:"16:00", kcal:360, p:34, c:32, f:9, foods:[
-          { name:"Tvaroh (měkký)", amt:"250 g" },
-          { name:"Celozrnný chléb", amt:"1 plátek (35 g)" },
-          { name:"Rajče", amt:"1 ks" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:560, p:46, c:40, f:17, foods:[
-          { name:"Losos", amt:"200 g" },
-          { name:"Quinoa (vařená)", amt:"140 g" },
-          { name:"Špenát s česnekem", amt:"150 g" },
-          { name:"Olivový olej", amt:"1 lžíce" },
-        ]},
-      ]},
-      { label:"So", name:"Sobota — Cardio", meals:[
-        { name:"Snídaně", time:"8:00", kcal:460, p:40, c:42, f:13, foods:[
-          { name:"Vejce míchaná", amt:"3 ks" },
-          { name:"Celozrnný toast", amt:"2 plátky (70 g)" },
-          { name:"Šunka krůtí", amt:"60 g" },
-          { name:"Rajče + paprika", amt:"150 g" },
-        ]},
-        { name:"Oběd", time:"13:00", kcal:600, p:54, c:52, f:17, foods:[
-          { name:"Kuřecí prsa", amt:"230 g" },
-          { name:"Těstoviny celozrnné (vařené)", amt:"150 g" },
-          { name:"Rajčatová omáčka", amt:"100 g" },
-          { name:"Olivový olej", amt:"1 lžíce" },
-        ]},
-        { name:"Svačina", time:"16:30", kcal:330, p:30, c:30, f:8, foods:[
-          { name:"Kefír", amt:"300 ml" },
-          { name:"Ovesné vločky", amt:"40 g" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:560, p:46, c:40, f:17, foods:[
-          { name:"Vejce (celá + bílky)", amt:"2 celá + 4 bílky" },
-          { name:"Brambory vařené", amt:"160 g" },
-          { name:"Špenát s česnekem", amt:"150 g" },
-          { name:"Olivový olej", amt:"1 lžíce" },
-        ]},
-      ]},
-      { label:"Ne", name:"Neděle — Rest", meals:[
-        { name:"Snídaně", time:"9:00", kcal:490, p:44, c:44, f:14, foods:[
-          { name:"Vaječná omeleta", amt:"3 vejce" },
-          { name:"Celozrnný toast", amt:"2 plátky (70 g)" },
-          { name:"Šunka krůtí", amt:"60 g" },
-          { name:"Rajče + avokádo", amt:"1 ks + ¼ ks" },
-        ]},
-        { name:"Oběd", time:"13:00", kcal:640, p:56, c:56, f:18, foods:[
-          { name:"Kuřecí stehno pečené", amt:"250 g" },
-          { name:"Rýže vařená", amt:"160 g" },
-          { name:"Zelenina dušená (mix)", amt:"200 g" },
-          { name:"Olivový olej", amt:"1 lžíce" },
-        ]},
-        { name:"Svačina", time:"16:00", kcal:340, p:30, c:30, f:9, foods:[
-          { name:"Tvaroh (měkký)", amt:"200 g" },
-          { name:"Ovoce dle výběru", amt:"150 g" },
-          { name:"Chia semínka", amt:"10 g" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:540, p:44, c:38, f:16, foods:[
-          { name:"Losos nebo tuňák", amt:"200 g" },
-          { name:"Batáty pečené", amt:"150 g" },
-          { name:"Salát (mix listů, olej, citron)", amt:"150 g" },
-        ]},
-      ]},
+      { name:"Snídaně", time:"7:00", kcal:450, p:40, c:38, f:14,
+        cats:[
+          { cat:"Bílkoviny", opts:"vejce 3 ks / tvaroh měkký 200 g / řecký jogurt 0% 250 g / protein shake v vodě", note:"Vyber jeden zdroj" },
+          { cat:"Sacharidy", opts:"ovesné vločky 65 g / celozrnný toast 2 plátky / pohanka vařená 130 g", note:"Vyber jeden zdroj" },
+          { cat:"Ovoce", opts:"borůvky / jahody / jablko", note:"80–100 g" },
+          { cat:"Tuky", opts:"mandle 12 g / chia semínka 10 g", note:"Vyber jedno" },
+        ]
+      },
+      { name:"Svačina", time:"10:00", kcal:240, p:28, c:20, f:6,
+        cats:[
+          { cat:"Bílkoviny", opts:"tvaroh měkký 200 g / řecký jogurt 0% 200 g / protein shake v vodě", note:"Vyber jeden zdroj" },
+          { cat:"Sacharidy", opts:"rýžové chlebíčky 2 ks / jablko 1 ks / paprika + okurka", note:"Nízkokalorická varianta" },
+        ]
+      },
+      { name:"Oběd", time:"13:00", kcal:620, p:56, c:52, f:18,
+        cats:[
+          { cat:"Bílkoviny", opts:"kuřecí prsa 240 g / tuňák 2 konzervy (260 g) / hovězí mleté 90% 200 g / losos 180 g", note:"Vyber jeden zdroj" },
+          { cat:"Sacharidy", opts:"rýže vařená 145 g / brambory vařené 175 g / kuskus vařený 155 g / těstoviny cel. 140 g", note:"Vyber jeden zdroj" },
+          { cat:"Zelenina", opts:"brokolice / paprika / cuketa / špenát / zelená fazolka", note:"150–200 g neomezeně" },
+          { cat:"Tuky", opts:"olivový olej 1 lžíce (10 g)", note:"Na přípravu" },
+        ]
+      },
+      { name:"Svačina", time:"16:30", kcal:230, p:25, c:20, f:6,
+        cats:[
+          { cat:"Bílkoviny", opts:"tvaroh měkký 180 g / vejce 2 ks + bílek 2 ks / kefír 250 ml", note:"Vyber jeden zdroj" },
+          { cat:"Sacharidy", opts:"celozrnný chléb 1 plátek / rýžové chlebíčky 2 ks", note:"Vyber jedno" },
+          { cat:"Extra", opts:"rajče / okurka / paprika", note:"Zelenina dle chuti" },
+        ]
+      },
+      { name:"Večeře", time:"19:30", kcal:520, p:42, c:38, f:16,
+        cats:[
+          { cat:"Bílkoviny", opts:"losos 190 g / treska 210 g / kuřecí stehno bez kůže 210 g / vepřová panenka 190 g / vejce 3 ks + bílky 3 ks", note:"Vyber jeden zdroj" },
+          { cat:"Sacharidy", opts:"batáty 150 g / brambory 165 g / quinoa vařená 130 g / rýže 120 g", note:"Vyber jeden zdroj — menší porce než oběd" },
+          { cat:"Zelenina", opts:"špenát / brokolice / zelený salát / cuketa", note:"150 g+" },
+          { cat:"Tuky", opts:"olivový olej 1 lžíce (10 g)", note:"Na přípravu nebo zálivku" },
+        ]
+      },
     ]
   },
   {
-    id: "recomp",
-    label: "Rekomposice",
-    kcal: 2750, p: 155, c: 340, f: 80,
-    color: "#5a9fd4", bg: "#0d1e30",
-    duration: "16–20 týdnů",
-    desc: "Maintenance ~2 750 kcal · Současná ztráta tuku + nárůst svalů",
-    tip: "Alternativa pokud nechceš jít přes cut. Výzkum (Barakat et al. 2020, Longland et al. 2016) potvrzuje, že trénovaní intermediáti na maintenance kaloriích s vysokým příjmem bílkovin mohou zároveň ztrácet tuk i nabírat svalovou hmotu. Očekávaný výsledek za 16–20 týdnů: −2 až −3 kg tuku, +1 až +2 kg svalů, podobná celková váha. Tréninkové dny: ~2 950 kcal. Rest dny: ~2 250 kcal. Průměr = ~2 750 kcal/týden.",
-    rec: false,
+    id: "transition", num: "Přechod", title: "Maintenance", dur: "2 týdny", kcal: 2635,
+    color: "#888", bg: "#1e1e1c", macros: { p: 155, c: 310, f: 80 }, tag: "Po mini-cutu",
+    rules: [
+      "<strong>2 635 kcal/den</strong> — skutečný maintenance (BMR 1 700 × 1.55)",
+      "<strong>155 g bílkovin</strong> — udržovací dávka pro zachování svalů",
+      "<strong>Trvání 2 týdny</strong> — nutné pro obnovu hormonů a metabolismu po deficitu",
+      "<strong>Cíl:</strong> stabilizace váhy, obnovení energie, příprava na bulk",
+      "<strong>Váha se může zvýšit</strong> o 1–2 kg — je to voda a zásoby glykogenu, ne tuk"
+    ],
     meals: [
-      { label:"Po", name:"Pondělí — Push A", meals:[
-        { name:"Snídaně", time:"7:00", kcal:680, p:42, c:76, f:20, foods:[
-          { name:"Ovesné vločky", amt:"100 g" },
-          { name:"Řecký jogurt (0%)", amt:"200 g" },
-          { name:"Tvaroh (měkký)", amt:"100 g" },
-          { name:"Banán", amt:"1 ks" },
-          { name:"Mandle", amt:"15 g" },
-        ]},
-        { name:"Oběd", time:"12:30", kcal:820, p:55, c:90, f:22, foods:[
-          { name:"Kuřecí prsa", amt:"230 g" },
-          { name:"Rýže basmati (vařená)", amt:"230 g" },
-          { name:"Brokolice", amt:"150 g" },
-          { name:"Olivový olej", amt:"1 lžíce" },
-        ]},
-        { name:"Svačina", time:"16:00", kcal:420, p:32, c:46, f:10, foods:[
-          { name:"Tvaroh (tučný 10%)", amt:"200 g" },
-          { name:"Celozrnný chléb", amt:"2 plátky (70 g)" },
-          { name:"Vejce (vařené)", amt:"1 ks" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:740, p:52, c:72, f:22, foods:[
-          { name:"Losos", amt:"200 g" },
-          { name:"Brambory vařené", amt:"240 g" },
-          { name:"Špenát (čerstvý)", amt:"150 g" },
-          { name:"Olivový olej", amt:"1 lžíce" },
-        ]},
-      ]},
-      { label:"Út", name:"Úterý — Pull A", meals:[
-        { name:"Snídaně", time:"7:00", kcal:660, p:40, c:74, f:18, foods:[
-          { name:"Celozrnný toast", amt:"3 plátky (105 g)" },
-          { name:"Vajíčka míchaná", amt:"3 ks" },
-          { name:"Šunka krůtí", amt:"70 g" },
-          { name:"Rajče", amt:"1 ks" },
-        ]},
-        { name:"Oběd", time:"12:30", kcal:810, p:54, c:90, f:21, foods:[
-          { name:"Hovězí mleté (90%)", amt:"200 g" },
-          { name:"Těstoviny celozrnné (vařené)", amt:"230 g" },
-          { name:"Rajčatová omáčka", amt:"150 g" },
-          { name:"Olivový olej", amt:"½ lžíce" },
-        ]},
-        { name:"Svačina", time:"16:30", kcal:440, p:34, c:46, f:10, foods:[
-          { name:"Protein shake", amt:"1 odměrka (30 g)" },
-          { name:"Mléko polotučné", amt:"350 ml" },
-          { name:"Ovesné vločky", amt:"50 g" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:740, p:52, c:72, f:22, foods:[
-          { name:"Kuřecí stehno (bez kůže)", amt:"230 g" },
-          { name:"Pohanka vařená", amt:"220 g" },
-          { name:"Cuketa + paprika", amt:"200 g" },
-          { name:"Olivový olej", amt:"1 lžíce" },
-        ]},
-      ]},
-      { label:"St", name:"Středa — Legs + Core", meals:[
-        { name:"Snídaně", time:"7:00", kcal:680, p:40, c:78, f:20, foods:[
-          { name:"Ovesné vločky", amt:"100 g" },
-          { name:"Mléko polotučné", amt:"300 ml" },
-          { name:"Protein prášek", amt:"1 odměrka (30 g)" },
-          { name:"Borůvky", amt:"100 g" },
-          { name:"Chia semínka", amt:"10 g" },
-        ]},
-        { name:"Oběd", time:"12:30", kcal:820, p:58, c:88, f:22, foods:[
-          { name:"Tuňák v nálevu", amt:"2 konzervičky (280 g)" },
-          { name:"Rýže jasmínová (vařená)", amt:"230 g" },
-          { name:"Hrášek", amt:"100 g" },
-          { name:"Majonéza light", amt:"1.5 lžíce" },
-        ]},
-        { name:"Svačina", time:"15:30", kcal:400, p:28, c:44, f:10, foods:[
-          { name:"Řecký jogurt (0%)", amt:"200 g" },
-          { name:"Müsli (bez cukru)", amt:"50 g" },
-          { name:"Med", amt:"1 lžička" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:760, p:52, c:72, f:22, foods:[
-          { name:"Vepřová panenka", amt:"220 g" },
-          { name:"Batáty pečené", amt:"240 g" },
-          { name:"Zelený salát + olivový olej", amt:"150 g + 1 lžíce" },
-        ]},
-      ]},
-      { label:"Čt", name:"Čtvrtek — Push B", meals:[
-        { name:"Snídaně", time:"7:00", kcal:670, p:40, c:76, f:18, foods:[
-          { name:"Celozrnný toast", amt:"3 plátky (105 g)" },
-          { name:"Arašídové máslo (natural)", amt:"25 g" },
-          { name:"Tvaroh (měkký)", amt:"180 g" },
-          { name:"Jablko", amt:"1 ks" },
-        ]},
-        { name:"Oběd", time:"12:30", kcal:820, p:54, c:92, f:21, foods:[
-          { name:"Kuřecí prsa", amt:"230 g" },
-          { name:"Kuskus (vařený)", amt:"240 g" },
-          { name:"Paprika + cuketa", amt:"200 g" },
-          { name:"Olivový olej", amt:"1 lžíce" },
-        ]},
-        { name:"Svačina", time:"16:00", kcal:420, p:32, c:44, f:10, foods:[
-          { name:"Protein shake", amt:"1 odměrka (30 g)" },
-          { name:"Mléko polotučné", amt:"350 ml" },
-          { name:"Banán", amt:"1 ks" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:750, p:50, c:72, f:22, foods:[
-          { name:"Treska filé", amt:"230 g" },
-          { name:"Brambory vařené", amt:"240 g" },
-          { name:"Zelená fazolka", amt:"150 g" },
-          { name:"Máslo", amt:"12 g" },
-        ]},
-      ]},
-      { label:"Pá", name:"Pátek — Pull B", meals:[
-        { name:"Snídaně", time:"7:00", kcal:680, p:42, c:76, f:20, foods:[
-          { name:"Ovesné vločky", amt:"100 g" },
-          { name:"Vejce (vařené)", amt:"2 ks" },
-          { name:"Tvaroh (tučný)", amt:"150 g" },
-          { name:"Jahody", amt:"150 g" },
-        ]},
-        { name:"Oběd", time:"12:30", kcal:820, p:56, c:88, f:22, foods:[
-          { name:"Hovězí steak (libový)", amt:"220 g" },
-          { name:"Rýže basmati (vařená)", amt:"230 g" },
-          { name:"Brokolice + mrkev", amt:"200 g" },
-          { name:"Olivový olej", amt:"1 lžíce" },
-        ]},
-        { name:"Svačina", time:"16:00", kcal:420, p:30, c:46, f:10, foods:[
-          { name:"Tvaroh (měkký)", amt:"230 g" },
-          { name:"Celozrnný chléb", amt:"2 plátky (70 g)" },
-          { name:"Rajče", amt:"1 ks" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:740, p:50, c:72, f:22, foods:[
-          { name:"Losos", amt:"200 g" },
-          { name:"Quinoa (vařená)", amt:"220 g" },
-          { name:"Špenát s česnekem", amt:"150 g" },
-          { name:"Olivový olej", amt:"1 lžíce" },
-        ]},
-      ]},
-      { label:"So", name:"Sobota — Cardio", meals:[
-        { name:"Snídaně", time:"8:00", kcal:640, p:38, c:72, f:18, foods:[
-          { name:"Palačinky (celozrnná mouka)", amt:"3 ks" },
-          { name:"Řecký jogurt", amt:"180 g" },
-          { name:"Med + borůvky", amt:"1 lžička + 80 g" },
-          { name:"Protein prášek", amt:"20 g" },
-        ]},
-        { name:"Oběd", time:"13:00", kcal:800, p:50, c:88, f:21, foods:[
-          { name:"Kuřecí prsa", amt:"210 g" },
-          { name:"Těstoviny celozrnné (vařené)", amt:"220 g" },
-          { name:"Pesto", amt:"20 g" },
-          { name:"Cherry rajčata", amt:"100 g" },
-        ]},
-        { name:"Svačina", time:"16:30", kcal:390, p:26, c:44, f:10, foods:[
-          { name:"Kefír", amt:"300 ml" },
-          { name:"Ovesná tyčinka", amt:"50 g" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:730, p:48, c:74, f:22, foods:[
-          { name:"Vejce (celá + bílky)", amt:"2 celá + 4 bílky" },
-          { name:"Brambory vařené", amt:"240 g" },
-          { name:"Špenát s česnekem", amt:"150 g" },
-          { name:"Olivový olej", amt:"1 lžíce" },
-        ]},
-      ]},
-      { label:"Ne", name:"Neděle — Rest", meals:[
-        { name:"Snídaně", time:"9:00", kcal:700, p:40, c:78, f:20, foods:[
-          { name:"Vaječná omeleta", amt:"3 vejce" },
-          { name:"Celozrnný toast", amt:"3 plátky (105 g)" },
-          { name:"Avokádo", amt:"½ ks (~80 g)" },
-          { name:"Šunka krůtí", amt:"60 g" },
-        ]},
-        { name:"Oběd", time:"13:00", kcal:840, p:54, c:92, f:22, foods:[
-          { name:"Kuřecí stehno pečené", amt:"250 g" },
-          { name:"Rýže vařená", amt:"240 g" },
-          { name:"Mrkev + brokolice", amt:"200 g" },
-          { name:"Olivový olej", amt:"1 lžíce" },
-        ]},
-        { name:"Svačina", time:"16:00", kcal:380, p:26, c:42, f:10, foods:[
-          { name:"Tvaroh (měkký)", amt:"200 g" },
-          { name:"Ovoce dle výběru", amt:"180 g" },
-          { name:"Chia semínka", amt:"10 g" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:740, p:48, c:72, f:22, foods:[
-          { name:"Losos nebo tuňák", amt:"200 g" },
-          { name:"Batáty pečené", amt:"220 g" },
-          { name:"Salát (mix listů, olej, citron)", amt:"150 g" },
-        ]},
-      ]},
+      { name:"Snídaně", time:"7:00", kcal:580, p:36, c:68, f:18,
+        cats:[
+          { cat:"Bílkoviny", opts:"vejce 3 ks / tvaroh 200 g + vejce 1 ks / řecký jogurt 250 g + protein shake", note:"Vyber jeden zdroj" },
+          { cat:"Sacharidy", opts:"ovesné vločky 95 g / celozrnný toast 3 plátky / pohanka vařená 190 g", note:"Vyber jeden zdroj" },
+          { cat:"Ovoce", opts:"banán / borůvky / jahody", note:"100–130 g" },
+          { cat:"Tuky", opts:"mandle 18 g / arašídové máslo 18 g / chia 12 g", note:"Vyber jedno" },
+        ]
+      },
+      { name:"Svačina", time:"10:00", kcal:320, p:24, c:36, f:8,
+        cats:[
+          { cat:"Bílkoviny", opts:"tvaroh 180 g / řecký jogurt 200 g / kefír 250 ml + protein shake", note:"Vyber jeden zdroj" },
+          { cat:"Sacharidy", opts:"celozrnný chléb 1 plátek / ovesné vločky 40 g / ovoce 150 g", note:"Vyber jeden zdroj" },
+        ]
+      },
+      { name:"Oběd", time:"13:00", kcal:760, p:48, c:86, f:20,
+        cats:[
+          { cat:"Bílkoviny", opts:"kuřecí prsa 220 g / hovězí steak 200 g / losos 195 g / tuňák 2 konzervy", note:"Vyber jeden zdroj" },
+          { cat:"Sacharidy", opts:"rýže vařená 220 g / brambory 250 g / těstoviny cel. 210 g / kuskus 220 g", note:"Vyber jeden zdroj" },
+          { cat:"Zelenina", opts:"libovolná zelenina", note:"150–200 g" },
+          { cat:"Tuky", opts:"olivový olej 1 lžíce / parmazán 12 g", note:"Na přípravu" },
+        ]
+      },
+      { name:"Svačina", time:"16:30", kcal:310, p:22, c:36, f:8,
+        cats:[
+          { cat:"Bílkoviny", opts:"tvaroh 180 g / kefír 250 ml / protein shake v mléce 200 ml", note:"Vyber jeden zdroj" },
+          { cat:"Sacharidy", opts:"celozrnný chléb 2 plátky / ovesná tyčinka (bez cukru) / müsli 45 g", note:"Vyber jeden zdroj" },
+        ]
+      },
+      { name:"Večeře", time:"19:30", kcal:680, p:46, c:72, f:20,
+        cats:[
+          { cat:"Bílkoviny", opts:"losos 195 g / kuřecí stehno 220 g / vepřová panenka 210 g / treska 220 g", note:"Vyber jeden zdroj" },
+          { cat:"Sacharidy", opts:"brambory 230 g / batáty 230 g / quinoa 210 g / rýže 210 g", note:"Vyber jeden zdroj" },
+          { cat:"Zelenina", opts:"špenát / brokolice / zelený salát / cuketa + paprika", note:"150 g+" },
+          { cat:"Tuky", opts:"olivový olej 1 lžíce / máslo 10 g", note:"Na přípravu" },
+        ]
+      },
     ]
   },
   {
-    id: "lean-bulk",
-    label: "Lean bulk",
-    kcal: 2900, p: 155, c: 380, f: 85,
-    color: "#5aaa7a", bg: "#0f1f15",
-    duration: "Pouze po mini-cutu",
-    desc: "+10 % surplus · Jen po dosažení ~14–15 % BF",
-    tip: "Spusť tento protokol až po úspěšném mini-cutu na ~14–15 % BF. Helms et al. 2023 prokázali, že surplus 5–10 % dává stejný nárůst svalů jako 15 % surplus, ale výrazně méně tuku. Cílená rychlost nárůstu váhy: 0.2–0.25 kg/týden. Pokud nabíráš rychleji, sniž o 100–150 kcal. Bílkoviny zůstávají stejné (155 g) — sacharidy a tuky jsou proměnná.",
-    rec: false,
+    id: "bulk", num: "Fáze 2", title: "Lean bulk", dur: "Dlouhodobě", kcal: 2900,
+    color: "#5aaa7a", bg: "#0f1f15", macros: { p: 155, c: 380, f: 85 }, tag: "Po 10–12 týdnech",
+    rules: [
+      "<strong>2 900 kcal/den</strong> — surplus +265 kcal nad maintenance (10 %)",
+      "<strong>155 g bílkovin</strong> (2.0 g/kg) — dostatečné pro maximální syntézu svalů",
+      "<strong>380 g sacharidů</strong> — palivo pro trénink a regeneraci",
+      "<strong>85 g tuků</strong> — podpora testosteronu a hormonální rovnováhy",
+      "<strong>Cíl:</strong> nárůst 0.2–0.25 kg váhy týdně — víc = příliš mnoho tuku",
+      "<strong>Kontrola:</strong> pokud nabíráš rychleji než 0.25 kg/týden, sniž o 100–150 kcal",
+      "<strong>Ukončit bulk</strong> jakmile BF překročí ~17–18 % — pak krátký cut"
+    ],
     meals: [
-      { label:"Po", name:"Pondělí — Push A", meals:[
-        { name:"Snídaně", time:"7:00", kcal:760, p:44, c:86, f:22, foods:[
-          { name:"Ovesné vločky", amt:"110 g" },
-          { name:"Řecký jogurt (0%)", amt:"200 g" },
-          { name:"Tvaroh (měkký)", amt:"100 g" },
-          { name:"Banán", amt:"1 ks" },
-          { name:"Mandle", amt:"20 g" },
-        ]},
-        { name:"Oběd", time:"12:30", kcal:900, p:56, c:102, f:24, foods:[
-          { name:"Kuřecí prsa", amt:"240 g" },
-          { name:"Rýže basmati (vařená)", amt:"270 g" },
-          { name:"Brokolice", amt:"150 g" },
-          { name:"Olivový olej", amt:"1 lžíce" },
-          { name:"Parmazán", amt:"10 g" },
-        ]},
-        { name:"Svačina", time:"16:00", kcal:450, p:34, c:50, f:12, foods:[
-          { name:"Tvaroh (tučný 10%)", amt:"200 g" },
-          { name:"Celozrnný chléb", amt:"2 plátky (70 g)" },
-          { name:"Vejce (vařené)", amt:"2 ks" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:790, p:54, c:76, f:24, foods:[
-          { name:"Losos", amt:"210 g" },
-          { name:"Brambory vařené", amt:"260 g" },
-          { name:"Špenát (čerstvý)", amt:"150 g" },
-          { name:"Olivový olej", amt:"1.5 lžíce" },
-        ]},
-      ]},
-      { label:"Út", name:"Úterý — Pull A", meals:[
-        { name:"Snídaně", time:"7:00", kcal:750, p:44, c:84, f:20, foods:[
-          { name:"Celozrnný toast", amt:"3 plátky (105 g)" },
-          { name:"Vajíčka míchaná", amt:"3 ks" },
-          { name:"Šunka krůtí", amt:"70 g" },
-          { name:"Avokádo", amt:"¼ ks (50 g)" },
-        ]},
-        { name:"Oběd", time:"12:30", kcal:880, p:55, c:100, f:23, foods:[
-          { name:"Hovězí mleté (90%)", amt:"210 g" },
-          { name:"Těstoviny celozrnné (vařené)", amt:"260 g" },
-          { name:"Rajčatová omáčka", amt:"150 g" },
-          { name:"Parmazán", amt:"15 g" },
-        ]},
-        { name:"Svačina", time:"16:30", kcal:460, p:36, c:50, f:10, foods:[
-          { name:"Protein shake", amt:"1 odměrka (30 g)" },
-          { name:"Mléko polotučné", amt:"350 ml" },
-          { name:"Ovesné vločky", amt:"55 g" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:810, p:54, c:78, f:24, foods:[
-          { name:"Kuřecí stehno (bez kůže)", amt:"240 g" },
-          { name:"Pohanka vařená", amt:"240 g" },
-          { name:"Cuketa + paprika", amt:"200 g" },
-          { name:"Olivový olej", amt:"1.5 lžíce" },
-        ]},
-      ]},
-      { label:"St", name:"Středa — Legs + Core", meals:[
-        { name:"Snídaně", time:"7:00", kcal:760, p:42, c:88, f:22, foods:[
-          { name:"Ovesné vločky", amt:"110 g" },
-          { name:"Mléko polotučné", amt:"320 ml" },
-          { name:"Protein prášek", amt:"1 odměrka (30 g)" },
-          { name:"Borůvky", amt:"100 g" },
-          { name:"Chia semínka", amt:"12 g" },
-        ]},
-        { name:"Oběd", time:"12:30", kcal:890, p:58, c:98, f:24, foods:[
-          { name:"Tuňák v nálevu", amt:"2 konzervičky (280 g)" },
-          { name:"Rýže jasmínová (vařená)", amt:"260 g" },
-          { name:"Hrášek + kukuřice", amt:"100 g" },
-          { name:"Majonéza light", amt:"2 lžíce" },
-        ]},
-        { name:"Svačina", time:"15:30", kcal:430, p:30, c:48, f:11, foods:[
-          { name:"Řecký jogurt (0%)", amt:"230 g" },
-          { name:"Müsli (bez cukru)", amt:"55 g" },
-          { name:"Med", amt:"1 lžička" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:820, p:54, c:80, f:26, foods:[
-          { name:"Vepřová panenka", amt:"230 g" },
-          { name:"Batáty pečené", amt:"260 g" },
-          { name:"Zelený salát + olivový olej", amt:"150 g + 1.5 lžíce" },
-        ]},
-      ]},
-      { label:"Čt", name:"Čtvrtek — Push B", meals:[
-        { name:"Snídaně", time:"7:00", kcal:750, p:42, c:84, f:22, foods:[
-          { name:"Celozrnný toast", amt:"3 plátky (105 g)" },
-          { name:"Arašídové máslo (natural)", amt:"28 g" },
-          { name:"Tvaroh (měkký)", amt:"190 g" },
-          { name:"Jablko", amt:"1 ks" },
-        ]},
-        { name:"Oběd", time:"12:30", kcal:880, p:54, c:100, f:23, foods:[
-          { name:"Kuřecí prsa", amt:"240 g" },
-          { name:"Kuskus (vařený)", amt:"260 g" },
-          { name:"Paprika + cuketa", amt:"200 g" },
-          { name:"Olivový olej", amt:"1.5 lžíce" },
-        ]},
-        { name:"Svačina", time:"16:00", kcal:450, p:34, c:50, f:10, foods:[
-          { name:"Protein shake", amt:"1 odměrka (30 g)" },
-          { name:"Mléko polotučné", amt:"350 ml" },
-          { name:"Banán", amt:"1 ks" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:820, p:52, c:78, f:24, foods:[
-          { name:"Treska filé", amt:"240 g" },
-          { name:"Brambory vařené", amt:"260 g" },
-          { name:"Zelená fazolka", amt:"150 g" },
-          { name:"Máslo", amt:"12 g" },
-          { name:"Olivový olej", amt:"½ lžíce" },
-        ]},
-      ]},
-      { label:"Pá", name:"Pátek — Pull B", meals:[
-        { name:"Snídaně", time:"7:00", kcal:760, p:46, c:84, f:22, foods:[
-          { name:"Ovesné vločky", amt:"110 g" },
-          { name:"Vejce (vařené)", amt:"3 ks" },
-          { name:"Tvaroh (tučný)", amt:"150 g" },
-          { name:"Jahody", amt:"150 g" },
-        ]},
-        { name:"Oběd", time:"12:30", kcal:880, p:56, c:96, f:24, foods:[
-          { name:"Hovězí steak (libový)", amt:"230 g" },
-          { name:"Rýže basmati (vařená)", amt:"256 g" },
-          { name:"Brokolice + mrkev", amt:"200 g" },
-          { name:"Olivový olej", amt:"1.5 lžíce" },
-        ]},
-        { name:"Svačina", time:"16:00", kcal:450, p:32, c:50, f:11, foods:[
-          { name:"Tvaroh (měkký)", amt:"240 g" },
-          { name:"Celozrnný chléb", amt:"2 plátky (70 g)" },
-          { name:"Rajče", amt:"1 ks" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:810, p:52, c:78, f:24, foods:[
-          { name:"Losos", amt:"210 g" },
-          { name:"Quinoa (vařená)", amt:"236 g" },
-          { name:"Špenát s česnekem", amt:"150 g" },
-          { name:"Olivový olej", amt:"1.5 lžíce" },
-        ]},
-      ]},
-      { label:"So", name:"Sobota — Cardio", meals:[
-        { name:"Snídaně", time:"8:00", kcal:730, p:40, c:84, f:20, foods:[
-          { name:"Palačinky (celozrnná mouka)", amt:"4 ks" },
-          { name:"Řecký jogurt", amt:"180 g" },
-          { name:"Med + borůvky", amt:"1.5 lžičky + 90 g" },
-          { name:"Protein prášek", amt:"25 g" },
-        ]},
-        { name:"Oběd", time:"13:00", kcal:860, p:52, c:96, f:23, foods:[
-          { name:"Kuřecí prsa", amt:"220 g" },
-          { name:"Těstoviny celozrnné (vařené)", amt:"248 g" },
-          { name:"Pesto", amt:"22 g" },
-          { name:"Cherry rajčata + parmazán", amt:"100 g + 10 g" },
-        ]},
-        { name:"Svačina", time:"16:30", kcal:430, p:26, c:50, f:12, foods:[
-          { name:"Kefír", amt:"300 ml" },
-          { name:"Ovesná tyčinka", amt:"58 g" },
-          { name:"Banán", amt:"½ ks" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:800, p:52, c:76, f:24, foods:[
-          { name:"Vejce (celá + bílky)", amt:"3 celá + 4 bílky" },
-          { name:"Brambory vařené", amt:"254 g" },
-          { name:"Špenát s česnekem", amt:"150 g" },
-          { name:"Olivový olej", amt:"1.5 lžíce" },
-        ]},
-      ]},
-      { label:"Ne", name:"Neděle — Rest", meals:[
-        { name:"Snídaně", time:"9:00", kcal:780, p:42, c:88, f:24, foods:[
-          { name:"Vaječná omeleta", amt:"4 vejce" },
-          { name:"Celozrnný toast", amt:"3 plátky (105 g)" },
-          { name:"Avokádo", amt:"½ ks (~80 g)" },
-          { name:"Šunka krůtí", amt:"70 g" },
-        ]},
-        { name:"Oběd", time:"13:00", kcal:880, p:54, c:98, f:24, foods:[
-          { name:"Kuřecí stehno pečené", amt:"260 g" },
-          { name:"Rýže vařená", amt:"260 g" },
-          { name:"Mrkev + brokolice", amt:"200 g" },
-          { name:"Olivový olej", amt:"1.5 lžíce" },
-        ]},
-        { name:"Svačina", time:"16:00", kcal:430, p:28, c:48, f:12, foods:[
-          { name:"Tvaroh (měkký)", amt:"200 g" },
-          { name:"Ovoce dle výběru", amt:"200 g" },
-          { name:"Chia semínka", amt:"12 g" },
-        ]},
-        { name:"Večeře", time:"19:30", kcal:810, p:50, c:76, f:24, foods:[
-          { name:"Losos nebo tuňák", amt:"210 g" },
-          { name:"Batáty pečené", amt:"236 g" },
-          { name:"Salát (mix listů, olej, citron)", amt:"150 g" },
-        ]},
-      ]},
+      { name:"Snídaně", time:"7:00", kcal:680, p:38, c:80, f:20,
+        cats:[
+          { cat:"Bílkoviny", opts:"vejce 3 ks / tvaroh 150 g + vejce 2 ks / řecký jogurt 200 g + protein shake", note:"Vyber jeden zdroj" },
+          { cat:"Sacharidy", opts:"ovesné vločky 105 g / celozrnný toast 4 plátky / palačinky cel. mouka 3 ks", note:"Vyber jeden zdroj" },
+          { cat:"Ovoce", opts:"banán / borůvky / jahody / mango", note:"120–150 g" },
+          { cat:"Tuky", opts:"mandle 20 g / arašídové máslo 22 g / avokádo ¼ ks", note:"Vyber jedno" },
+        ]
+      },
+      { name:"Svačina", time:"10:00", kcal:390, p:26, c:46, f:10,
+        cats:[
+          { cat:"Bílkoviny", opts:"tvaroh 200 g / řecký jogurt 250 g / protein shake v mléce 250 ml", note:"Vyber jeden zdroj" },
+          { cat:"Sacharidy", opts:"banán + ovesné vločky 45 g / celozrnný chléb 2 plátky / müsli 55 g", note:"Vyber jeden zdroj" },
+          { cat:"Tuky", opts:"mandle 10 g / chia 8 g", note:"Volitelně" },
+        ]
+      },
+      { name:"Oběd", time:"13:00", kcal:880, p:50, c:100, f:24,
+        cats:[
+          { cat:"Bílkoviny", opts:"kuřecí prsa 235 g / hovězí steak 225 g / losos 205 g / hovězí mleté 215 g", note:"Vyber jeden zdroj" },
+          { cat:"Sacharidy", opts:"rýže vařená 260 g / brambory 290 g / těstoviny cel. 250 g / kuskus 260 g", note:"Vyber jeden zdroj" },
+          { cat:"Zelenina", opts:"libovolná zelenina", note:"150–200 g" },
+          { cat:"Tuky", opts:"olivový olej 1.5 lžíce / parmazán 15 g / máslo 10 g", note:"Na přípravu" },
+        ]
+      },
+      { name:"Svačina", time:"16:30", kcal:380, p:24, c:46, f:10,
+        cats:[
+          { cat:"Bílkoviny", opts:"protein shake v mléce 300 ml / tvaroh 200 g + vejce 1 ks / kefír 300 ml", note:"Vyber jeden zdroj" },
+          { cat:"Sacharidy", opts:"banán + ovesné vločky 45 g / celozrnný chléb 2 plátky / rýžový nákyp", note:"Vyber jeden zdroj" },
+          { cat:"Tuky", opts:"mandle 12 g", note:"Volitelně" },
+        ]
+      },
+      { name:"Večeře", time:"19:30", kcal:800, p:48, c:88, f:22,
+        cats:[
+          { cat:"Bílkoviny", opts:"losos 205 g / kuřecí stehno 235 g / treska 235 g / vepřová panenka 225 g", note:"Vyber jeden zdroj" },
+          { cat:"Sacharidy", opts:"brambory 255 g / batáty 260 g / quinoa 235 g / rýže 240 g", note:"Vyber jeden zdroj — největší sacharidová porce dne" },
+          { cat:"Zelenina", opts:"špenát / brokolice / zelený salát / cuketa", note:"150 g+" },
+          { cat:"Tuky", opts:"olivový olej 1.5 lžíce / máslo 12 g", note:"Na přípravu" },
+        ]
+      },
     ]
-  },
+  }
 ];
 
-let activePhase = 0;
-let activeMealDay = 0;
+let activeRM = 0;
 
-function renderPhaseCards() {
-  document.getElementById("phaseCards").innerHTML = PHASES.map((ph, i) => {
-    const a = i === activePhase;
-    const borderStyle = a ? `border:1.5px solid ${ph.color};background:${ph.bg};` : "";
-    return `<div class="phase-card ${a?"active":""}" style="${borderStyle}" onclick="setPhase(${i})">
-      <div class="pc-label" style="color:${ph.color}">${ph.label}</div>
-      <div class="pc-kcal">${ph.kcal} kcal</div>
-      <div class="pc-desc">${ph.desc}</div>
-      <div style="font-size:11px;color:#555;margin-top:4px">${ph.duration}</div>
-      ${ph.rec ? `<div class="pc-rec" style="background:${ph.bg};color:${ph.color};border:0.5px solid ${ph.color}">Doporučeno</div>` : ""}
+function renderRoadmap() {
+  const steps = [ROADMAP[0], null, ROADMAP[1], null, ROADMAP[2]];
+  document.getElementById("roadmap").innerHTML = steps.map((s, i) => {
+    if (s === null) return `<div class="rm-arrow">→</div>`;
+    const idx = [0,2,4].indexOf(i);
+    const a = idx === activeRM;
+    const border = a ? `border:1.5px solid ${s.color};background:${s.bg};` : "";
+    return `<div class="rm-step ${a?"active":""}" style="${border}" onclick="setRM(${idx})">
+      <div class="rm-num" style="color:${s.color}">${s.num}</div>
+      <div class="rm-title">${s.title}</div>
+      <div class="rm-dur">${s.dur}</div>
+      <div class="rm-kcal-big" style="color:${s.color}">${s.kcal} kcal</div>
+      <div class="rm-macros">
+        <div class="rm-macro-row"><span class="rm-macro-label">Bílkoviny</span><span class="rm-macro-val" style="color:#5a9fd4">${s.macros.p} g</span></div>
+        <div class="rm-macro-row"><span class="rm-macro-label">Sacharidy</span><span class="rm-macro-val" style="color:#5aaa7a">${s.macros.c} g</span></div>
+        <div class="rm-macro-row"><span class="rm-macro-label">Tuky</span><span class="rm-macro-val" style="color:#c47aaa">${s.macros.f} g</span></div>
+      </div>
+      <div class="rm-tag" style="background:${s.bg};color:${s.color};border:0.5px solid ${s.color}">${s.tag}</div>
     </div>`;
   }).join("");
 }
 
-function renderMacroBar() {
-  const ph = PHASES[activePhase];
-  const maxKcal = 3200;
-  document.getElementById("mf-kcal").style.width = Math.round(ph.kcal / maxKcal * 100) + "%";
-  document.getElementById("mv-kcal").textContent = ph.kcal + " kcal";
-  document.getElementById("mf-p").style.width = Math.round(ph.p / 200 * 100) + "%";
-  document.getElementById("mv-p").textContent = ph.p + " g";
-  document.getElementById("mf-c").style.width = Math.round(ph.c / 450 * 100) + "%";
-  document.getElementById("mv-c").textContent = ph.c + " g";
-  document.getElementById("mf-f").style.width = Math.round(ph.f / 120 * 100) + "%";
-  document.getElementById("mv-f").textContent = ph.f + " g";
-  document.getElementById("phase-tip").textContent = ph.tip;
+function renderPhaseDetail() {
+  const ph = ROADMAP[activeRM];
+  document.getElementById("phase-detail").innerHTML = `
+    <div class="phase-detail-box">
+      <div class="phase-detail-title" style="color:${ph.color}">${ph.title} — pravidla a cíle</div>
+      <div class="phase-rules">${ph.rules.map(r => `<div class="phase-rule">${r}</div>`).join("")}</div>
+    </div>`;
 }
 
-function macroChip(cls, label, val) {
-  return `<span class="mm ${cls}">${label} ${val}</span>`;
-}
-
-function renderMeals() {
-  const ph = PHASES[activePhase];
-  document.getElementById("mealTabs").innerHTML = ph.meals.map((d, i) => {
-    const a = i === activeMealDay;
-    return `<div class="day-tab ${a?"active":""}" onclick="setMealDay(${i})">${d.label}</div>`;
-  }).join("");
-
-  document.getElementById("mealPanels").innerHTML = ph.meals.map((d, i) => {
-    if (i !== activeMealDay) return `<div class="meal-panel"></div>`;
-    const totalK = d.meals.reduce((s,m)=>s+m.kcal,0);
-    const totalP = d.meals.reduce((s,m)=>s+m.p,0);
-    const totalC = d.meals.reduce((s,m)=>s+m.c,0);
-    const totalF = d.meals.reduce((s,m)=>s+m.f,0);
-    const cards = d.meals.map(m => `
-      <div class="meal-card">
-        <div class="meal-header">
+function renderNutrMeals() {
+  const ph = ROADMAP[activeRM];
+  document.getElementById("mealPanels").innerHTML = `<div class="meal-panel active">${
+    ph.meals.map(m => {
+      const rows = m.cats.map(c => `
+        <div class="meal-ex-row">
+          <div class="meal-ex-cat">${c.cat}</div>
+          <div>
+            <div class="meal-ex-opts">${c.opts}</div>
+            <div class="meal-ex-note">${c.note}</div>
+          </div>
+        </div>`).join("");
+      return `<div class="meal-card">
+        <div class="meal-top">
           <div><div class="meal-name">${m.name}</div><div class="meal-time">${m.time}</div></div>
         </div>
         <div class="meal-macros">
-          ${macroChip("mm-k","⚡",m.kcal+" kcal")}
-          ${macroChip("mm-p","Bíl.",m.p+"g")}
-          ${macroChip("mm-c","Sach.",m.c+"g")}
-          ${macroChip("mm-f","Tuky",m.f+"g")}
+          <span class="mm mm-k">⚡ ${m.kcal} kcal</span>
+          <span class="mm mm-p">Bíl. ${m.p} g</span>
+          <span class="mm mm-c">Sach. ${m.c} g</span>
+          <span class="mm mm-f">Tuky ${m.f} g</span>
         </div>
-        <ul class="food-list">${m.foods.map(f=>`<li><span>${f.name}</span><span class="food-amt">${f.amt}</span></li>`).join("")}</ul>
-      </div>`).join("");
-    return `<div class="meal-panel active">
-      <div style="font-size:13px;color:#888;margin-bottom:12px">${d.name}</div>
-      ${cards}
-      <div class="day-total-bar">
-        <span style="color:#888;font-weight:400;font-size:12px">Denní součet:</span>
-        <span style="color:#c9882a">${totalK} kcal</span>
-        <span style="color:#5a9fd4">B: ${totalP}g</span>
-        <span style="color:#5aaa7a">S: ${totalC}g</span>
-        <span style="color:#c47aaa">T: ${totalF}g</span>
-      </div>
-      <div class="tip-box">Pij 3–3.5 l vody denně. Protein distribuuj rovnoměrně do 4 jídel (~40 g/jídlo). Poslední jídlo před spánkem: tvaroh nebo kaseinový shake pro noční syntézu bílkovin.</div>
-    </div>`;
-  }).join("");
+        <div class="meal-ex-header">Příklady — vyber si kombinaci</div>
+        ${rows}
+      </div>`;
+    }).join("")
+  }
+  <div class="day-total-bar">
+    <span style="color:#888;font-weight:400">Denní cíl:</span>
+    <span style="color:#c9882a">${ph.kcal} kcal</span>
+    <span style="color:#5a9fd4">B: ${ph.macros.p} g</span>
+    <span style="color:#5aaa7a">S: ${ph.macros.c} g</span>
+    <span style="color:#c47aaa">T: ${ph.macros.f} g</span>
+  </div>
+  <div class="tip-box" style="margin-top:12px">Jídelníček je flexibilní — makra jsou pevná, jídla jsou volitelná. Každý den si vyber zdroje dle chuti. Priorita: vždy dosáhni cíle bílkovin. Pij 3–3.5 l vody denně. Kreatin monohydrát 3–5 g denně.</div>
+  </div>`;
+  document.getElementById("mealTabs").innerHTML = "";
 }
 
-function setPhase(i) { activePhase = i; activeMealDay = 0; renderPhaseCards(); renderMacroBar(); renderMeals(); }
-function setMealDay(i) { activeMealDay = i; renderMeals(); }
+function setRM(i) { activeRM = i; renderRoadmap(); renderPhaseDetail(); renderNutrMeals(); }
 
-renderPhaseCards();
-renderMacroBar();
-renderMeals();
+renderRoadmap();
+renderPhaseDetail();
+renderNutrMeals();
+/* ══════════ TRACKER ══════════ */
+const TR_KEY = "calorie_tracker_v1";
+const TR_TARGETS = {
+  cut:        { kcal:2100, p:175, c:170, f:70 },
+  transition: { kcal:2635, p:155, c:310, f:80 },
+  bulk:       { kcal:2900, p:155, c:380, f:85 }
+};
+
+let trSelected = null; // currently selected food from DB
+
+function trToday() {
+  return new Date().toISOString().slice(0,10);
+}
+
+function trLoadAll() {
+  try { return JSON.parse(localStorage.getItem(TR_KEY)) || {}; } catch { return {}; }
+}
+
+function trSaveAll(data) {
+  localStorage.setItem(TR_KEY, JSON.stringify(data));
+}
+
+function trGetDate() {
+  return document.getElementById("tr-date").value || trToday();
+}
+
+function trGetEntries() {
+  return trLoadAll()[trGetDate()] || [];
+}
+
+function trSaveEntries(entries) {
+  const all = trLoadAll();
+  all[trGetDate()] = entries;
+  trSaveAll(all);
+}
+
+function trGetTarget() {
+  const phase = document.getElementById("tr-phase").value;
+  return TR_TARGETS[phase] || TR_TARGETS.cut;
+}
+
+function trTotals(entries) {
+  return entries.reduce((acc, e) => {
+    acc.kcal += e.kcal; acc.p += e.p; acc.c += e.c; acc.f += e.f;
+    return acc;
+  }, { kcal:0, p:0, c:0, f:0 });
+}
+
+function trRenderSummary() {
+  const entries = trGetEntries();
+  const tot = trTotals(entries);
+  const tgt = trGetTarget();
+  const pct = (v, t) => Math.min(Math.round(v / t * 100), 100);
+  const over = (v, t) => v > t;
+
+  document.getElementById("tr-summary").innerHTML = `
+    <div class="tr-bar-row">
+      <div class="tr-bar-top">
+        <span class="tr-bar-label">Kalorie</span>
+        <span class="tr-bar-vals">
+          <span class="eaten">${Math.round(tot.kcal)}</span>
+          <span class="target"> / ${tgt.kcal} kcal</span>
+          <span style="font-size:11px;color:#555;margin-left:6px">${tgt.kcal - Math.round(tot.kcal) >= 0 ? "zbývá " + (tgt.kcal - Math.round(tot.kcal)) : "přebytek +" + (Math.round(tot.kcal) - tgt.kcal)} kcal</span>
+        </span>
+      </div>
+      <div class="tr-track"><div class="tr-fill ${over(tot.kcal,tgt.kcal)?"over":""}" style="width:${pct(tot.kcal,tgt.kcal)}%;background:#c9882a"></div></div>
+    </div>
+    <div class="tr-macros-grid">
+      <div class="tr-macro-mini">
+        <div class="tr-macro-mini-label">Bílkoviny</div>
+        <div class="tr-macro-mini-val" style="color:#5a9fd4">${Math.round(tot.p)} g</div>
+        <div class="tr-track" style="margin-top:5px"><div class="tr-fill ${over(tot.p,tgt.p)?"over":""}" style="width:${pct(tot.p,tgt.p)}%;background:#5a9fd4"></div></div>
+        <div class="tr-macro-mini-target">cíl ${tgt.p} g</div>
+      </div>
+      <div class="tr-macro-mini">
+        <div class="tr-macro-mini-label">Sacharidy</div>
+        <div class="tr-macro-mini-val" style="color:#5aaa7a">${Math.round(tot.c)} g</div>
+        <div class="tr-track" style="margin-top:5px"><div class="tr-fill ${over(tot.c,tgt.c)?"over":""}" style="width:${pct(tot.c,tgt.c)}%;background:#5aaa7a"></div></div>
+        <div class="tr-macro-mini-target">cíl ${tgt.c} g</div>
+      </div>
+      <div class="tr-macro-mini">
+        <div class="tr-macro-mini-label">Tuky</div>
+        <div class="tr-macro-mini-val" style="color:#c47aaa">${Math.round(tot.f)} g</div>
+        <div class="tr-track" style="margin-top:5px"><div class="tr-fill ${over(tot.f,tgt.f)?"over":""}" style="width:${pct(tot.f,tgt.f)}%;background:#c47aaa"></div></div>
+        <div class="tr-macro-mini-target">cíl ${tgt.f} g</div>
+      </div>
+    </div>`;
+  trRenderLog();
+}
+
+function trRenderLog() {
+  const entries = trGetEntries();
+  const logEl = document.getElementById("tr-log");
+  if (!entries.length) {
+    logEl.innerHTML = `<div class="tr-empty">Žádné záznamy pro tento den. Přidej první jídlo výše.</div>`;
+    return;
+  }
+  const slots = ["Snídaně","Svačina 1","Oběd","Svačina 2","Večeře","Ostatní"];
+  let html = "";
+  slots.forEach(slot => {
+    const slotEntries = entries.filter(e => e.slot === slot);
+    if (!slotEntries.length) return;
+    const slotTot = trTotals(slotEntries);
+    html += `<div class="tr-meal-group">
+      <div class="tr-meal-group-title">${slot} &nbsp;·&nbsp; <span style="color:#c9882a">${Math.round(slotTot.kcal)} kcal</span></div>
+      ${slotEntries.map((e, gi) => {
+        const idx = entries.indexOf(e);
+        return `<div class="tr-entry">
+          <div>
+            <div class="tr-entry-name">${e.name} <span style="color:#555;font-weight:400;font-size:12px">${e.grams} g</span></div>
+            <div class="tr-entry-macros">B: ${e.p.toFixed(1)}g &nbsp; S: ${e.c.toFixed(1)}g &nbsp; T: ${e.f.toFixed(1)}g</div>
+          </div>
+          <div class="tr-entry-kcal">${Math.round(e.kcal)} kcal</div>
+          <button class="del-btn" onclick="trDelete(${idx})">✕</button>
+        </div>`;
+      }).join("")}
+    </div>`;
+  });
+  logEl.innerHTML = html;
+}
+
+function trSearch(q) {
+  const sugg = document.getElementById("tr-suggestions");
+  if (!q || q.length < 2) { sugg.innerHTML = ""; trSelected = null; return; }
+  const hits = FOODS.filter(f => f.name.toLowerCase().includes(q.toLowerCase())).slice(0, 8);
+  if (!hits.length) { sugg.innerHTML = ""; return; }
+  sugg.innerHTML = `<div class="tr-sugg-list">${hits.map(f =>
+    `<div class="tr-sugg-item" onclick="trSelectFood(${JSON.stringify(f).replace(/"/g,'&quot;')})">
+      <span>${f.name}</span>
+      <span class="tr-sugg-macros">${f.kcal} kcal &nbsp; B:${f.p}g S:${f.c}g T:${f.f}g &nbsp; /100g</span>
+    </div>`).join("")}</div>`;
+}
+
+function trSelectFood(f) {
+  trSelected = f;
+  document.getElementById("tr-food-name").value = f.name;
+  document.getElementById("tr-search").value = "";
+  document.getElementById("tr-suggestions").innerHTML = "";
+  document.getElementById("tr-grams").value = 100;
+  trUpdatePreview();
+}
+
+function trUpdatePreview() {
+  const grams = parseFloat(document.getElementById("tr-grams").value) || 0;
+  const prev = document.getElementById("tr-preview");
+  if (!trSelected || !grams) { prev.innerHTML = ""; return; }
+  const ratio = grams / 100;
+  const kcal = trSelected.kcal * ratio;
+  const p = trSelected.p * ratio;
+  const c = trSelected.c * ratio;
+  const f = trSelected.f * ratio;
+  prev.innerHTML = `
+    <div class="tr-preview-chip"><div class="pv-val">${Math.round(kcal)}</div><div class="pv-label">kcal</div></div>
+    <div class="tr-preview-chip"><div class="pv-val" style="color:#5a9fd4">${p.toFixed(1)}g</div><div class="pv-label">bílkoviny</div></div>
+    <div class="tr-preview-chip"><div class="pv-val" style="color:#5aaa7a">${c.toFixed(1)}g</div><div class="pv-label">sacharidy</div></div>
+    <div class="tr-preview-chip"><div class="pv-val" style="color:#c47aaa">${f.toFixed(1)}g</div><div class="pv-label">tuky</div></div>`;
+}
+
+document.addEventListener("input", function(e) {
+  if (e.target.id === "tr-grams") trUpdatePreview();
+  if (e.target.id === "tr-date") trRenderSummary();
+});
+
+function trAddEntry() {
+  const name = document.getElementById("tr-food-name").value.trim();
+  const grams = parseFloat(document.getElementById("tr-grams").value);
+  const slot = document.getElementById("tr-meal-slot").value;
+  if (!name || !grams) return;
+
+  let kcal = 0, p = 0, c = 0, f = 0;
+  if (trSelected && trSelected.name === name) {
+    const r = grams / 100;
+    kcal = trSelected.kcal * r; p = trSelected.p * r;
+    c = trSelected.c * r; f = trSelected.f * r;
+  }
+
+  const entries = trGetEntries();
+  entries.push({ name, grams, kcal, p, c, f, slot, time: new Date().toLocaleTimeString("cs-CZ",{hour:"2-digit",minute:"2-digit"}) });
+  trSaveEntries(entries);
+
+  document.getElementById("tr-food-name").value = "";
+  document.getElementById("tr-grams").value = "";
+  document.getElementById("tr-preview").innerHTML = "";
+  document.getElementById("tr-search").value = "";
+  trSelected = null;
+  trRenderSummary();
+}
+
+function trDelete(i) {
+  const entries = trGetEntries();
+  entries.splice(i, 1);
+  trSaveEntries(entries);
+  trRenderSummary();
+}
+
+function trInit() {
+  document.getElementById("tr-date").value = trToday();
+  trRenderSummary();
+}
+trInit();
+
 /* ── Food DB ── */
 const FOODS = [
   { name:"Kuřecí prsa", cat:"protein",  kcal:165, p:31, c:0,  f:3.6 },
