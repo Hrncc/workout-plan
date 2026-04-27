@@ -1,12 +1,14 @@
 {
-  "name": "Plan — byHRNC",
+  "name": "byHRNC — Plán",
   "short_name": "byHRNC",
-  "description": "Tréninkový plán, výživa a tracker",
-  "start_url": "./",
+  "description": "Tréninkový a výživový plán · Domácí workout · Nabírání svalů",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
   "background_color": "#0d0d0c",
   "theme_color": "#0d0d0c",
+  "categories": ["health", "fitness"],
   "icons": [
     {
       "src": "icons/icon-192.png",

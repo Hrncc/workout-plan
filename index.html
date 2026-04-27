@@ -2,12 +2,22 @@
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Plan — byHRNC</title>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0d0d0c">
+
+<!-- iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="byHRNC">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0d0d0c; color: #e2dfd8; min-height: 100vh; padding: 0 0 4rem; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0d0d0c; color: #e2dfd8; min-height: 100vh; padding: 0 0 4rem; padding-bottom: max(4rem, env(safe-area-inset-bottom)); }
   .container { max-width: 700px; margin: 0 auto; padding: 0 1.25rem; }
 
   /* ── Nav ── */
@@ -419,40 +429,41 @@ const DAYS = [
         { name:"Kroužení paží + rameny", note:"10× kroužení vpřed + vzad každou paží, pak 10× rolování ramen — rozehřej klouby, ne svaly", sets:"2 min", tags:[] },
       ]},
       { label:"Hlavní trénink", ex:[
-        { name:"Kliky na šíři — hrudník", note:"Ruce wider než ramena, lokty nejdou ani rovně do stran ani k tělu — tvoří šipku ~45°. Hruď se dotkne země v dolní poloze, v horní poloze plně natáhni lokty.", sets:"4 × 12–15", tags:["vlastní váha"] },
-        { name:"Kliky v pike — ramena", note:"Z kliku přesuň ruce blíže ke kolenům a vytlač hýždě co nejvýše — tělo tvoří \"A\". Ohýbej lokty a spouštěj hlavu mezi ruce, dokud se temeno nepřiblíží k podlaze. Zpět tlač do výchozí polohy.", sets:"4 × 10–12", tags:["vlastní váha"] },
+        { name:"Kliky na šíři — hrudník", note:"Ruce wider než ramena, lokty nejdou ani rovně do stran ani k tělu — tvoří šipku ~45°. Hruď se dotkne země v dolní poloze, v horní poloze plně natáhni lokty.", sets:"3 × 12–15", tags:["vlastní váha"] },
+        { name:"Kliky v pike — ramena", note:"Z kliku přesuň ruce blíže ke kolenům a vytlač hýždě co nejvýše — tělo tvoří \"A\". Ohýbej lokty a spouštěj hlavu mezi ruce, dokud se temeno nepřiblíží k podlaze. Zpět tlač do výchozí polohy.", sets:"3 × 10–12", tags:["vlastní váha"] },
         { name:"Diamantové kliky — triceps", note:"Ruce pod středem hrudníku, palce a ukazováky tvoří trojúhelník. Lokty jdou dozadu (ne do stran). Spusť se co nejníže a zpět — cítíš výrazné pálení v tricepsu.", sets:"3 × 8–10", tags:["vlastní váha"] },
-        { name:"Tlak s gumou na hrudník", note:"Přešlápni gumu a zakotvi ji na zádech pod lopatkami. Ruce ve výšce hrudníku, lokty 45° od těla. Tlač obě ruce vpřed do plného natažení — pak pomalu zpět.", sets:"3 × 15", tags:["band"] },
-        { name:"Upažování s gumou", note:"Stoj na středu gumy, konce drž v rukou podél těla. Mírně pokrčené lokty — zvedej paže přesně do výšky ramen (ne výše). Pomalu zpět — 2 s nahoru, 3 s dolů.", sets:"3 × 12", tags:["band"] },
-        { name:"Tlak s gumou nad hlavu", note:"Stoj na středu gumy, ruce ve výšce ramen dlaněmi vpřed. Tlač obě ruce nad hlavu do plného natažení, stáhni lopatky k sobě. Pomalu zpět na úroveň ramen.", sets:"3 × 12", tags:["band"] },
-      ]},
-      { label:"Doplněk", ex:[
-        { name:"Výdrž v dolní poloze kliku", note:"Spusť se do kliku a zastav 2–3 cm nad zemí. Drž tuto polohu 20–30 s — hýždě a břicho zatnuté, tělo jako prkno. Nezapadej v bocích ani nepoklesávej v zádech.", sets:"3 × 20–30s", tags:["vlastní váha"] },
+        { name:"Booty band pull-aparts", note:"Drž booty band oběma rukama za oba konce, paže natažené vpřed v šíři ramen. Roztahuj band horizontálně od sebe — dokud se nedotkne hrudníku. Lopatky zmáčkni k sobě. 2 s zpět. Lokty mírně pokrčené po celou dobu.", sets:"3 × 15", tags:["band"] },
+        { name:"Scapulární kliky — zdraví ramen", note:"Ve vzporu na rukou (poloha vrchní části kliku). Drž lokty natažené — pohyb jde jen z lopatek. Nech hrudník klesnout mezi paže (lopatky se roztáhnou), pak vystlač hrudník nahoru lopatkami k sobě. Malý pohyb, velký efekt na ramenní stabilizaci.", sets:"2 × 12", tags:["vlastní váha"] },
       ]},
     ]
   },
   { short:"Út", name:"Úterý", type:"Pull A", badge:"Pull", badgeBg:"#0f1f15", badgeColor:"#5aaa7a",
     subtitle:"Záda · Biceps · Zadní deltové",
-    tip:"Paže dosáhly 91–95 % na InBody — tahová práce je priorita. Použij odporovou gumu přes hrazdu pro asistované shyby, pokud je potřeba.",
+    tip:"Paže dosáhly 91–95 % na InBody — tahová práce je priorita. Pokud nezvládáš 3 shyby za sérii, přidej asistenci: odporová guma přes hrazdu nebo negativní shyby.",
     sections:[
       { label:"Zahřátí (5 min)", ex:[
         { name:"Švihadlo", note:"Udržuj pravidelný rytmus, dýchej nosem — tempo, při kterém udržíš rozhovor", sets:"3 min", tags:["švihadlo"] },
-        { name:"Roztahování gumy — zadní deltové", note:"Drž gumu oběma rukama před sebou v šíři ramen, paže natažené. Roztahuj gumu horizontálně dokud se nedotkne hrudníku — lopatky zmáčkni k sobě. 2 s zpět. Lokty mírně pokrčené po celou dobu.", sets:"2 × 15", tags:["band"] },
+        { name:"Booty band pull-aparts — zahřátí", note:"Drž booty band oběma rukama za oba konce, paže natažené vpřed v šíři ramen. Roztahuj band horizontálně od sebe — lopatky zmáčkni k sobě. 2 s zpět. Lokty mírně pokrčené. Zahřátí zadních deltových a mezilopatkových svalů.", sets:"2 × 15", tags:["band"] },
       ]},
       { label:"Hlavní trénink", ex:[
-        { name:"Shyby (nadhmat, šíře)", note:"Nadhmat širší než ramena. Začni plným visem — ramena aktivně stáhni dolů (ne k uším). Přitahuj lokty k bokům těla dokud brada nepřejde přes hrazdu. Pomalu spusť do plného visu — 3 sekundy dolů.", sets:"4 × max", tags:["hrazda"] },
+        { name:"Shyby (nadhmat, šíře)", note:"Nadhmat širší než ramena. Začni plným visem — ramena aktivně stáhni dolů (ne k uším). Přitahuj lokty k bokům těla dokud brada nepřejde přes hrazdu. Pomalu spusť do plného visu — 3 sekundy dolů.", sets:"3 × max", tags:["hrazda"] },
         { name:"Shyby podhmatem", note:"Podhmat v šíři ramen. Pohyb zahaj stažením lopatek dolů — pak teprve ohýbej lokty. Přitáhni se dokud hrudník nesměřuje k hrazdě. Pomalé spouštění 3 s.", sets:"3 × max", tags:["hrazda"] },
-        { name:"Shyby neutrálním úchopem", note:"Ruce vedle sebe neutrálním úchopem (palce k sobě). Přitahuj se tak, aby hrudník směřoval k hrazdě — lokte jdou přímo dolů podél těla. Cíl: střed zad, ne biceps.", sets:"3 × max", tags:["hrazda"] },
-        { name:"Veslování s gumou v předklonu", note:"Stoj na středu gumy, mírný předklon v bocích (~45°), záda rovná. Jednou rukou se opři o koleno. Druhá ruka táhne loket přimo k boku — lopatka se přitlačí k páteři. Pomalu zpět. 15× každá strana.", sets:"4 × 15", tags:["band"] },
-        { name:"Bicepsové zdvihy s gumou", note:"Stoj na středu gumy, uchop konce v rukou, lokty pevně přitisknuté k bokům těla — po celou dobu se nehýbou. Ohýbej jen předloktí nahoru k ramenům. Pokud kýváš trupem, guma je příliš silná.", sets:"3 × 12–15", tags:["band"] },
-        { name:"Přítahy k obličeji s gumou", note:"Zakotvi gumu do výšky obličeje (dveřní zárubeň, hrazda). Drž konce oběma rukama, lokty nahoru a do stran. Přitahuj ruce k uším/tvářím — lopatky se zmáčknou. Drž 1 s v záběru, pak pomalu zpět.", sets:"3 × 15", tags:["band"] },
+        { name:"Negativní shyby", note:"Vyskočí nebo naskočí do horní polohy shybu (brada nad hrazdou). Pak se záměrně a pomalu spouštěj do plného visu přesně 5 sekund. Excentrická fáze buduje sílu shybů nejefektivněji pro začátečníky. Odpočiň 90 s mezi sériemi.", sets:"3 × 5", tags:["hrazda"] },
+        { name:"Veslování pod stolem", note:"Lehni pod pevný stůl, uchop okraj desky nadhmatem v šíři ramen, nohy natažené a paty na zemi. Tělo tvoří přímou linii. Přitáhni hrudník ke stolu — lopatky zmáčkni k sobě. Pomalu zpět do plného natažení paží.", sets:"4 × 10–12", tags:["vlastní váha"] },
+        { name:"Bicepsové zdvihy s booty bandem", note:"Provleč booty band skrz pevnou kliku dveří nebo kolem pevné tyče ve výšce pasu. Uchop oba konce, ustup o krok od kliky, lokty přimáčkni k tělu. Ohýbej předloktí nahoru — band se napne o kotevní bod. Pohybují se POUZE předloktí.", sets:"3 × 12", tags:["band"] },
+        { name:"Přítahy k obličeji s booty bandem", note:"Provleč booty band skrz kliku dveří nebo pevnou tyč ve výšce obličeje. Uchop oba konce, ustup 1–2 kroky. Lokty nahoru a do stran. Přitahuj ruce k uším/tvářím — lopatky se zmáčknou. Drž 1 s v záběru, pak pomalu zpět.", sets:"3 × 15", tags:["band"] },
       ]},
       { label:"Core", ex:[
         { name:"Hollow body výdrž", note:"Lehni na záda, paže za hlavu, nohy natažené. Stáhni břicho a přimáčkni bedra k podlaze — tato poloha se nesmí změnit. Zvedej paže i nohy jen do výšky, dokud bederní opora vydrží. Začínáš asi 15–20 cm nad zemí.", sets:"3 × 30s", tags:["vlastní váha"] },
       ]},
     ]
   },
-  { short:"St", name:"Středa", type:"Legs + Core", badge:"Legs", badgeBg:"#2a1f0a", badgeColor:"#c9882a",
+  { short:"St", name:"Středa", type:"Rest", badge:"Rest", badgeBg:"#1e1e1c", badgeColor:"#666",
+    subtitle:"Plná regenerace", isRest:true,
+    tip:"Svaly rostou během odpočinku — ne v posilovně. Prioritizuj 8 h spánku. Drž se kalorického plánu: mini-cut = 2 100 kcal/den, 175 g bílkovin. Lehký pohyb (procházka, protažení) je v pořádku — tvrdý trénink ne.",
+    sections:[]
+  },
+  { short:"Čt", name:"Čtvrtek", type:"Legs + Core", badge:"Legs", badgeBg:"#2a1f0a", badgeColor:"#c9882a",
     subtitle:"Kvadricepsy · Hýždě · Hamstringy · Core",
     tip:"Nohy dosáhly 103–104 % na InBody — jsou na tom dobře. Tento trénink udržuje svalovou hmotu nohou, spaluje kalorie a útočí na tuk v trupu přes core cvičení.",
     sections:[
@@ -461,20 +472,20 @@ const DAYS = [
         { name:"Kroužení kyčlemi + švihy nohama", note:"Ruce na bocích: 10× velké kroužení kyčlemi každým směrem. Pak přidej švihy nohama — 10× vpřed/vzad a 10× do strany. Pomalé plynné pohyby.", sets:"2 min", tags:[] },
       ]},
       { label:"Hlavní trénink", ex:[
-        { name:"Bulharské dřepy", note:"Přední noha velký krok vpřed, nártem zadní nohy se opři o okraj židle. Trup vzpřímený. Pomalu klesej tak, aby přední koleno mířilo přímo nad přední špičku — zadní koleno se zastaví 2–3 cm nad zemí. Zpět tlačením přes přední patu.", sets:"4 × 10 / side", tags:["vlastní váha"] },
+        { name:"Step-upy na stoličku", note:"Postav se čelem ke stoličce nebo schodu (výška cca 40–50 cm). Krok přední nohou celou plochou na stoličku. Tlačením přes patu přední nohy vytlač tělo celé nahoru — zadní noha se přidá. Pak pomalu krokem zpět dolů. Záda vzpřímená, koleno sleduje špičku. Odcvič celou sadu jedné nohy před přepnutím.", sets:"4 × 12 / side", tags:["vlastní váha"] },
         { name:"Výbušné dřepy s výskokem", note:"Stoj na šíři ramen. Klesni do dřepu kde stehna jsou rovnoběžně se zemí. Exploduj nahoru maximálním výskokem — ruce pomohou švihem. Dopad na přední část chodidla, ihned přejdi do dalšího dřepu.", sets:"3 × 12", tags:["vlastní váha"] },
         { name:"Mrtvý tah na jedné noze", note:"Stoj na jedné noze, ruce podél těla nebo před sebe. Předkloň trup a zároveň zvedej volnou nohu dozadu — tělo a noha tvoří rovnou linii rovnoběžně se zemí. Cítíš tah v hamstrinzích stojné nohy. Pomalu zpět.", sets:"3 × 10 / side", tags:["vlastní váha"] },
-        { name:"Hýžďový most s gumou", note:"Lehni na záda, chodidla na šíři boků, guma nad koleny. Kolena aktivně tlač od sebe proti gumě. Stáhni hýždě a zvedni pánev co nejvýše — v horní poloze svěr hýždě 2 sekundy. Pomalu dolů, nedotýkej se podlahy mezi opakováními.", sets:"4 × 20", tags:["band"] },
-        { name:"Boční chůze s gumou", note:"Guma těsně nad koleny, nohy na šíři ramen, polodřep (stehna ~45°). V této poloze kroky do strany — vždy přines nohu zpět na šíři ramen, nekřiž. Kolena aktivně tlač ven proti gumě. Pak 15 kroků zpět.", sets:"3 × 15 / side", tags:["band"] },
+        { name:"Hýžďový most s booty bandem", note:"Lehni na záda, chodidla na šíři boků, booty band nad koleny. Kolena aktivně tlač od sebe proti bandu. Stáhni hýždě a zvedni pánev co nejvýše — v horní poloze svěr hýždě 2 sekundy. Pomalu dolů, nedotýkej se podlahy mezi opakováními.", sets:"4 × 20", tags:["band"] },
+        { name:"Boční chůze s booty bandem", note:"Booty band těsně nad koleny, nohy na šíři ramen, polodřep (stehna ~45°). V této poloze kroky do strany — vždy přines nohu zpět na šíři ramen, nekřiž. Kolena aktivně tlač ven proti bandu. Pak 15 kroků zpět.", sets:"3 × 15 / side", tags:["band"] },
       ]},
       { label:"Core okruh (3 kola)", ex:[
         { name:"Plank", note:"Předloktí na zemi, lokty pod rameny, špičky na šíři boků. Stáhni břicho a hýždě — tělo tvoří přímou linii od kotníků po ramena. Neklesej v bedrech, nevystrkuj hýždě nahoru. Dýchej pravidelně.", sets:"3 × 45s", tags:["vlastní váha"] },
-        { name:"V-sed — zdvihy", note:"Lehni na záda, paže natažené za hlavu, nohy rovné. Stáhni břicho a v jednom pohybu zvedni ruce i nohy — v horním bodě se dotkni prsty špiček. Pomalu zpět bez dotyku se zemí a opakuj.", sets:"3 × 12", tags:["vlastní váha"] },
+        { name:"Dead bug", note:"Lehni na záda, paže svisle nad ramenou, kyčle a kolena pokrčena na 90°. Stáhni bedra k podlaze — tato poloha se nemění po celou dobu. Pomalu spusť pravou paži nad hlavu A ZÁROVEŇ natáhni levou nohu. Bedra zůstávají přitisknutá. Zpět a opakuj na druhou stranu.", sets:"3 × 8 / side", tags:["vlastní váha"] },
         { name:"Boční plank", note:"Předloktí na zemi kolmo k tělu, chodidla na sobě (nebo jedno před druhým). Zvedni boky — tělo od kotníků po ramena tvoří přímku. Nevystrčuj hýždě, neklesej v bocích. Volná ruka podél těla nebo na boku.", sets:"3 × 20s / side", tags:["vlastní váha"] },
       ]},
     ]
   },
-  { short:"Čt", name:"Čtvrtek", type:"Push B", badge:"Push", badgeBg:"#0d1e30", badgeColor:"#5a9fd4",
+  { short:"Pá", name:"Pátek", type:"Push B", badge:"Push", badgeBg:"#0d1e30", badgeColor:"#5a9fd4",
     subtitle:"Hrudník · Ramena · Triceps — objem",
     tip:"Push B má vyšší objem než A. Mírná svalová bolestivost z pondělí nevadí. Dodrž všechny série, i když počet opakování mírně klesne.",
     sections:[
@@ -483,19 +494,15 @@ const DAYS = [
         { name:"Mobilita ramen + zápěstí", note:"Pomalé kroužení ramenou vpřed + vzad, pak kroužení zápěstím — 10× každým směrem", sets:"2 min", tags:[] },
       ]},
       { label:"Hlavní trénink", ex:[
-        { name:"Kliky s nohama nahoře", note:"Nohy vlož na okraj židle nebo postele, ruce na podlaze. Čím vyšší jsou nohy, tím více pracuje horní část hrudníku. Pohyb stejný jako normální klik — lokty 45° od těla, hruď k podlaze.", sets:"4 × 12", tags:["vlastní váha"] },
-        { name:"Kliky s rukama nahoře", note:"Ruce na okraji nízké stoličky nebo schodu, tělo v šikmé linii — hlava výše než nohy. Klesej hrudníkem k hraně plochy. Cítíš tah ve spodní části hrudníku a protažení.", sets:"3 × 15", tags:["vlastní váha"] },
-        { name:"Střelecké kliky", note:"Ruce co nejdál od sebe na šíři 1.5× ramen. V každém kliku přesuň váhu na JEDNU ruku — tato ruka se ohýbá, druhá zůstává téměř natažená. Střídej strany. Je to náročný cvik — pokud nestíháš, začni s menším přesunem váhy.", sets:"3 × 6 / side", tags:["vlastní váha"] },
-        { name:"Tricepsové natahování s gumou", note:"Stoj na středu gumy, uchop konce za hlavou. Paže drž svisle, lokty mírí ke stropu — tato pozice se nemění. Ohýbej jen předloktí dolů za hlavu a zpět nahoru. Pohybují se POUZE předloktí, lokte zůstávají na místě.", sets:"4 × 12", tags:["band"] },
-        { name:"Předpažování s gumou", note:"Stoj na středu gumy, konce drž v rukou podél těla. Zvedej obě paže rovně vpřed (palce nahoru) do výšky ramen — ne výše. 2 s nahoru, 3 s dolů. Nezakláněj trup dozadu.", sets:"3 × 12", tags:["band"] },
-        { name:"Dips na židli", note:"Sedni si na okraj židle, ruce na okraji sedáku vedle boků, prsty vpřed. Přesuň se před židli — váha na rukou. Nohy napnuté vpřed na patách. Ohýbej lokty přímo dozadu (ne do stran) a klesej dokud lokty nesvírají 90°. Tlačením z dlaní zpět nahoru.", sets:"4 × 10–12", tags:["vlastní váha"] },
-      ]},
-      { label:"Doplněk", ex:[
-        { name:"Kliky — žebřík", note:"Udělej 10 kliků, odpočiň 10 s, pak 9 kliků, 10 s odpočinek, pak 8… pokračuj až do 1 opakování. Celkem 55 kliků s minimálními pauzami — finišer pro vyčerpání.", sets:"1 × ladder", tags:["vlastní váha"] },
+        { name:"Kliky s nohama nahoře", note:"Nohy vlož na okraj židle nebo postele, ruce na podlaze. Čím vyšší jsou nohy, tím více pracuje horní část hrudníku. Pohyb stejný jako normální klik — lokty 45° od těla, hruď k podlaze.", sets:"3 × 12", tags:["vlastní váha"] },
+        { name:"Kliky s rukama nahoře", note:"Ruce na okraji nízké stoličky nebo schodu, tělo v šikmé linii — hlava výše než nohy. Klesej hrudníkem k hraně plochy. Cítíš tah ve spodní části hrudníku a protažení.", sets:"3 × 12", tags:["vlastní váha"] },
+        { name:"Tricepsové stlačení s booty bandem", note:"Provleč booty band přes horní část dveřního rámu nebo zavěs na pevnou tyč nad hlavou. Uchop oba konce vedle sebe, lokty přimáčkni k tělu — pohybují se POUZE předloktí. Stlačuj dolů do plného natažení. 2 s dolů, 3 s nahoru.", sets:"3 × 12", tags:["band"] },
+        { name:"Plank shoulder taps — ramena", note:"Ve vzporu na rukou (poloha vrchní části kliku). Střídavě zvedej jednu ruku a dotkni se protilehlého ramene. Minimalizuj pohyb boků a pánve — břicho zatnuté, nohy na šíři ramen. Pomalý kontrolovaný pohyb.", sets:"3 × 10 / side", tags:["vlastní váha"] },
+        { name:"Dips na židli", note:"Sedni si na okraj židle, ruce na okraji sedáku vedle boků, prsty vpřed. Přesuň se před židli — váha na rukou. Nohy napnuté vpřed na patách. Ohýbej lokty přímo dozadu (ne do stran) a klesej dokud lokty nesvírají 90°. Tlačením z dlaní zpět nahoru.", sets:"3 × 10–12", tags:["vlastní váha"] },
       ]},
     ]
   },
-  { short:"Pá", name:"Pátek", type:"Pull B", badge:"Pull", badgeBg:"#0f1f15", badgeColor:"#5aaa7a",
+  { short:"So", name:"Sobota", type:"Pull B", badge:"Pull", badgeBg:"#0f1f15", badgeColor:"#5aaa7a",
     subtitle:"Záda · Biceps — objem + intenzita",
     tip:"Zaznamenávej svůj max shybů bez asistence každý týden. Toto číslo je nejjasnějším signálem pokroku horní části těla.",
     sections:[
@@ -504,11 +511,11 @@ const DAYS = [
         { name:"Visení na hrazdě", note:"Pouze vis, nevis jen na kloubech — aktivně zatáhni lopatky dolů", sets:"2 × 25s", tags:["hrazda"] },
       ]},
       { label:"Hlavní trénink", ex:[
-        { name:"Výbušné shyby", note:"Z visu přitáhni co nejrychleji a nejsilněji — explozivní fáze nahoru. Pak se záměrně spouštěj přesně 3 sekundy dolů do plného visu. Tato excentrická fáze buduje sílu nejvíce.", sets:"4 × max", tags:["hrazda"] },
-        { name:"Shyby s L-sedem", note:"Před shybem natáhni nohy před sebe do vodorovné polohy (tvar \"L\"). V této poloze proveď celý shyb — nohy stále vodorovně. Extrémně náročné na core. Pokud nestíháš, začni s pokrčenými koleny před sebou.", sets:"3 × 5–8", tags:["hrazda"] },
-        { name:"Veslování jednou rukou s gumou", note:"Stoj na středu gumy, předkloň se, volnou rukou se opři o koleno. Druhá ruka drží konec gumy — táhni loket přímo k boku těla dokud lopatka není zcela stažena. 1 s pauza v záběru, pak pomalu zpět. 12× každá strana.", sets:"4 × 12 / side", tags:["band"] },
-        { name:"Kladivový zdvih s gumou", note:"Stoj na středu gumy, uchop konce s palci nahoru (neutrální úchop). Lokty přitiskni k tělu — nehýbají se. Zdvihej pomalým tempem: 2 s nahoru, 3 s dolů. Pohybují se POUZE předloktí.", sets:"3 × 15", tags:["band"] },
-        { name:"Zpětné upažování s gumou", note:"Přestoupni gumu oběma nohama, předkloň trup téměř do 90° — záda rovná. Ruce svisle dolů s konci gumy. Zvedej rovné paže do stran (jako motýlek) dokud nejsou v rovině se zády. 2 s nahoru, 3 s dolů.", sets:"3 × 15", tags:["band"] },
+        { name:"Výbušné shyby", note:"Z visu přitáhni co nejrychleji a nejsilněji — explozivní fáze nahoru. Pak se záměrně spouštěj přesně 3 sekundy dolů do plného visu. Tato excentrická fáze buduje sílu nejvíce.", sets:"3 × max", tags:["hrazda"] },
+        { name:"Negativní shyby — intenzita", note:"Naskočí do horní polohy shybu. Spouštěj se záměrně pomalu přesně 5 sekund dolů do plného visu. Tempo 5 s je o sekundu pomalejší než Úterý — vyšší excentrický stimulus pro Sobotu.", sets:"3 × 5", tags:["hrazda"] },
+        { name:"Veslování pod stolem — objem", note:"Lehni pod pevný stůl, uchop okraj desky nadhmatem v šíři ramen, nohy natažené a paty na zemi. Přitáhni hrudník ke stolu — lopatky zmáčkni k sobě. Pro větší obtížnost zvedni nohy na druhou židli nebo stoličku.", sets:"4 × 12", tags:["vlastní váha"] },
+        { name:"Kladivový zdvih s booty bandem", note:"Provleč booty band skrz pevnou kliku dveří nebo kolem pevné tyče ve výšce pasu. Uchop oba konce s palci nahoru (neutrální úchop). Lokty přitiskni k tělu — pohybují se POUZE předloktí. 2 s nahoru, 3 s dolů.", sets:"3 × 12", tags:["band"] },
+        { name:"Prone T zvedáky — zadní delta", note:"Lehni obličejem dolů na zem nebo na postel. Paže rozpaž do stran (tvar T), palce míří ke stropu. Zvedej obě paže co nejvýše od podlahy — pomalý pohyb, cítíš stah mezilopatkových svalů a zadních deltových. Drž 1 s nahoře, pomalu dolů.", sets:"3 × 15", tags:["vlastní váha"] },
         { name:"Výdrž ve visu na hrazdě", note:"Chop se hrazdy. Ve visu aktivně stáhni lopatky dolů od uší. Drž tuto aktivní polohu 30 s — chráníš ramenní klouby a buduješ sílu lopatek.", sets:"3 × 30s", tags:["hrazda"] },
       ]},
       { label:"Core", ex:[
@@ -516,9 +523,9 @@ const DAYS = [
       ]},
     ]
   },
-  { short:"So", name:"Sobota", type:"Cardio", badge:"Cardio", badgeBg:"#2a1010", badgeColor:"#d45a5a",
+  { short:"Ne", name:"Neděle", type:"Cardio", badge:"Cardio", badgeBg:"#2a1010", badgeColor:"#d45a5a",
     subtitle:"Spalování tuku · Aktivní regenerace",
-    tip:"Udržuj TF na 60–70 % max (~117–136 BPM). Tato zóna spaluje tuk bez odbourávání svalů. Jde o aktivní regeneraci, ne o tvrdý výkon.",
+    tip:"Udržuj TF na 60–70 % max (~117–136 BPM). Tato zóna spaluje tuk bez odbourávání svalů. Jde o aktivní regeneraci, ne o tvrdý výkon. Pokud se necítíš zotavený, přeskoč a dej si plnou regeneraci — svaly to ocení.",
     sections:[
       { label:"Varianta A — kolo (doporučeno)", ex:[
         { name:"Jízda na kole", note:"Cílová tepová frekvence 117–136 BPM (60–70 % maxima). Test: musíš být schopen pohodlně mluvit celou větu. Pokud dýcháš příliš, zpomal.", sets:"40–60 min", tags:["kolo"] },
@@ -533,11 +540,6 @@ const DAYS = [
         { name:"Protažení hrudníku v rámu dveří", note:"Stoj ve dveřním rámu, předloktí opři o oba svislé rámy ve výšce ramen (lokty 90°). Udělej mírný krok vpřed — cítíš protažení hrudníku a přední části ramen. Nehýbej se, jen drž pozici 30 s.", sets:"2 × 30s", tags:[] },
       ]},
     ]
-  },
-  { short:"Ne", name:"Neděle", type:"Rest", badge:"Rest", badgeBg:"#1e1e1c", badgeColor:"#666",
-    subtitle:"Plná regenerace", isRest:true,
-    tip:"Svaly rostou během odpočinku. Prioritizuj 8 h spánku, jez 3200–3300 kcal/den a dosáhni 140–170 g bílkovin (~1.8–2.2 g na kg tělesné váhy).",
-    sections:[]
   },
 ];
 
@@ -1179,6 +1181,14 @@ function deleteEntry(i) { const e=loadEntries(); e.splice(i,1); saveEntries(e); 
 function clearAll() { if(confirm("Smazat všechny záznamy?")) { localStorage.removeItem(STORE_KEY); renderTable(); updateStats(); } }
 renderTable();
 updateStats();
+</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js');
+    });
+  }
 </script>
 </body>
 </html>
