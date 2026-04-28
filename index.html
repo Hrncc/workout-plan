@@ -188,6 +188,27 @@
   .tr-meal-empty { font-size:12px; color:#3a3a36; padding:10px 0; }
   .tr-added-flash { animation: trFlash 0.4s ease; }
   @keyframes trFlash { 0%{background:#1e2e1e} 100%{background:#1a1a18} }
+  /* Edit modal */
+  .tr-edit-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:500; opacity:0; pointer-events:none; transition:opacity 0.2s; }
+  .tr-edit-overlay.open { opacity:1; pointer-events:all; }
+  .tr-edit-sheet { position:fixed; bottom:0; left:0; right:0; background:#161614; border-top:1px solid #2a2a27; border-radius:20px 20px 0 0; padding:0 0 env(safe-area-inset-bottom,16px); z-index:501; transform:translateY(100%); transition:transform 0.28s cubic-bezier(0.32,0.72,0,1); max-width:700px; margin:0 auto; }
+  .tr-edit-sheet.open { transform:translateY(0); }
+  .tr-edit-handle { width:36px; height:4px; background:#2e2e2a; border-radius:2px; margin:12px auto 4px; }
+  .tr-edit-head { padding:8px 20px 14px; border-bottom:1px solid #1e1e1b; }
+  .tr-edit-title { font-size:15px; font-weight:700; color:#e8e4dc; margin-bottom:2px; }
+  .tr-edit-sub { font-size:12px; color:#4a4a46; }
+  .tr-edit-body { padding:16px 20px; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .tr-edit-field { display:flex; flex-direction:column; gap:5px; }
+  .tr-edit-field.full { grid-column:1/-1; }
+  .tr-edit-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#4a4a46; }
+  .tr-edit-input { background:#1a1a18; border:1px solid #2a2a27; border-radius:10px; padding:10px 12px; color:#e2dfd8; font-size:15px; font-weight:600; outline:none; font-family:inherit; transition:border-color 0.15s; -webkit-appearance:none; }
+  .tr-edit-input:focus { border-color:#c9882a; }
+  .tr-edit-recalc { font-size:11px; color:#4a6a3a; margin-top:2px; min-height:14px; }
+  .tr-edit-actions { display:grid; grid-template-columns:1fr 2fr; gap:8px; padding:0 20px 16px; }
+  .tr-edit-del { background:#1e1010; border:1px solid #3a1a1a; border-radius:12px; color:#c84a4a; font-size:13px; font-weight:600; padding:13px; cursor:pointer; }
+  .tr-edit-save { background:#c9882a; border:none; border-radius:12px; color:#0d0d0c; font-size:14px; font-weight:700; padding:13px; cursor:pointer; }
+  .tr-added-item { display:grid; grid-template-columns:1fr auto auto; align-items:center; gap:10px; padding:9px 12px; background:#1a1a18; border:1px solid #222220; border-radius:10px; cursor:pointer; transition:background 0.1s; }
+  .tr-added-item:active { background:#1e1e1b; }
 
   /* ── Progress ── */
   .log-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
@@ -290,7 +311,10 @@
   <div id="tr-current-meal"></div>
 
   <div class="tr-picker" style="margin-top:16px">
-    <div class="tr-picker-label">Přidat potravinu</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <div class="tr-picker-label" style="margin-bottom:0">Přidat potravinu</div>
+      <button onclick="trOpenCustom()" style="background:#1a1a18;border:1px solid #2a2a27;border-radius:8px;padding:6px 12px;color:#c9882a;font-size:12px;font-weight:600;cursor:pointer;">+ Vlastní</button>
+    </div>
     <input type="text" id="tr-pick-search" class="tr-pick-search" placeholder="Hledat potravinu..." oninput="trPickSearch(this.value)" autocomplete="off">
     <div class="tr-picker-cats" id="tr-picker-cats"></div>
     <div id="tr-food-grid"></div>
@@ -906,13 +930,13 @@ function trRenderCurrentMeal() {
   ];
   const itemsHtml = items.length
     ? items.map((e,i)=>`
-      <div class="tr-added-item">
+      <div class="tr-added-item" onclick="trOpenEdit('${m.name.replace(/'/g,"\\'")}',${i})">
         <div>
           <div class="tr-added-name">${e.name}</div>
           <div class="tr-added-sub">${e.grams}g &nbsp;·&nbsp; B:${e.p.toFixed(1)} S:${e.c.toFixed(1)} T:${e.f.toFixed(1)}</div>
         </div>
         <div class="tr-added-kcal">${Math.round(e.kcal)} kcal</div>
-        <button class="del-btn" onclick="trRemoveItem('${m.name.replace(/'/g,"\\'")}',${i})">✕</button>
+        <div style="font-size:11px;color:#3a3a36;padding-left:2px">✎</div>
       </div>`).join("")
     : `<div class="tr-meal-empty">Žádné potraviny — klikni na kartu níže a přidej</div>`;
   document.getElementById("tr-current-meal").innerHTML = `
@@ -987,9 +1011,141 @@ function trAddFood(f) {
   const date = trGetDate();
   if (!all[date]) all[date] = {};
   if (!all[date][mealName]) all[date][mealName] = [];
-  all[date][mealName].push({ name:f.name, grams:f.s.g, kcal:f.kcal*r, p:f.p*r, c:f.c*r, f:f.f*r, slot:mealName });
+  all[date][mealName].push({
+    name:f.name, grams:f.s.g,
+    kcal:f.kcal*r, p:f.p*r, c:f.c*r, f:f.f*r,
+    slot:mealName,
+    // base per-100g values for recalculation on gram edit
+    kcal100:f.kcal, p100:f.p, c100:f.c, f100:f.f
+  });
   trSaveAll(all);
   trRenderAll();
+}
+
+// ── Edit modal state ──
+let trEditMeal = null;
+let trEditIdx  = null;
+
+function trOpenEdit(mealName, idx) {
+  const all  = trLoadAll();
+  const date = trGetDate();
+  const e    = all[date]?.[mealName]?.[idx];
+  if (!e) return;
+  trEditMeal = mealName;
+  trEditIdx  = idx;
+  document.getElementById("trEditTitle").textContent = e.name;
+  document.getElementById("trEditSub").textContent   = mealName;
+  document.getElementById("trEditGrams").value = e.grams;
+  document.getElementById("trEditKcal").value  = e.kcal.toFixed(1);
+  document.getElementById("trEditP").value     = e.p.toFixed(1);
+  document.getElementById("trEditC").value     = e.c.toFixed(1);
+  document.getElementById("trEditF").value     = e.f.toFixed(1);
+  document.getElementById("trEditRecalcNote").textContent = e.kcal100
+    ? "Změna gramáže přepočítá makra automaticky"
+    : "Makra uprav ručně — není k dispozici základ na 100 g";
+  document.getElementById("trEditOverlay").classList.add("open");
+  document.getElementById("trEditSheet").classList.add("open");
+}
+
+function trEditGramsChanged() {
+  const all   = trLoadAll();
+  const date  = trGetDate();
+  const e     = all[date]?.[trEditMeal]?.[trEditIdx];
+  if (!e || !e.kcal100) return;  // no base data — user edits manually
+  const g = parseFloat(document.getElementById("trEditGrams").value) || 0;
+  const r = g / 100;
+  document.getElementById("trEditKcal").value = (e.kcal100 * r).toFixed(1);
+  document.getElementById("trEditP").value    = (e.p100    * r).toFixed(1);
+  document.getElementById("trEditC").value    = (e.c100    * r).toFixed(1);
+  document.getElementById("trEditF").value    = (e.f100    * r).toFixed(1);
+  document.getElementById("trEditRecalcNote").textContent = `Přepočítáno z ${g} g`;
+}
+
+function trEditSave() {
+  const all   = trLoadAll();
+  const date  = trGetDate();
+  if (!all[date]?.[trEditMeal]) return;
+  const e     = all[date][trEditMeal][trEditIdx];
+  const grams = parseFloat(document.getElementById("trEditGrams").value) || e.grams;
+  e.grams = grams;
+  e.kcal  = parseFloat(document.getElementById("trEditKcal").value) || 0;
+  e.p     = parseFloat(document.getElementById("trEditP").value) || 0;
+  e.c     = parseFloat(document.getElementById("trEditC").value) || 0;
+  e.f     = parseFloat(document.getElementById("trEditF").value) || 0;
+  // Update base if we have it (keep ratio consistent)
+  if (e.kcal100 && grams > 0) {
+    const r = grams / 100;
+    e.kcal100 = e.kcal / r;
+    e.p100    = e.p    / r;
+    e.c100    = e.c    / r;
+    e.f100    = e.f    / r;
+  }
+  trSaveAll(all);
+  trCloseEdit();
+  trRenderAll();
+}
+
+function trEditDelete() {
+  trRemoveItem(trEditMeal, trEditIdx);
+  trCloseEdit();
+}
+
+function trCloseEdit() {
+  document.getElementById("trEditOverlay").classList.remove("open");
+  document.getElementById("trEditSheet").classList.remove("open");
+  trEditMeal = null; trEditIdx = null;
+}
+
+// ── Custom food ──
+function trOpenCustom() {
+  const mealName = MEAL_TARGETS[trGetPhase()][trActiveMeal].name;
+  document.getElementById("trCustomMealName").textContent = "Přidá se do: " + mealName;
+  ["trCustomName","trCustomGrams","trCustomKcal","trCustomP","trCustomC","trCustomF"].forEach(id => {
+    document.getElementById(id).value = "";
+  });
+  document.getElementById("trCustomGramsHint").textContent = "";
+  document.getElementById("trCustomOverlay").classList.add("open");
+  document.getElementById("trCustomSheet").classList.add("open");
+  setTimeout(() => document.getElementById("trCustomName").focus(), 300);
+}
+
+function trCustomGramsHint() {
+  const g = parseFloat(document.getElementById("trCustomGrams").value);
+  document.getElementById("trCustomGramsHint").textContent = g > 0
+    ? `Zadej makra pro tuto porci (${g} g)`
+    : "";
+}
+
+function trCustomSave() {
+  const name  = document.getElementById("trCustomName").value.trim();
+  const grams = parseFloat(document.getElementById("trCustomGrams").value) || 100;
+  const kcal  = parseFloat(document.getElementById("trCustomKcal").value) || 0;
+  const p     = parseFloat(document.getElementById("trCustomP").value) || 0;
+  const c     = parseFloat(document.getElementById("trCustomC").value) || 0;
+  const f     = parseFloat(document.getElementById("trCustomF").value) || 0;
+  if (!name) { document.getElementById("trCustomName").focus(); return; }
+  const mealName = MEAL_TARGETS[trGetPhase()][trActiveMeal].name;
+  const all  = trLoadAll();
+  const date = trGetDate();
+  if (!all[date]) all[date] = {};
+  if (!all[date][mealName]) all[date][mealName] = [];
+  // Store per-100g base so edit recalc works later
+  const r = grams / 100;
+  all[date][mealName].push({
+    name, grams, kcal, p, c, f, slot: mealName,
+    kcal100: r > 0 ? kcal/r : null,
+    p100:    r > 0 ? p/r    : null,
+    c100:    r > 0 ? c/r    : null,
+    f100:    r > 0 ? f/r    : null,
+  });
+  trSaveAll(all);
+  trCloseCustom();
+  trRenderAll();
+}
+
+function trCloseCustom() {
+  document.getElementById("trCustomOverlay").classList.remove("open");
+  document.getElementById("trCustomSheet").classList.remove("open");
 }
 
 function trRemoveItem(mealName, idx) {
@@ -1218,5 +1374,79 @@ updateStats();
     });
   }
 </script>
+  <div class="tr-edit-overlay" id="trEditOverlay" onclick="trCloseEdit()"></div>
+  <div class="tr-edit-sheet" id="trEditSheet">
+    <div class="tr-edit-handle"></div>
+    <div class="tr-edit-head">
+      <div class="tr-edit-title" id="trEditTitle"></div>
+      <div class="tr-edit-sub" id="trEditSub"></div>
+    </div>
+    <div class="tr-edit-body">
+      <div class="tr-edit-field full">
+        <div class="tr-edit-label">Gramáž</div>
+        <input class="tr-edit-input" id="trEditGrams" type="number" min="1" max="2000" oninput="trEditGramsChanged()">
+        <div class="tr-edit-recalc" id="trEditRecalcNote"></div>
+      </div>
+      <div class="tr-edit-field">
+        <div class="tr-edit-label">kcal</div>
+        <input class="tr-edit-input" id="trEditKcal" type="number" step="0.1" min="0">
+      </div>
+      <div class="tr-edit-field">
+        <div class="tr-edit-label">Bílkoviny (g)</div>
+        <input class="tr-edit-input" id="trEditP" type="number" step="0.1" min="0">
+      </div>
+      <div class="tr-edit-field">
+        <div class="tr-edit-label">Sacharidy (g)</div>
+        <input class="tr-edit-input" id="trEditC" type="number" step="0.1" min="0">
+      </div>
+      <div class="tr-edit-field">
+        <div class="tr-edit-label">Tuky (g)</div>
+        <input class="tr-edit-input" id="trEditF" type="number" step="0.1" min="0">
+      </div>
+    </div>
+    <div class="tr-edit-actions">
+      <button class="tr-edit-del" onclick="trEditDelete()">Smazat</button>
+      <button class="tr-edit-save" onclick="trEditSave()">Uložit změny</button>
+    </div>
+  </div>
+  <div class="tr-edit-overlay" id="trCustomOverlay" onclick="trCloseCustom()"></div>
+  <div class="tr-edit-sheet" id="trCustomSheet">
+    <div class="tr-edit-handle"></div>
+    <div class="tr-edit-head">
+      <div class="tr-edit-title">Vlastní potravina</div>
+      <div class="tr-edit-sub" id="trCustomMealName"></div>
+    </div>
+    <div class="tr-edit-body">
+      <div class="tr-edit-field full">
+        <div class="tr-edit-label">Název potraviny</div>
+        <input class="tr-edit-input" id="trCustomName" type="text" placeholder="např. Domácí chléb" autocomplete="off" style="font-size:14px;">
+      </div>
+      <div class="tr-edit-field full">
+        <div class="tr-edit-label">Gramáž (g)</div>
+        <input class="tr-edit-input" id="trCustomGrams" type="number" min="1" max="5000" placeholder="100" oninput="trCustomGramsHint()">
+        <div class="tr-edit-recalc" id="trCustomGramsHint"></div>
+      </div>
+      <div class="tr-edit-field">
+        <div class="tr-edit-label">kcal</div>
+        <input class="tr-edit-input" id="trCustomKcal" type="number" step="0.1" min="0" placeholder="0">
+      </div>
+      <div class="tr-edit-field">
+        <div class="tr-edit-label">Bílkoviny (g)</div>
+        <input class="tr-edit-input" id="trCustomP" type="number" step="0.1" min="0" placeholder="0">
+      </div>
+      <div class="tr-edit-field">
+        <div class="tr-edit-label">Sacharidy (g)</div>
+        <input class="tr-edit-input" id="trCustomC" type="number" step="0.1" min="0" placeholder="0">
+      </div>
+      <div class="tr-edit-field">
+        <div class="tr-edit-label">Tuky (g)</div>
+        <input class="tr-edit-input" id="trCustomF" type="number" step="0.1" min="0" placeholder="0">
+      </div>
+    </div>
+    <div class="tr-edit-actions">
+      <button class="tr-edit-del" onclick="trCloseCustom()">Zrušit</button>
+      <button class="tr-edit-save" onclick="trCustomSave()">Přidat do jídla</button>
+    </div>
+  </div>
 </body>
 </html>
