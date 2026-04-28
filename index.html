@@ -22,7 +22,7 @@
 
   /* ── Nav ── */
   .top-nav { display: flex; gap: 0; padding: max(1.5rem, calc(env(safe-area-inset-top) + 0.5rem)) 1.25rem 0; max-width: 700px; margin: 0 auto 1.75rem; border-bottom: 1px solid #1e1e1b; background: #0d0d0c; position: sticky; top: 0; z-index: 100; }
-  .nav-btn { padding: 9px 22px; font-size: 13px; font-weight: 600; background: none; border: none; color: #4a4a46; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; letter-spacing: 0.01em; }
+  .nav-btn { padding: 9px 22px; font-size: 13px; font-weight: 600; background: none; border: none; color: #7c7c76; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; letter-spacing: 0.01em; }
   .nav-btn:hover { color: #999; }
   .nav-btn.active { color: #f0ede6; border-bottom-color: #c9882a; }
 
@@ -32,44 +32,44 @@
 
   /* ── Shared ── */
   .page-title { font-size: 22px; font-weight: 700; color: #f5f2eb; margin-bottom: 4px; letter-spacing: -0.3px; }
-  .page-sub { font-size: 13px; color: #6a6a64; margin-bottom: 18px; line-height: 1.5; }
-  .inbody-note { font-size: 11px; color: #6a6a64; background: #161614; border-radius: 8px; padding: 7px 14px; margin-bottom: 18px; border: 1px solid #1e1e1b; letter-spacing: 0.01em; }
-  .section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #4a4a46; font-weight: 700; margin-bottom: 10px; margin-top: 22px; }
+  .page-sub { font-size: 13px; color: #909088; margin-bottom: 18px; line-height: 1.5; }
+  .inbody-note { font-size: 11px; color: #909088; background: #161614; border-radius: 8px; padding: 7px 14px; margin-bottom: 18px; border: 1px solid #1e1e1b; letter-spacing: 0.01em; }
+  .section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #7c7c76; font-weight: 700; margin-bottom: 10px; margin-top: 22px; }
   .section-label:first-child { margin-top: 0; }
-  .tip-box { background: #161614; border-left: 2px solid #2e2e2a; border-radius: 0 10px 10px 0; padding: 11px 16px; font-size: 13px; color: #6a6a64; line-height: 1.65; margin-top: 16px; }
+  .tip-box { background: #161614; border-left: 2px solid #2e2e2a; border-radius: 0 10px 10px 0; padding: 11px 16px; font-size: 13px; color: #909088; line-height: 1.65; margin-top: 16px; }
   .badge { font-size: 11px; padding: 3px 12px; border-radius: 20px; font-weight: 600; white-space: nowrap; letter-spacing: 0.02em; }
 
   /* ── Stat cards ── */
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 22px; }
   .stat { background: #161614; border-radius: 12px; padding: 12px 14px; border: 1px solid #1e1e1b; transition: border-color 0.15s; }
   .stat:hover { border-color: #2e2e2a; }
-  .stat-label { font-size: 10px; color: #4a4a46; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; font-weight: 600; }
+  .stat-label { font-size: 10px; color: #7c7c76; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; font-weight: 600; }
   .stat-val { font-size: 18px; font-weight: 700; color: #f0ede6; letter-spacing: -0.3px; }
-  .stat-sub { font-size: 11px; color: #4a4a46; margin-top: 3px; }
+  .stat-sub { font-size: 11px; color: #7c7c76; margin-top: 3px; }
 
   /* ── Workout ── */
   .week-bar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-bottom: 18px; }
   .week-day { text-align: center; padding: 9px 4px; border-radius: 10px; cursor: pointer; border: 1px solid #1e1e1b; background: #161614; transition: all 0.15s; user-select: none; }
   .week-day:hover { background: #1e1e1b; border-color: #2e2e2a; }
-  .wd-name { font-size: 10px; color: #6a6a64; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
-  .wd-type { font-size: 10px; color: #4a4a46; margin-top: 3px; }
+  .wd-name { font-size: 10px; color: #909088; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+  .wd-type { font-size: 10px; color: #7c7c76; margin-top: 3px; }
   .day-panel { display: none; }
   .day-panel.active { display: block; }
   .day-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid #1e1e1b; }
   .day-title { font-size: 18px; font-weight: 700; color: #f5f2eb; letter-spacing: -0.2px; }
-  .day-subtitle { font-size: 13px; color: #6a6a64; margin-top: 3px; }
+  .day-subtitle { font-size: 13px; color: #909088; margin-top: 3px; }
   .ex-list { display: flex; flex-direction: column; gap: 6px; }
   .ex-row { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 12px; padding: 12px 14px; background: #161614; border-radius: 10px; border: 1px solid #1e1e1b; transition: border-color 0.15s; }
   .ex-row:hover { border-color: #2e2e2a; }
   .ex-name { font-size: 14px; font-weight: 600; color: #e8e4dc; margin-bottom: 3px; letter-spacing: -0.1px; }
-  .ex-note { font-size: 12px; color: #6a6a64; line-height: 1.5; }
+  .ex-note { font-size: 12px; color: #909088; line-height: 1.5; }
   .ex-sets { font-size: 13px; color: #999; font-weight: 700; white-space: nowrap; padding-top: 1px; }
   .tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
   .tag { font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 600; letter-spacing: 0.02em; }
-  .rest-box { text-align: center; padding: 3.5rem 1rem; color: #3a3a36; }
+  .rest-box { text-align: center; padding: 3.5rem 1rem; color: #6a6a62; }
   .rest-box .dash { font-size: 44px; margin-bottom: 12px; }
-  .rest-box .rest-title { font-size: 15px; font-weight: 700; color: #4a4a46; margin-bottom: 6px; }
-  .rest-box .rest-sub { font-size: 13px; color: #3a3a36; }
+  .rest-box .rest-title { font-size: 15px; font-weight: 700; color: #7c7c76; margin-bottom: 6px; }
+  .rest-box .rest-sub { font-size: 13px; color: #6a6a62; }
 
   /* ── Nutrition ── */
   .roadmap { display: grid; grid-template-columns: 1fr 40px 1fr 40px 1fr; align-items: stretch; gap: 0; margin-bottom: 1.25rem; }
@@ -79,22 +79,22 @@
   .rm-arrow { display: flex; align-items: center; justify-content: center; font-size: 18px; color: #2e2e2a; }
   .rm-num { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
   .rm-title { font-size: 14px; font-weight: 700; color: #f0ede6; margin-bottom: 3px; letter-spacing: -0.1px; }
-  .rm-dur { font-size: 11px; color: #4a4a46; margin-bottom: 12px; }
+  .rm-dur { font-size: 11px; color: #7c7c76; margin-bottom: 12px; }
   .rm-kcal-big { font-size: 26px; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.5px; }
   .rm-macros { display: flex; flex-direction: column; gap: 5px; }
   .rm-macro-row { display: flex; justify-content: space-between; font-size: 12px; }
-  .rm-macro-label { color: #4a4a46; }
+  .rm-macro-label { color: #7c7c76; }
   .rm-macro-val { font-weight: 700; }
   .rm-tag { display: inline-block; font-size: 10px; padding: 3px 10px; border-radius: 20px; font-weight: 700; margin-top: 10px; letter-spacing: 0.03em; }
 
   .phase-detail-box { background: #161614; border-radius: 12px; border: 1px solid #1e1e1b; padding: 16px 18px; margin-bottom: 1.25rem; }
-  .phase-detail-title { font-size: 11px; font-weight: 700; color: #6a6a64; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 12px; }
+  .phase-detail-title { font-size: 11px; font-weight: 700; color: #909088; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 12px; }
   .phase-rules { display: flex; flex-direction: column; gap: 8px; }
-  .phase-rule { font-size: 13px; color: #6a6a64; line-height: 1.6; padding-left: 14px; border-left: 2px solid #2e2e2a; }
+  .phase-rule { font-size: 13px; color: #909088; line-height: 1.6; padding-left: 14px; border-left: 2px solid #2e2e2a; }
   .phase-rule strong { color: #c8c4bc; }
 
   .day-tabs { display: flex; gap: 4px; margin-bottom: 14px; flex-wrap: wrap; }
-  .day-tab { padding: 5px 13px; border-radius: 8px; border: 1px solid #1e1e1b; background: #161614; font-size: 12px; cursor: pointer; color: #4a4a46; transition: all 0.15s; user-select: none; font-weight: 500; }
+  .day-tab { padding: 5px 13px; border-radius: 8px; border: 1px solid #1e1e1b; background: #161614; font-size: 12px; cursor: pointer; color: #7c7c76; transition: all 0.15s; user-select: none; font-weight: 500; }
   .day-tab:hover { background: #1a1a18; color: #888; }
   .day-tab.active { border: 1.5px solid #c9882a; background: #221808; color: #e0a855; font-weight: 700; }
   .meal-panel { display: none; }
@@ -103,19 +103,19 @@
   .meal-card:hover { border-color: #2e2e2a; }
   .meal-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
   .meal-name { font-size: 15px; font-weight: 700; color: #f0ede6; letter-spacing: -0.15px; }
-  .meal-time { font-size: 11px; color: #4a4a46; margin-top: 2px; }
+  .meal-time { font-size: 11px; color: #7c7c76; margin-top: 2px; }
   .meal-macros { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
   .mm { font-size: 11px; padding: 3px 9px; border-radius: 20px; font-weight: 600; letter-spacing: 0.02em; }
   .mm-k { background: #1e1408; color: #d4943a; }
   .mm-p { background: #091522; color: #6aabde; }
   .mm-c { background: #091a10; color: #6ab87e; }
   .mm-f { background: #1e1224; color: #c982be; }
-  .meal-ex-header { font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; color: #3a3a36; font-weight: 700; margin-bottom: 8px; }
+  .meal-ex-header { font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; color: #6a6a62; font-weight: 700; margin-bottom: 8px; }
   .meal-ex-row { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 1px solid #1a1a17; }
   .meal-ex-row:last-child { border-bottom: none; }
-  .meal-ex-cat { font-size: 10px; color: #4a4a46; width: 72px; flex-shrink: 0; padding-top: 2px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+  .meal-ex-cat { font-size: 10px; color: #7c7c76; width: 72px; flex-shrink: 0; padding-top: 2px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
   .meal-ex-opts { font-size: 13px; color: #8a8880; line-height: 1.55; }
-  .meal-ex-note { font-size: 11px; color: #3a3a36; margin-top: 2px; }
+  .meal-ex-note { font-size: 11px; color: #6a6a62; margin-top: 2px; }
   .day-total-bar { display: flex; gap: 10px; margin-top: 16px; padding: 11px 16px; background: #0d0d0c; border-radius: 10px; border: 1px solid #1a1a17; flex-wrap: wrap; align-items: center; }
   .day-total-bar span { font-size: 12px; font-weight: 700; }
 
@@ -123,11 +123,11 @@
   .search-input { width: 100%; background: #161614; border: 1px solid #1e1e1b; border-radius: 10px; padding: 10px 14px; color: #e2dfd8; font-size: 14px; outline: none; margin-bottom: 10px; transition: border-color 0.15s; font-family: inherit; }
   .search-input:focus { border-color: #3e3e3a; }
   .cat-filters { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 12px; }
-  .cat-btn { padding: 5px 13px; border-radius: 20px; border: 1px solid #1e1e1b; background: #161614; font-size: 12px; color: #4a4a46; cursor: pointer; transition: all 0.15s; font-weight: 500; }
+  .cat-btn { padding: 5px 13px; border-radius: 20px; border: 1px solid #1e1e1b; background: #161614; font-size: 12px; color: #7c7c76; cursor: pointer; transition: all 0.15s; font-weight: 500; }
   .cat-btn:hover { background: #1a1a18; color: #777; }
   .cat-btn.active { background: #221808; border-color: #c9882a; color: #e0a855; font-weight: 700; }
   .db-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .db-table th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; color: #3a3a36; padding: 8px 10px; border-bottom: 1px solid #1e1e1b; font-weight: 700; }
+  .db-table th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; color: #6a6a62; padding: 8px 10px; border-bottom: 1px solid #1e1e1b; font-weight: 700; }
   .db-table td { padding: 9px 10px; border-bottom: 1px solid #161614; color: #8a8880; transition: background 0.1s; }
   .db-table tr:last-child td { border-bottom: none; }
   .db-table tr:hover td { background: #161614; }
@@ -149,26 +149,26 @@
   .tr-day-bar-label { font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; display:flex; justify-content:space-between; margin-bottom:3px; }
   .tr-meal-tabs { display:flex; gap:6px; overflow-x:auto; padding-bottom:4px; margin-bottom:12px; scrollbar-width:none; }
   .tr-meal-tabs::-webkit-scrollbar { display:none; }
-  .tr-mtab { flex-shrink:0; padding:7px 14px; border-radius:20px; font-size:12px; font-weight:600; background:#161614; border:1px solid #1e1e1b; color:#6a6a64; cursor:pointer; transition:all 0.15s; white-space:nowrap; }
+  .tr-mtab { flex-shrink:0; padding:7px 14px; border-radius:20px; font-size:12px; font-weight:600; background:#161614; border:1px solid #1e1e1b; color:#909088; cursor:pointer; transition:all 0.15s; white-space:nowrap; }
   .tr-mtab.active { background:#1e1508; border-color:#c9882a; color:#c9882a; }
   .tr-meal-card { background:#161614; border:1px solid #1e1e1b; border-radius:14px; padding:16px; margin-bottom:14px; }
   .tr-meal-card-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; }
   .tr-meal-card-name { font-size:16px; font-weight:700; color:#f0ede6; }
-  .tr-meal-card-time { font-size:12px; color:#4a4a46; margin-top:2px; }
+  .tr-meal-card-time { font-size:12px; color:#7c7c76; margin-top:2px; }
   .tr-meal-macro-bars { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:14px; }
   .tr-mmbar-label { font-size:10px; font-weight:600; display:flex; justify-content:space-between; margin-bottom:3px; }
   .tr-mmbar-val { font-size:13px; font-weight:700; margin-top:3px; }
   .tr-meal-added { display:flex; flex-direction:column; gap:5px; min-height:10px; }
   .tr-added-item { display:grid; grid-template-columns:1fr auto auto; align-items:center; gap:10px; padding:9px 12px; background:#1a1a18; border:1px solid #222220; border-radius:10px; }
   .tr-added-name { font-size:13px; font-weight:600; color:#d8d4cc; }
-  .tr-added-sub  { font-size:11px; color:#4a4a46; margin-top:1px; }
+  .tr-added-sub  { font-size:11px; color:#7c7c76; margin-top:1px; }
   .tr-added-kcal { font-size:12px; font-weight:700; color:#d4943a; white-space:nowrap; }
-  .tr-picker-label { font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:#4a4a46; font-weight:700; margin-bottom:10px; }
+  .tr-picker-label { font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:#7c7c76; font-weight:700; margin-bottom:10px; }
   .tr-pick-search { background:#161614; border:1px solid #1e1e1b; border-radius:10px; padding:10px 14px; color:#e2dfd8; font-size:14px; width:100%; outline:none; font-family:inherit; margin-bottom:10px; transition:border-color 0.15s; box-sizing:border-box; }
   .tr-pick-search:focus { border-color:#3e3e3a; }
   .tr-picker-cats { display:flex; gap:6px; overflow-x:auto; padding-bottom:6px; margin-bottom:10px; scrollbar-width:none; }
   .tr-picker-cats::-webkit-scrollbar { display:none; }
-  .tr-pcat { flex-shrink:0; padding:5px 12px; border-radius:20px; font-size:11px; font-weight:600; background:#161614; border:1px solid #1e1e1b; color:#6a6a64; cursor:pointer; transition:all 0.15s; }
+  .tr-pcat { flex-shrink:0; padding:5px 12px; border-radius:20px; font-size:11px; font-weight:600; background:#161614; border:1px solid #1e1e1b; color:#909088; cursor:pointer; transition:all 0.15s; }
   .tr-pcat.active { background:#091522; border-color:#5a9fd4; color:#5a9fd4; }
   .tr-food-list { background:#161614; border:1px solid #1e1e1b; border-radius:12px; overflow:hidden; }
   .tr-food-row { display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #111110; cursor:pointer; transition:background 0.1s; -webkit-tap-highlight-color:transparent; }
@@ -176,7 +176,7 @@
   .tr-food-row:active { background:#1e1e1b; }
   .tr-fr-left { flex:1; min-width:0; }
   .tr-fr-name { font-size:13px; font-weight:600; color:#d8d4cc; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .tr-fr-serving { font-size:11px; color:#4a4a46; margin-top:1px; }
+  .tr-fr-serving { font-size:11px; color:#7c7c76; margin-top:1px; }
   .tr-fr-macros { display:flex; gap:3px; flex-shrink:0; }
   .tr-fmac { font-size:10px; padding:2px 6px; border-radius:5px; font-weight:600; white-space:nowrap; }
   .tr-fmac-k { background:#1e1508; color:#c9882a; }
@@ -184,8 +184,8 @@
   .tr-fmac-c { background:#091a10; color:#6ab87e; }
   .tr-fmac-f { background:#1e1224; color:#c982be; }
   .tr-fr-add { width:28px; height:28px; border-radius:8px; background:#1e1e1b; border:1px solid #2a2a27; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:300; color:#c9882a; flex-shrink:0; line-height:1; padding-bottom:1px; }
-  .tr-no-results { font-size:13px; color:#3a3a36; padding:2rem; text-align:center; }
-  .tr-meal-empty { font-size:12px; color:#3a3a36; padding:10px 0; }
+  .tr-no-results { font-size:13px; color:#6a6a62; padding:2rem; text-align:center; }
+  .tr-meal-empty { font-size:12px; color:#6a6a62; padding:10px 0; }
   .tr-added-flash { animation: trFlash 0.4s ease; }
   @keyframes trFlash { 0%{background:#1e2e1e} 100%{background:#1a1a18} }
   /* Edit modal */
@@ -196,11 +196,11 @@
   .tr-edit-handle { width:36px; height:4px; background:#2e2e2a; border-radius:2px; margin:12px auto 4px; }
   .tr-edit-head { padding:8px 20px 14px; border-bottom:1px solid #1e1e1b; }
   .tr-edit-title { font-size:15px; font-weight:700; color:#e8e4dc; margin-bottom:2px; }
-  .tr-edit-sub { font-size:12px; color:#4a4a46; }
+  .tr-edit-sub { font-size:12px; color:#7c7c76; }
   .tr-edit-body { padding:16px 20px; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
   .tr-edit-field { display:flex; flex-direction:column; gap:5px; }
   .tr-edit-field.full { grid-column:1/-1; }
-  .tr-edit-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#4a4a46; }
+  .tr-edit-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#7c7c76; }
   .tr-edit-input { background:#1a1a18; border:1px solid #2a2a27; border-radius:10px; padding:10px 12px; color:#e2dfd8; font-size:15px; font-weight:600; outline:none; font-family:inherit; transition:border-color 0.15s; -webkit-appearance:none; }
   .tr-edit-input:focus { border-color:#c9882a; }
   .tr-edit-recalc { font-size:11px; color:#4a6a3a; margin-top:2px; min-height:14px; }
@@ -213,7 +213,7 @@
   /* ── Progress ── */
   .log-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
   .log-field { display: flex; flex-direction: column; gap: 5px; }
-  .log-field label { font-size: 10px; color: #4a4a46; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+  .log-field label { font-size: 10px; color: #7c7c76; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
   .log-field input { background: #161614; border: 1px solid #1e1e1b; border-radius: 10px; padding: 9px 12px; color: #e2dfd8; font-size: 14px; width: 100%; outline: none; font-family: inherit; transition: border-color 0.15s; }
   .log-field input:focus { border-color: #3e3e3a; }
   .log-btn { background: #1e1e1b; border: 1px solid #2e2e2a; border-radius: 10px; color: #c8c4bc; font-size: 13px; font-weight: 600; padding: 10px 18px; cursor: pointer; transition: all 0.15s; white-space: nowrap; font-family: inherit; }
@@ -221,7 +221,7 @@
   .log-btn.danger { color: #c84a4a; background: #1e1010; border-color: #2e1818; }
   .log-btn.danger:hover { background: #2a1414; }
   .prog-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
-  .prog-table th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; color: #3a3a36; padding: 8px 10px; border-bottom: 1px solid #1e1e1b; font-weight: 700; }
+  .prog-table th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; color: #6a6a62; padding: 8px 10px; border-bottom: 1px solid #1e1e1b; font-weight: 700; }
   .prog-table td { padding: 10px 10px; border-bottom: 1px solid #161614; color: #8a8880; vertical-align: middle; }
   .prog-table tr:last-child td { border-bottom: none; }
   .prog-table tr:hover td { background: #161614; }
@@ -229,10 +229,29 @@
   .delta { font-size: 11px; margin-left: 5px; font-weight: 600; }
   .delta.pos { color: #6ab87e; }
   .delta.neg { color: #c84a4a; }
-  .delta.neu { color: #4a4a46; }
-  .del-btn { background: none; border: none; color: #3a3a36; font-size: 13px; cursor: pointer; padding: 3px 7px; border-radius: 6px; transition: all 0.15s; }
+  .delta.neu { color: #7c7c76; }
+  .del-btn { background: none; border: none; color: #6a6a62; font-size: 13px; cursor: pointer; padding: 3px 7px; border-radius: 6px; transition: all 0.15s; }
   .del-btn:hover { color: #c84a4a; background: #1e1010; }
-  .empty-log { font-size: 13px; color: #3a3a36; padding: 2rem 0; text-align: center; }
+  .empty-log { font-size: 13px; color: #6a6a62; padding: 2rem 0; text-align: center; }
+
+  /* ── Navy BF Calculator ── */
+  .navy-card { background: #161614; border: 1px solid #1e1e1b; border-radius: 14px; padding: 16px; margin-bottom: 1.5rem; }
+  .navy-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #7c7c76; margin-bottom: 14px; }
+  .navy-inputs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+  .navy-field { display: flex; flex-direction: column; gap: 5px; }
+  .navy-field label { font-size: 10px; color: #7c7c76; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+  .navy-field input { background: #1a1a18; border: 1px solid #2a2a27; border-radius: 10px; padding: 9px 12px; color: #e2dfd8; font-size: 15px; font-weight: 600; width: 100%; outline: none; font-family: inherit; transition: border-color 0.15s; -webkit-appearance: none; }
+  .navy-field input:focus { border-color: #c9882a; }
+  .navy-result { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 4px; flex-wrap: wrap; }
+  .navy-result-val { font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 1; }
+  .navy-result-meta { font-size: 12px; color: #7c7c76; margin-top: 4px; }
+  .navy-result-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  .navy-use-btn { background: #1e1508; border: 1px solid #c9882a; border-radius: 10px; color: #c9882a; font-size: 12px; font-weight: 700; padding: 8px 14px; cursor: pointer; white-space: nowrap; transition: all 0.15s; }
+  .navy-use-btn:hover { background: #c9882a; color: #0d0d0c; }
+  .navy-use-btn:disabled { opacity: 0.3; cursor: default; }
+  .navy-zone { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 700; letter-spacing: 0.03em; }
+  .navy-tip { font-size: 11px; color: #7c7c76; margin-top: 10px; line-height: 1.6; border-top: 1px solid #1e1e1b; padding-top: 10px; }
+  .navy-tip strong { color: #909088; }
 
   @media (max-width: 500px) {
     .stats { grid-template-columns: repeat(2, 1fr); }
@@ -240,6 +259,7 @@
     .log-grid { grid-template-columns: repeat(2, 1fr); }
     .roadmap { grid-template-columns: 1fr; }
     .rm-arrow { transform: rotate(90deg); height: 30px; }
+    .navy-inputs { grid-template-columns: repeat(3, 1fr); }
   }
 </style>
 </head>
@@ -333,6 +353,39 @@
 <div class="container">
   <p class="page-title">Týdenní progres</p>
   <p class="page-sub">Loguj každý týden — data zůstanou v prohlížeči</p>
+
+  <!-- Navy BF Calculator -->
+  <div class="section-label" style="margin-top:0">Navy Body Fat Kalkulačka</div>
+  <div class="navy-card">
+    <div class="navy-card-title">US Navy metoda — měř ráno nalačno, vždy na stejném místě</div>
+    <div class="navy-inputs">
+      <div class="navy-field">
+        <label>Výška (cm)</label>
+        <input type="number" id="navy-height" value="182" step="0.5" oninput="navyCalc()">
+      </div>
+      <div class="navy-field">
+        <label>Obvod pasu (cm)</label>
+        <input type="number" id="navy-waist" placeholder="např. 88" step="0.5" oninput="navyCalc()">
+      </div>
+      <div class="navy-field">
+        <label>Obvod krku (cm)</label>
+        <input type="number" id="navy-neck" placeholder="např. 38" step="0.5" oninput="navyCalc()">
+      </div>
+    </div>
+    <div class="navy-result" id="navy-result">
+      <div>
+        <div class="navy-result-val" style="color:#6a6a62" id="navy-bf-val">—</div>
+        <div class="navy-result-meta" id="navy-meta">Zadej obvody pasu a krku</div>
+      </div>
+      <div class="navy-result-right">
+        <span class="navy-zone" id="navy-zone" style="display:none"></span>
+        <button class="navy-use-btn" id="navy-use-btn" onclick="navyUseBF()" disabled>↓ Použít jako BF%</button>
+      </div>
+    </div>
+    <div class="navy-tip">
+      <strong>Pas:</strong> nejužší místo trupu (cca 2 cm nad pupkem) · <strong>Krk:</strong> těsně pod ohryzkem · měř vždy třikrát a ber průměr · přesnost ±1–2 %
+    </div>
+  </div>
 
   <div class="log-grid">
     <div class="log-field"><label>Týden</label><input id="inp-week" type="text" placeholder="W1" maxlength="6"></div>
@@ -883,8 +936,8 @@ function trRenderDayTotal() {
   <div class="tr-day-total">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
       <div>
-        <div style="font-size:10px;color:#4a4a46;text-transform:uppercase;letter-spacing:0.06em;font-weight:600;margin-bottom:4px">Dnes celkem</div>
-        <div class="tr-day-kcal-val">${Math.round(tot.kcal)}<span style="font-size:14px;color:#4a4a46;font-weight:400"> / ${tgt.kcal} kcal</span></div>
+        <div style="font-size:10px;color:#7c7c76;text-transform:uppercase;letter-spacing:0.06em;font-weight:600;margin-bottom:4px">Dnes celkem</div>
+        <div class="tr-day-kcal-val">${Math.round(tot.kcal)}<span style="font-size:14px;color:#7c7c76;font-weight:400"> / ${tgt.kcal} kcal</span></div>
       </div>
       <div style="text-align:right;padding-top:4px">
         <div style="font-size:13px;font-weight:700;color:${over(tot.kcal,tgt.kcal)?'#c84a4a':'#5aaa7a'}">${over(tot.kcal,tgt.kcal)?'+'+Math.round(tot.kcal-tgt.kcal)+' kcal':Math.round(tgt.kcal-tot.kcal)+' kcal zbývá'}</div>
@@ -896,7 +949,7 @@ function trRenderDayTotal() {
         <div>
           <div class="tr-day-bar-label"><span style="color:#5a5a54">${m.l}</span><span style="color:${over(m.v,m.t)?'#c84a4a':m.c};font-weight:700">${Math.round(m.v)}g</span></div>
           <div class="tr-track"><div class="tr-fill ${over(m.v,m.t)?"over":""}" style="width:${pct(m.v,m.t)}%;background:${m.c}"></div></div>
-          <div style="font-size:10px;color:#3a3a36;margin-top:2px">cíl ${m.t} g</div>
+          <div style="font-size:10px;color:#6a6a62;margin-top:2px">cíl ${m.t} g</div>
         </div>`).join("")}
     </div>
   </div>`;
@@ -936,7 +989,7 @@ function trRenderCurrentMeal() {
           <div class="tr-added-sub">${e.grams}g &nbsp;·&nbsp; B:${e.p.toFixed(1)} S:${e.c.toFixed(1)} T:${e.f.toFixed(1)}</div>
         </div>
         <div class="tr-added-kcal">${Math.round(e.kcal)} kcal</div>
-        <div style="font-size:11px;color:#3a3a36;padding-left:2px">✎</div>
+        <div style="font-size:11px;color:#6a6a62;padding-left:2px">✎</div>
       </div>`).join("")
     : `<div class="tr-meal-empty">Žádné potraviny — klikni na kartu níže a přidej</div>`;
   document.getElementById("tr-current-meal").innerHTML = `
@@ -945,13 +998,13 @@ function trRenderCurrentMeal() {
       <div><div class="tr-meal-card-name">${m.name}</div><div class="tr-meal-card-time">${m.time} · cíl ${m.kcal} kcal</div></div>
       <div style="text-align:right">
         <div style="font-size:24px;font-weight:700;color:${over(tot.kcal,m.kcal)?'#c84a4a':'#c9882a'};letter-spacing:-0.3px;line-height:1">${Math.round(tot.kcal)}</div>
-        <div style="font-size:10px;color:#4a4a46;margin-top:2px">kcal</div>
+        <div style="font-size:10px;color:#7c7c76;margin-top:2px">kcal</div>
       </div>
     </div>
     <div class="tr-meal-macro-bars">
       ${bars.map(b=>`
         <div>
-          <div class="tr-mmbar-label"><span style="color:${b.c}">${b.l}</span><span style="color:#3a3a36">${b.t}${b.unit}</span></div>
+          <div class="tr-mmbar-label"><span style="color:${b.c}">${b.l}</span><span style="color:#6a6a62">${b.t}${b.unit}</span></div>
           <div class="tr-track"><div class="tr-fill ${over(b.v,b.t)?"over":""}" style="width:${pct(b.v,b.t)}%;background:${b.c}"></div></div>
           <div class="tr-mmbar-val" style="color:${over(b.v,b.t)?'#c84a4a':b.c}">${b.l==='kcal'?Math.round(b.v):b.v.toFixed(1)}${b.unit}</div>
         </div>`).join("")}
@@ -1284,6 +1337,62 @@ const FOODS = [
 ];
 
 
+
+/* ══════════ NAVY BF CALCULATOR ══════════ */
+function navyCalc() {
+  const h = parseFloat(document.getElementById("navy-height").value);
+  const w = parseFloat(document.getElementById("navy-waist").value);
+  const n = parseFloat(document.getElementById("navy-neck").value);
+  const valEl  = document.getElementById("navy-bf-val");
+  const metaEl = document.getElementById("navy-meta");
+  const zoneEl = document.getElementById("navy-zone");
+  const btnEl  = document.getElementById("navy-use-btn");
+
+  if (!w || !n || !h || w <= n) {
+    valEl.textContent  = "—";
+    valEl.style.color  = "#6a6a62";
+    metaEl.textContent = w && n && w <= n ? "⚠ Obvod pasu musí být větší než obvod krku" : "Zadej obvody pasu a krku";
+    zoneEl.style.display = "none";
+    btnEl.disabled = true;
+    return;
+  }
+
+  // US Navy formula (men): 86.010×log10(waist−neck) − 70.041×log10(height) + 36.76
+  const bf = 86.010 * Math.log10(w - n) - 70.041 * Math.log10(h) + 36.76;
+  const bfR = Math.round(bf * 10) / 10;
+
+  // Use latest logged weight, fallback to InBody baseline
+  const entries = loadEntries();
+  const lastWeight = entries.length ? entries.filter(e => e.weight != null).slice(-1)[0]?.weight : null;
+  const baseWeight = lastWeight ?? 77.5;
+  const weightLabel = lastWeight ? `z logu ${entries.filter(e=>e.weight!=null).slice(-1)[0].week||'posledního záznamu'}` : `výchozí InBody`;
+
+  valEl.textContent = bfR + " %";
+  metaEl.textContent = `Tuk = ${(baseWeight * bfR / 100).toFixed(1)} kg · FFM = ${(baseWeight * (1 - bfR/100)).toFixed(1)} kg (${baseWeight} kg — ${weightLabel})`;
+
+  // Color & zone
+  let color, zone, zoneBg;
+  if (bfR < 6)        { color="#c84a4a"; zone="Pod minimum"; zoneBg="#2a1010"; }
+  else if (bfR < 14)  { color="#5a9fd4"; zone="Atletická forma"; zoneBg="#091522"; }
+  else if (bfR < 18)  { color="#5aaa7a"; zone="Fitness"; zoneBg="#0f1f15"; }
+  else if (bfR < 25)  { color="#c9882a"; zone="Průměr"; zoneBg="#221808"; }
+  else                { color="#c84a4a"; zone="Nad normou"; zoneBg="#2a1010"; }
+
+  valEl.style.color = color;
+  zoneEl.textContent = zone;
+  zoneEl.style.cssText = `background:${zoneBg};color:${color};display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:700;letter-spacing:0.03em;`;
+  btnEl.disabled = false;
+  btnEl.dataset.bf = bfR;
+}
+
+function navyUseBF() {
+  const bf = document.getElementById("navy-use-btn").dataset.bf;
+  if (!bf) return;
+  document.getElementById("inp-bf").value = bf;
+  document.getElementById("inp-bf").focus();
+  document.getElementById("inp-bf").style.borderColor = "#c9882a";
+  setTimeout(() => document.getElementById("inp-bf").style.borderColor = "", 1500);
+}
 
 /* ══════════ PROGRESS ══════════ */
 const STORE_KEY = "workout_progress_v1";
