@@ -419,19 +419,28 @@ function showSection(id) {
 
 /* ══════════ EXPORT / IMPORT ══════════ */
 function exportData(type) {
-  let data, filename;
+  let text, filename;
   if (type === "tracker") {
-    data = localStorage.getItem(TR_KEY) || "{}";
+    text = localStorage.getItem(TR_KEY) || "{}";
     filename = "tracker_" + new Date().toISOString().slice(0,10) + ".json";
-  } else {
-    data = localStorage.getItem(STORE_KEY) || "[]";
-    filename = "progres_" + new Date().toISOString().slice(0,10) + ".json";
+    const blob = new Blob([text], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = filename; a.click();
+    URL.revokeObjectURL(a.href);
+    return;
   }
-  const blob = new Blob([data], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
+  // Progress — compact text
+  const entries = loadEntries();
+  const lines = entries.map(e =>
+    `${e.week||'—'} | ${e.weight!=null?e.weight+'kg':'—'} | ${e.bf!=null?e.bf+'%':'—'}${e.note?' | '+e.note:''}`
+  );
+  lines.unshift('Týden | Váha | BF% | Poznámka');
+  lines.unshift('byHRNC — Progress export ' + new Date().toISOString().slice(0,10));
+  filename = "progres_" + new Date().toISOString().slice(0,10) + ".txt";
+  const blob = new Blob([lines.join('\n')], { type: "text/plain" });
   const a = document.createElement("a");
-  a.href = url; a.download = filename; a.click();
-  URL.revokeObjectURL(url);
+  a.href = URL.createObjectURL(blob); a.download = filename; a.click();
+  URL.revokeObjectURL(a.href);
 }
 
 function importData(type) {
@@ -1209,8 +1218,25 @@ function trRemoveItem(mealName, idx) {
 }
 
 function trExport() {
-  const blob = new Blob([JSON.stringify(trLoadAll(),null,2)],{type:'application/json'});
-  const a = Object.assign(document.createElement('a'),{href:URL.createObjectURL(blob),download:'tracker-export.json'});
+  const all = trLoadAll();
+  const lines = [];
+  for (const date of Object.keys(all).sort()) {
+    const dayData = all[date];
+    let dk=0, dp=0, dc=0, df=0;
+    lines.push(`=== ${date} ===`);
+    for (const meal of Object.keys(dayData)) {
+      const items = dayData[meal];
+      if (!items.length) continue;
+      const mStr = items.map(e=>`${e.name} ${e.grams}g (${Math.round(e.kcal)}kcal B${e.p.toFixed(1)} S${e.c.toFixed(1)} T${e.f.toFixed(1)})`).join(', ');
+      const mt = items.reduce((a,e)=>({kcal:a.kcal+e.kcal,p:a.p+e.p,c:a.c+e.c,f:a.f+e.f}),{kcal:0,p:0,c:0,f:0});
+      lines.push(`${meal}: ${mStr}`);
+      lines.push(`  → ${Math.round(mt.kcal)}kcal B${mt.p.toFixed(0)} S${mt.c.toFixed(0)} T${mt.f.toFixed(0)}`);
+      dk+=mt.kcal; dp+=mt.p; dc+=mt.c; df+=mt.f;
+    }
+    lines.push(`CELKEM: ${Math.round(dk)}kcal B${dp.toFixed(0)} S${dc.toFixed(0)} T${df.toFixed(0)}\n`);
+  }
+  const blob = new Blob([lines.join('\n')],{type:'text/plain'});
+  const a = Object.assign(document.createElement('a'),{href:URL.createObjectURL(blob),download:'tracker-export.txt'});
   a.click(); URL.revokeObjectURL(a.href);
 }
 function trImport() { document.getElementById("tr-import-file").click(); }
@@ -1558,4 +1584,19 @@ updateStats();
     </div>
   </div>
 </body>
+<script>
+// ── One-time data seed ──
+(function(){
+  const KEY = "calorie_tracker_v2";
+  const SEED = {"2026-04-28":{"Snídaně":[{"name":"Řecký jogurt (0%)","grams":200,"kcal":114,"p":20,"c":7,"f":0.6,"slot":"Snídaně","kcal100":57,"p100":10,"c100":3.5,"f100":0.3},{"name":"Granola","grams":50,"kcal":225,"p":5,"c":32.5,"f":8.5,"slot":"Snídaně","kcal100":450,"p100":10,"c100":65,"f100":17}],"Svačina 1":[{"name":"Datlová tyčinka RAW","grams":50,"kcal":219,"p":7,"c":19,"f":11,"slot":"Svačina 1","kcal100":438,"p100":14,"c100":38,"f100":22}],"Oběd":[{"name":"Gulášová polévka","grams":200,"kcal":130,"p":8,"c":11,"f":6,"slot":"Oběd","kcal100":65,"p100":4,"c100":5.5,"f100":3},{"name":"Tikka Masala","grams":580,"kcal":530,"p":36,"c":60,"f":12,"slot":"Oběd","kcal100":91.38,"p100":6.21,"c100":10.34,"f100":2.07}],"Svačina 2":[{"name":"Protein syrovátkový","grams":32,"kcal":124,"p":24,"c":7,"f":6,"slot":"Svačina 2","kcal100":387.5,"p100":75,"c100":21.875,"f100":18.75}],"Večeře":[{"name":"Balkánský sýr","grams":100,"kcal":254,"p":16,"c":3,"f":20,"slot":"Večeře","kcal100":254,"p100":16,"c100":3,"f100":20},{"name":"Cherry rajčata","grams":150,"kcal":33,"p":1,"c":5,"f":0,"slot":"Večeře","kcal100":22,"p100":0.67,"c100":3.33,"f100":0}]},"2026-04-29":{"Snídaně":[{"name":"Skyr","grams":150,"kcal":93,"p":18,"c":5,"f":0.15,"slot":"Snídaně","kcal100":62,"p100":12,"c100":3.33,"f100":0.1},{"name":"Granola","grams":50,"kcal":225,"p":5,"c":32.5,"f":8.5,"slot":"Snídaně","kcal100":450,"p100":10,"c100":65,"f100":17}],"Svačina 1":[{"name":"Ořechová tyčinka","grams":35,"kcal":199,"p":6,"c":13,"f":13,"slot":"Svačina 1","kcal100":568.57,"p100":17.14,"c100":37.14,"f100":37.14}],"Oběd":[{"name":"Rýže basmati (vařená)","grams":250,"kcal":325,"p":6.8,"c":70,"f":0.8,"slot":"Oběd","kcal100":130,"p100":2.72,"c100":28,"f100":0.32},{"name":"Tikka masala","grams":200,"kcal":199,"p":20,"c":8,"f":9,"slot":"Oběd","kcal100":99.5,"p100":10,"c100":4,"f100":4.5}],"Svačina 2":[{"name":"Celozrnný chléb+šunka+skyr","grams":100,"kcal":0,"p":0,"c":0,"f":0,"slot":"Svačina 2","kcal100":0,"p100":0,"c100":0,"f100":0}],"Večeře":[{"name":"4 vejce, 60g eidam, rajčata, okurka, protein","grams":100,"kcal":849,"p":109,"c":38,"f":29,"slot":"Večeře","kcal100":849,"p100":109,"c100":38,"f100":29}]},"2026-04-30":{"Snídaně":[{"name":"Skyr","grams":150,"kcal":93,"p":18,"c":5,"f":0.1,"slot":"Snídaně","kcal100":62,"p100":12,"c100":3.33,"f100":0.07}],"Svačina 1":[{"name":"Pomeranč","grams":150,"kcal":70.5,"p":1.35,"c":18,"f":0.15,"slot":"Svačina 1","kcal100":47,"p100":0.9,"c100":12,"f100":0.1}],"Oběd":[{"name":"Rýže basmati (vařená)","grams":250,"kcal":325,"p":6.8,"c":70,"f":0.8,"slot":"Oběd","kcal100":130,"p100":2.72,"c100":28,"f100":0.32},{"name":"Tikka masala","grams":200,"kcal":199,"p":20,"c":8,"f":9,"slot":"Oběd","kcal100":99.5,"p100":10,"c100":4,"f100":4.5}],"Svačina 2":[],"Večeře":[],"Svačina 1":[],"Snídaně":[]}};
+  // Merge seed into existing localStorage — never overwrites existing days
+  let existing = {};
+  try { existing = JSON.parse(localStorage.getItem(KEY)) || {}; } catch {}
+  let changed = false;
+  for (const date of Object.keys(SEED)) {
+    if (!existing[date]) { existing[date] = SEED[date]; changed = true; }
+  }
+  if (changed) localStorage.setItem(KEY, JSON.stringify(existing));
+})();
+</script>
 </html>
