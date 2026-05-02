@@ -184,6 +184,9 @@
   .tr-fmac-c { background:#091a10; color:#6ab87e; }
   .tr-fmac-f { background:#1e1224; color:#c982be; }
   .tr-fr-add { width:28px; height:28px; border-radius:8px; background:#1e1e1b; border:1px solid #2a2a27; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:300; color:#c9882a; flex-shrink:0; line-height:1; padding-bottom:1px; }
+  .tr-fr-star { width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-size:15px; color:#4a4a44; flex-shrink:0; cursor:pointer; transition:color 0.15s; border-radius:6px; }
+  .tr-fr-star:hover { color:#c9882a; }
+  .tr-fr-star.is-fav { color:#c9882a; }
   .tr-no-results { font-size:13px; color:#6a6a62; padding:2rem; text-align:center; }
   .tr-meal-empty { font-size:12px; color:#6a6a62; padding:10px 0; }
   .tr-added-flash { animation: trFlash 0.4s ease; }
@@ -886,6 +889,7 @@ renderPhaseDetail();
 renderNutrMeals();
 /* ══════════ TRACKER v2 ══════════ */
 const TR_KEY = "calorie_tracker_v2";
+const TR_FAV_KEY = "calorie_tracker_favorites";
 const TR_TARGETS = {
   cut:        { kcal:2100, p:175, c:170, f:70  },
   transition: { kcal:2635, p:155, c:310, f:80  },
@@ -1023,19 +1027,27 @@ function trRenderCurrentMeal() {
 }
 
 function trRenderPickerCats() {
-  const cats   = ["all","protein","dairy","carb","musli","fat","veg","fruit"];
-  const labels = {all:"Vše",protein:"Bílkoviny",dairy:"Mléčné",carb:"Sacharidy",musli:"Müsli",fat:"Tuky",veg:"Zelenina",fruit:"Ovoce"};
+  const favs = trLoadFavs();
+  const cats   = favs.length ? ["fav","all","protein","dairy","carb","musli","fat","veg","fruit"] : ["all","protein","dairy","carb","musli","fat","veg","fruit"];
+  const labels = {fav:"⭐ Oblíbené",all:"Vše",protein:"Bílkoviny",dairy:"Mléčné",carb:"Sacharidy",musli:"Müsli",fat:"Tuky",veg:"Zelenina",fruit:"Ovoce"};
+  // If active cat is fav but no favs, reset to all
+  if (trPickCat === "fav" && !favs.length) trPickCat = "all";
   document.getElementById("tr-picker-cats").innerHTML = cats.map(c=>
-    `<div class="tr-pcat ${c===trPickCat?"active":""}" onclick="trSetPickCat('${c}')">${labels[c]}</div>`
+    `<div class="tr-pcat ${c===trPickCat?"active":""}" onclick="trSetPickCat('${c}')" ${c==="fav"?"style='border-color:#c9882a;color:#c9882a;background:#1e1508'":""} >${labels[c]}${c==="fav"?` <span style="font-size:10px;opacity:0.7">${favs.length}</span>`:""}</div>`
   ).join("");
 }
 
 function trRenderFoodGrid() {
-  const foods = FOODS.filter(f => {
-    const mc = trPickCat==="all" || f.cat===trPickCat;
-    const mq = !trPickQ || f.name.toLowerCase().includes(trPickQ.toLowerCase());
-    return mc && mq;
-  });
+  const favs = trLoadFavs();
+  let pool;
+  if (trPickCat === "fav") {
+    pool = favs;
+  } else {
+    // merge favs into pool for "all" or filter by cat
+    const base = trPickCat === "all" ? [...FOODS, ...favs] : FOODS.filter(f => f.cat === trPickCat);
+    pool = base;
+  }
+  const foods = pool.filter(f => !trPickQ || f.name.toLowerCase().includes(trPickQ.toLowerCase()));
   if (!foods.length) {
     document.getElementById("tr-food-grid").innerHTML = `<div class="tr-no-results">Žádná potravina nenalezena</div>`;
     return;
@@ -1044,6 +1056,10 @@ function trRenderFoodGrid() {
     foods.map(f => {
       const r=f.s.g/100, fk=Math.round(f.kcal*r), fp=(f.p*r).toFixed(1), fc=(f.c*r).toFixed(1), ff=(f.f*r).toFixed(1);
       const safe = JSON.stringify({name:f.name,kcal:f.kcal,p:f.p,c:f.c,f:f.f,s:f.s}).replace(/"/g,'&quot;');
+      const isFav = f.cat === "fav" || trIsFav(f.name);
+      const starBtn = trPickCat === "fav"
+        ? `<div class="tr-fr-star" onclick="event.stopPropagation();trRemoveFav('${f.name.replace(/'/g,"\\'")}')">✕</div>`
+        : `<div class="tr-fr-star ${isFav?'is-fav':''}" onclick="event.stopPropagation();${isFav?`trRemoveFav('${f.name.replace(/'/g,"\\'")}')`:`trAddFav(${safe})`}" title="${isFav?'Odebrat z oblíbených':'Uložit do oblíbených'}">${isFav?'★':'☆'}</div>`;
       return `<div class="tr-food-row" onclick="trAddFood(${safe})">
         <div class="tr-fr-left">
           <div class="tr-fr-name">${f.name}</div>
@@ -1055,6 +1071,7 @@ function trRenderFoodGrid() {
           <span class="tr-fmac tr-fmac-c">S${fc}</span>
           <span class="tr-fmac tr-fmac-f">T${ff}</span>
         </div>
+        ${starBtn}
         <div class="tr-fr-add">+</div>
       </div>`;
     }).join("")
@@ -1186,6 +1203,24 @@ function trCustomSave() {
   const c     = parseFloat(document.getElementById("trCustomC").value) || 0;
   const f     = parseFloat(document.getElementById("trCustomF").value) || 0;
   if (!name) { document.getElementById("trCustomName").focus(); return; }
+
+  // Save to favourites if checkbox checked
+  if (document.getElementById("trCustomSaveFav")?.checked) {
+    const r = grams / 100;
+    const favs = trLoadFavs();
+    if (!favs.find(fv => fv.name === name)) {
+      favs.push({
+        name, cat:"fav",
+        kcal: r > 0 ? kcal/r : kcal,
+        p:    r > 0 ? p/r    : p,
+        c:    r > 0 ? c/r    : c,
+        f:    r > 0 ? f/r    : f,
+        s: { g: grams, l: grams + " g" }
+      });
+      trSaveFavs(favs);
+    }
+  }
+
   const mealName = MEAL_TARGETS[trGetPhase()][trActiveMeal].name;
   const all  = trLoadAll();
   const date = trGetDate();
@@ -1246,6 +1281,28 @@ function trHandleImport(e) {
   r.onload = ev => { try { trSaveAll(JSON.parse(ev.target.result)); trRenderAll(); } catch { alert("Neplatný soubor"); } };
   r.readAsText(file);
 }
+
+/* ── Favourites ── */
+function trLoadFavs() { try { return JSON.parse(localStorage.getItem(TR_FAV_KEY))||[]; } catch { return []; } }
+function trSaveFavs(f) { localStorage.setItem(TR_FAV_KEY, JSON.stringify(f)); }
+
+function trAddFav(food) {
+  const favs = trLoadFavs();
+  if (favs.find(f => f.name === food.name)) return; // already saved
+  favs.push({ ...food, cat:"fav" });
+  trSaveFavs(favs);
+  trRenderPickerCats();
+  trRenderFoodGrid();
+}
+
+function trRemoveFav(name) {
+  const favs = trLoadFavs().filter(f => f.name !== name);
+  trSaveFavs(favs);
+  trRenderPickerCats();
+  trRenderFoodGrid();
+}
+
+function trIsFav(name) { return trLoadFavs().some(f => f.name === name); }
 
 function trInit() {
   document.getElementById("tr-date").value = trToday();
@@ -1578,9 +1635,15 @@ updateStats();
         <input class="tr-edit-input" id="trCustomF" type="number" step="0.1" min="0" placeholder="0">
       </div>
     </div>
-    <div class="tr-edit-actions">
-      <button class="tr-edit-del" onclick="trCloseCustom()">Zrušit</button>
-      <button class="tr-edit-save" onclick="trCustomSave()">Přidat do jídla</button>
+    <div class="tr-edit-actions" style="flex-direction:column;gap:8px;padding:0 20px 16px">
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;padding:8px 12px;background:#1a1a18;border:1px solid #2a2a27;border-radius:10px">
+        <input type="checkbox" id="trCustomSaveFav" style="width:16px;height:16px;accent-color:#c9882a;flex-shrink:0">
+        <span style="font-size:13px;color:#909088">⭐ Uložit do oblíbených — přidá se do pickeru pro rychlé přidávání</span>
+      </label>
+      <div style="display:grid;grid-template-columns:1fr 2fr;gap:8px">
+        <button class="tr-edit-del" onclick="trCloseCustom()">Zrušit</button>
+        <button class="tr-edit-save" onclick="trCustomSave()">Přidat do jídla</button>
+      </div>
     </div>
   </div>
 </body>
