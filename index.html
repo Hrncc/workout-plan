@@ -256,6 +256,20 @@
   .navy-tip { font-size: 11px; color: #7c7c76; margin-top: 10px; line-height: 1.6; border-top: 1px solid #1e1e1b; padding-top: 10px; }
   .navy-tip strong { color: #909088; }
 
+  /* ── Fav toggle ── */
+  .fav-toggle-row { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:11px 14px; background:#1a1a18; border:1px solid #2a2a27; border-radius:10px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .fav-toggle-label { font-size:13px; color:#909088; display:flex; align-items:center; gap:7px; }
+  .fav-toggle { position:relative; width:38px; height:22px; flex-shrink:0; }
+  .fav-toggle input { opacity:0; width:0; height:0; position:absolute; }
+  .fav-slider { position:absolute; inset:0; background:#2a2a27; border-radius:11px; transition:background 0.2s; }
+  .fav-slider::before { content:""; position:absolute; width:16px; height:16px; left:3px; top:3px; background:#fff; border-radius:50%; transition:transform 0.2s; }
+  .fav-toggle input:checked + .fav-slider { background:#c9882a; }
+  .fav-toggle input:checked + .fav-slider::before { transform:translateX(16px); }
+
+  /* ── iPhone 17 / modern iOS optimizations ── */
+  @supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .tr-edit-sheet, #trCustomSheet { padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+  }
   @media (max-width: 500px) {
     .stats { grid-template-columns: repeat(2, 1fr); }
     .wd-type { display: none; }
@@ -263,6 +277,18 @@
     .roadmap { grid-template-columns: 1fr; }
     .rm-arrow { transform: rotate(90deg); height: 30px; }
     .navy-inputs { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 393px) {
+    .tr-meal-macro-bars { grid-template-columns: repeat(2,1fr); }
+    .tr-edit-body { grid-template-columns: 1fr; }
+    .tr-edit-field.full { grid-column: 1; }
+  }
+  @media (pointer: coarse) {
+    .tr-food-row { min-height: 52px; }
+    .tr-mtab { min-height: 36px; padding: 8px 16px; }
+    .tr-fr-add { width:34px; height:34px; font-size:20px; }
+    .tr-fr-star { width:30px; height:30px; font-size:17px; }
+    .nav-btn { padding: 10px 22px; }
   }
 </style>
 </head>
@@ -1636,9 +1662,12 @@ updateStats();
       </div>
     </div>
     <div class="tr-edit-actions" style="flex-direction:column;gap:8px;padding:0 20px 16px">
-      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;padding:8px 12px;background:#1a1a18;border:1px solid #2a2a27;border-radius:10px">
-        <input type="checkbox" id="trCustomSaveFav" style="width:16px;height:16px;accent-color:#c9882a;flex-shrink:0">
-        <span style="font-size:13px;color:#909088">⭐ Uložit do oblíbených — přidá se do pickeru pro rychlé přidávání</span>
+      <label class="fav-toggle-row" onclick="">
+        <span class="fav-toggle-label">⭐ Uložit do oblíbených</span>
+        <div class="fav-toggle">
+          <input type="checkbox" id="trCustomSaveFav">
+          <span class="fav-slider"></span>
+        </div>
       </label>
       <div style="display:grid;grid-template-columns:1fr 2fr;gap:8px">
         <button class="tr-edit-del" onclick="trCloseCustom()">Zrušit</button>
