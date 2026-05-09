@@ -185,6 +185,8 @@
   .tr-fmac-f { background:#1e1224; color:#c982be; }
   .tr-fr-add { width:28px; height:28px; border-radius:8px; background:#1e1e1b; border:1px solid #2a2a27; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:300; color:#c9882a; flex-shrink:0; line-height:1; padding-bottom:1px; }
   .tr-fr-fav { width:26px; height:28px; display:flex; align-items:center; justify-content:center; font-size:15px; color:#3a3a36; cursor:pointer; flex-shrink:0; transition:color 0.15s; -webkit-tap-highlight-color:transparent; }
+  .tr-fr-edit { width:26px; height:28px; display:flex; align-items:center; justify-content:center; font-size:13px; color:#6a6a62; cursor:pointer; flex-shrink:0; transition:color 0.15s; -webkit-tap-highlight-color:transparent; }
+  .tr-fr-edit:active { color:#c9882a; }
   .tr-fr-fav.faved { color:#c9882a; }
   .tr-fav-btn { font-size:13px; color:#3a3a36; cursor:pointer; padding:2px 4px; transition:color 0.15s; flex-shrink:0; -webkit-tap-highlight-color:transparent; }
   .tr-fav-btn.faved { color:#c9882a; }
@@ -1107,6 +1109,7 @@ function trRenderFoodGrid() {
           <span class="tr-fmac tr-fmac-f">T${ff}</span>
         </div>
         <div class="tr-fr-fav ${faved?"faved":""}" onclick="event.stopPropagation();trToggleFav(${safe},event)">★</div>
+        ${trPickCat==="fav"?`<div class="tr-fr-edit" onclick="event.stopPropagation();trOpenFavEdit(${foods.indexOf(f)},event)">✎</div>`:""}
         <div class="tr-fr-add">+</div>
       </div>`;
     }).join("")
@@ -1260,6 +1263,75 @@ function trCustomSave() {
 function trCloseCustom() {
   document.getElementById("trCustomOverlay").classList.remove("open");
   document.getElementById("trCustomSheet").classList.remove("open");
+}
+
+// ── Fav edit ──
+let trFavEditIdx = null;
+function trOpenFavEdit(idx, ev) {
+  if (ev) ev.stopPropagation();
+  const favs = trLoadFavs();
+  const f = favs[idx];
+  if (!f) return;
+  trFavEditIdx = idx;
+  const r = f.s.g / 100;
+  document.getElementById("trFavEditTitle").textContent = f.name;
+  document.getElementById("trFavEditName").value   = f.name;
+  document.getElementById("trFavEditLabel").value  = f.s.l;
+  document.getElementById("trFavEditGrams").value  = f.s.g;
+  document.getElementById("trFavEditKcal").value   = (f.kcal * r).toFixed(1);
+  document.getElementById("trFavEditP").value      = (f.p    * r).toFixed(1);
+  document.getElementById("trFavEditC").value      = (f.c    * r).toFixed(1);
+  document.getElementById("trFavEditF").value      = (f.f    * r).toFixed(1);
+  document.getElementById("trFavEditOverlay").classList.add("open");
+  document.getElementById("trFavEditSheet").classList.add("open");
+}
+function trFavEditGramsChanged() {
+  const favs = trLoadFavs();
+  const f = favs[trFavEditIdx];
+  if (!f) return;
+  const g = parseFloat(document.getElementById("trFavEditGrams").value) || 0;
+  const r = g / 100;
+  document.getElementById("trFavEditKcal").value = (f.kcal * r).toFixed(1);
+  document.getElementById("trFavEditP").value    = (f.p    * r).toFixed(1);
+  document.getElementById("trFavEditC").value    = (f.c    * r).toFixed(1);
+  document.getElementById("trFavEditF").value    = (f.f    * r).toFixed(1);
+}
+function trFavEditSave() {
+  const favs = trLoadFavs();
+  const f = favs[trFavEditIdx];
+  if (!f) return;
+  const name  = document.getElementById("trFavEditName").value.trim() || f.name;
+  const label = document.getElementById("trFavEditLabel").value.trim() || f.s.l;
+  const g     = parseFloat(document.getElementById("trFavEditGrams").value) || f.s.g;
+  const kcal  = parseFloat(document.getElementById("trFavEditKcal").value) || 0;
+  const p     = parseFloat(document.getElementById("trFavEditP").value)    || 0;
+  const c     = parseFloat(document.getElementById("trFavEditC").value)    || 0;
+  const fval  = parseFloat(document.getElementById("trFavEditF").value)    || 0;
+  const r = g / 100;
+  f.name  = name;
+  f.s     = { g, l: label };
+  f.kcal  = r > 0 ? kcal / r : kcal;
+  f.p     = r > 0 ? p    / r : p;
+  f.c     = r > 0 ? c    / r : c;
+  f.f     = r > 0 ? fval / r : fval;
+  trSaveFavs(favs);
+  trCloseFavEdit();
+  trRenderPickerCats();
+  trRenderFoodGrid();
+}
+function trFavEditDelete() {
+  const favs = trLoadFavs();
+  favs.splice(trFavEditIdx, 1);
+  trSaveFavs(favs);
+  trCloseFavEdit();
+  trRenderPickerCats();
+  trRenderFoodGrid();
+  trRenderCurrentMeal();
+}
+function trCloseFavEdit() {
+  document.getElementById("trFavEditOverlay").classList.remove("open");
+  document.getElementById("trFavEditSheet").classList.remove("open");
+  trFavEditIdx = null;
 }
 
 function trRemoveItem(mealName, idx) {
@@ -1633,6 +1705,48 @@ updateStats();
     <div class="tr-edit-actions">
       <button class="tr-edit-del" onclick="trCloseCustom()">Zrušit</button>
       <button class="tr-edit-save" onclick="trCustomSave()">Přidat do jídla</button>
+    </div>
+  </div>
+  <div class="tr-edit-overlay" id="trFavEditOverlay" onclick="trCloseFavEdit()"></div>
+  <div class="tr-edit-sheet" id="trFavEditSheet">
+    <div class="tr-edit-handle"></div>
+    <div class="tr-edit-head">
+      <div class="tr-edit-title" id="trFavEditTitle">Upravit oblíbenou</div>
+      <div class="tr-edit-sub">Oblíbené potraviny</div>
+    </div>
+    <div class="tr-edit-body">
+      <div class="tr-edit-field full">
+        <div class="tr-edit-label">Název</div>
+        <input class="tr-edit-input" id="trFavEditName" type="text" autocomplete="off" style="font-size:14px;">
+      </div>
+      <div class="tr-edit-field">
+        <div class="tr-edit-label">Gramáž (g)</div>
+        <input class="tr-edit-input" id="trFavEditGrams" type="number" min="1" max="5000" oninput="trFavEditGramsChanged()">
+      </div>
+      <div class="tr-edit-field">
+        <div class="tr-edit-label">Popis porce</div>
+        <input class="tr-edit-input" id="trFavEditLabel" type="text" placeholder="např. 150 g" style="font-size:13px;">
+      </div>
+      <div class="tr-edit-field">
+        <div class="tr-edit-label">kcal (porce)</div>
+        <input class="tr-edit-input" id="trFavEditKcal" type="number" step="0.1" min="0">
+      </div>
+      <div class="tr-edit-field">
+        <div class="tr-edit-label">Bílkoviny (g)</div>
+        <input class="tr-edit-input" id="trFavEditP" type="number" step="0.1" min="0">
+      </div>
+      <div class="tr-edit-field">
+        <div class="tr-edit-label">Sacharidy (g)</div>
+        <input class="tr-edit-input" id="trFavEditC" type="number" step="0.1" min="0">
+      </div>
+      <div class="tr-edit-field">
+        <div class="tr-edit-label">Tuky (g)</div>
+        <input class="tr-edit-input" id="trFavEditF" type="number" step="0.1" min="0">
+      </div>
+    </div>
+    <div class="tr-edit-actions">
+      <button class="tr-edit-del" onclick="trFavEditDelete()">Odebrat</button>
+      <button class="tr-edit-save" onclick="trFavEditSave()">Uložit změny</button>
     </div>
   </div>
 </body>
